@@ -1,8 +1,15 @@
 import { calculatePerItemSize } from "@/src/core/commonFuncs";
 import tw from "@/src/core/tailwind";
 import React, { useCallback, useState } from "react";
-import { LayoutChangeEvent, ScrollView, Text, View } from "react-native";
+import {
+  LayoutChangeEvent,
+  Pressable,
+  ScrollView,
+  View,
+} from "react-native";
 import { Image } from "expo-image";
+import { useSafeAreaInsetsStyle } from "../../hooks/useSafeAreaInsetsStyle";
+import { Text } from "../../base/Text";
 
 const DATA = [
   {
@@ -214,20 +221,36 @@ const OPhim = () => {
     setPerItemSize(calculatePerItemSize(width, gapSize));
   }, []);
 
+  const insets = useSafeAreaInsetsStyle(["bottom"]);
+
   return (
-    <View style={tw`flex-1`} onLayout={onLayout}>
-      <ScrollView
-        overScrollMode="never"
-        contentContainerStyle={tw`flex-row flex-wrap gap-[${gapSize}px]`}
-        showsVerticalScrollIndicator={false}
-      >
-        {DATA.map((item) => (
-          <View key={item.name} style={tw`w-[${perItemSize}px] gap-1`}>
-            <Image style={tw`w-full h-[${perItemSize + 50}px]`} source={item.thumbUrl} contentFit="cover" />
-            <Text style={tw`font-semibold`} numberOfLines={1}>{item.name}</Text>
+    <View style={tw`flex-1 px-3`}>
+      <View onLayout={onLayout}>
+        <ScrollView
+          overScrollMode="never"
+          contentContainerStyle={insets}
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={tw`flex-row flex-wrap gap-[${gapSize}px] py-3`}>
+            {DATA.map((item) => (
+              <Pressable
+                key={item.name}
+                style={tw`w-[${perItemSize - 0.01}px] gap-1`}
+                onPress={() => console.log('test')}
+              >
+                <Image
+                  style={tw`w-full h-[${perItemSize + 50}px]`}
+                  source={item.thumbUrl}
+                  contentFit="cover"
+                />
+                <Text size={13} style={tw`font-semibold`} numberOfLines={1}>
+                  {item.name}
+                </Text>
+              </Pressable>
+            ))}
           </View>
-        ))}
-      </ScrollView>
+        </ScrollView>
+      </View>
     </View>
   );
 };

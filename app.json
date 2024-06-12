@@ -1,5 +1,12 @@
 {
   "expo": {
+    "name": "hmovie-tvos",
+    "slug": "hmovie-tvos",
+    "scheme": "com.yourpackage.yourapp",
+    "web": {
+      "output": "server",
+      "bundler": "metro"
+    },
     "plugins": [
       [
         "@react-native-tvos/config-tv",
@@ -31,8 +38,6 @@
     ],
     "experiments": {
       "typedRoutes": true
-    },
-    "name": "hmovie-tvos",
-    "slug": "hmovie-tvos"
+    }
   }
 }
