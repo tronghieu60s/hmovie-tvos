@@ -1,17 +1,20 @@
 import tw from "@/src/core/tailwind";
-import Home from "@/src/main/components/Home";
+import MoviesOPhimInfo from "@/src/main/components/Movies/OPhim/Info";
 import { useSafeAreaInsetsStyle } from "@/src/main/hooks/useSafeAreaInsetsStyle";
+import { useLocalSearchParams } from "expo-router";
 import React from "react";
 import { View } from "react-native";
 
-const Index = () => {
+const MovieOPhim = () => {
+  const { slug } = useLocalSearchParams();
+
   const insets = useSafeAreaInsetsStyle(["top"]);
 
   return (
     <View style={[tw`grow bg-white`, insets]}>
-      <Home />
+      <MoviesOPhimInfo />
     </View>
   );
 };
 
-export default Index;
+export default MovieOPhim;
