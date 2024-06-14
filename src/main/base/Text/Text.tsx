@@ -1,5 +1,6 @@
+import { notMobilePlatform } from "@/src/core/config";
 import React, { useMemo } from "react";
-import { Animated, Platform, StyleProp, TextStyle } from "react-native";
+import { Animated, StyleProp, TextStyle } from "react-native";
 import { scale } from "react-native-size-matters";
 import { Text as DefaultText } from "react-native-ui-lib";
 
@@ -20,7 +21,7 @@ export const Text = (props: TextProps) => {
       return;
     }
 
-    if (Platform.OS === "web" || Platform.isTV) {
+    if (notMobilePlatform) {
       return size;
     }
 

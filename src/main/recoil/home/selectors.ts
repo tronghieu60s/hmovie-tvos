@@ -5,7 +5,7 @@ import { MovieListType } from "../movie/ophim/types";
 export const moviesOPhimState = selector<MovieListType[]>({
   key: "MoviesOPhimState",
   get: async () => {
-    const movies = await axiosRequest.get("/movie/ophim/list");
+    const movies = await axiosRequest.get("/ophim/movies");
     if (movies.data.success) {
       return movies.data.data.items;
     }

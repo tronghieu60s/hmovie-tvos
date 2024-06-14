@@ -30,7 +30,8 @@
             "newArchEnabled": false
           },
           "android": {
-            "newArchEnabled": false
+            "newArchEnabled": false,
+            "usesCleartextTraffic": true
           }
         }
       ],
@@ -38,6 +39,9 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "android": {
+      "package": "com.tronghieu60s.hmovietvos"
     }
   }
 }
