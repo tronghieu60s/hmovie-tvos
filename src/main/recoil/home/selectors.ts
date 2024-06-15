@@ -1,8 +1,8 @@
 import { axiosRequest } from "@/src/core/api";
 import { selector } from "recoil";
-import { MovieListType } from "../movie/ophim/types";
+import { MoviesType } from "../movie/ophim/types";
 
-export const moviesOPhimState = selector<MovieListType[]>({
+export const moviesOPhimState = selector<MoviesType[]>({
   key: "MoviesOPhimState",
   get: async () => {
     const movies = await axiosRequest.get("/ophim/movies");

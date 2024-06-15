@@ -12,41 +12,39 @@ import { moviesOPhimState } from "../../recoil/home/selectors";
 const gapSize = 15;
 
 const HomeOPhim = () => {
-  const [layout, setLayout] = useState({ width: 0, height: 0 });
   const { state, contents: movies } = useRecoilValueLoadable(moviesOPhimState);
+  const [wrapperLayout, setWrapperLayout] = useState({ width: 0, height: 0 });
 
-  const onLayout = useCallback((event: LayoutChangeEvent) => {
+  const onWrapperLayout = useCallback((event: LayoutChangeEvent) => {
     const { width, height } = event.nativeEvent.layout;
-    setLayout({ width, height });
+    setWrapperLayout({ width, height });
   }, []);
 
   const insets = useSafeAreaInsetsStyle(["bottom"]);
 
   const perItemSize = useMemo(
-    () => calculatePerItemSize(layout.width, gapSize),
-    [layout.width],
+    () => calculatePerItemSize(wrapperLayout.width, gapSize),
+    [wrapperLayout.width],
   );
 
   return (
     <View style={tw`flex-1 px-3`}>
-      <View style={tw`grow`} onLayout={onLayout}>
+      <View style={tw`grow`} onLayout={onWrapperLayout}>
         <ScrollView
           overScrollMode="never"
-          contentContainerStyle={insets}
-          style={tw`h-[${layout.height}px]`}
-          showsVerticalScrollIndicator={false}
-        >
+          style={tw`h-[${wrapperLayout.height}px]`}
+          contentContainerStyle={[tw`grow`, insets]}
+          showsVerticalScrollIndicator={false}>
           {state === "hasValue" && (
             <View style={tw`flex-row flex-wrap gap-[${gapSize}px] py-3`}>
-              {movies?.map((movie) => (
+              {movies.map((movie) => (
                 <Link
                   key={movie.name}
                   href={{
                     params: { slug: movie.slug },
                     pathname: "/movie/ophim/[slug]",
                   }}
-                  asChild
-                >
+                  asChild>
                   <Pressable
                     style={tw`w-[${perItemSize - 0.15}px] gap-1`}
                     onPress={() => console.log("test")}>

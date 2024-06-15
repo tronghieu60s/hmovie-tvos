@@ -16,8 +16,7 @@ export const Tabs = (props: TabsProps) => {
   return (
     <View style={[tw`grow`, style]} {...restProps}>
       <View
-        style={tw`flex flex-row flex-wrap gap-2 border-b border-gray-200 px-3`}
-      >
+        style={tw`flex flex-row flex-wrap gap-2 border-b border-gray-200 px-3`}>
         {items.map((item, index) => (
           <TabsItem
             key={index}

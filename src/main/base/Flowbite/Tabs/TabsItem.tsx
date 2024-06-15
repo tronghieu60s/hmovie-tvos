@@ -16,8 +16,7 @@ export const TabsItem = (props: TabsItemProps) => {
   return (
     <Pressable
       onHoverIn={() => setHovered(true)}
-      onHoverOut={() => setHovered(false)}
-    >
+      onHoverOut={() => setHovered(false)}>
       <Text
         size={14}
         style={[
@@ -26,8 +25,7 @@ export const TabsItem = (props: TabsItemProps) => {
           tw`${active ? "bg-gray-100 text-blue-600" : "text-gray-500"}`,
           style,
         ]}
-        {...restProps}
-      >
+        {...restProps}>
         {title}
       </Text>
     </Pressable>

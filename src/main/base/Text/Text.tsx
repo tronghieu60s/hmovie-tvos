@@ -1,5 +1,4 @@
-import { notMobilePlatform } from "@/src/core/config";
-import React, { useMemo } from "react";
+import React from "react";
 import { Animated, StyleProp, TextStyle } from "react-native";
 import { scale } from "react-native-size-matters";
 import { Text as DefaultText } from "react-native-ui-lib";
@@ -16,23 +15,10 @@ export const Text = (props: TextProps) => {
 
   const contentText = text || children;
 
-  const fontSize = useMemo(() => {
-    if (!size) {
-      return;
-    }
-
-    if (notMobilePlatform) {
-      return size;
-    }
-
-    return scale(size);
-  }, []);
-
   return (
     <DefaultText
-      style={[style, { ...(size && { fontSize }) }]}
-      {...restProps}
-    >
+      style={[style, { ...(size && { fontSize: scale(size) }) }]}
+      {...restProps}>
       {contentText}
     </DefaultText>
   );
