@@ -17,7 +17,7 @@ export const Text = (props: TextProps) => {
 
   return (
     <DefaultText
-      style={[style, { ...(size && { fontSize: scale(size) }) }]}
+      style={[{ ...(size && { fontSize: scale(size) }) }, style]}
       {...restProps}>
       {contentText}
     </DefaultText>

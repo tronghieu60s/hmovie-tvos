@@ -1,15 +1,16 @@
 import tw from "@/src/core/tailwind";
 import React, { useState } from "react";
-import { View, ViewProps } from "react-native";
+import { StyleProp, TextStyle, View, ViewProps } from "react-native";
 import { TabsItem } from "./TabsItem";
 
 export type TabsProps = ViewProps & {
   type?: "default";
   items: { title: string; children: React.ReactNode }[];
+  titleStyle?: StyleProp<TextStyle>;
 };
 
 export const Tabs = (props: TabsProps) => {
-  const { items, style, ...restProps } = props;
+  const { items, style, titleStyle, ...restProps } = props;
 
   const [currentTab, setCurrentTab] = useState(0);
 
@@ -21,6 +22,7 @@ export const Tabs = (props: TabsProps) => {
           <TabsItem
             key={index}
             title={item.title}
+            titleStyle={titleStyle}
             active={currentTab === index}
             onPress={() => setCurrentTab(index)}
           />

@@ -3,7 +3,6 @@ import React from "react";
 import { StyleProp, TextStyle, View, ViewProps } from "react-native";
 import { Text } from "../../Text";
 import { scale } from "react-native-size-matters";
-import { Animated } from "react-native";
 
 type SizeType = "xs" | "sm" | number;
 
@@ -21,7 +20,7 @@ export type BadgeProps = ViewProps & {
   size?: SizeType;
   color?: ColorType;
   label?: string;
-  textStyle?: StyleProp<TextStyle | Animated.AnimatedProps<TextStyle>>;
+  textStyle?: StyleProp<TextStyle>;
 };
 
 const getSize = (size: SizeType) => {

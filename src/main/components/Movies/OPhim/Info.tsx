@@ -1,13 +1,16 @@
 import { layout } from "@/src/core/layout";
 import tw from "@/src/core/tailwind";
 import { Badge } from "@/src/main/base/Flowbite/Badge";
+import { Tabs } from "@/src/main/base/Flowbite/Tabs";
 import { Text } from "@/src/main/base/Text";
 import { useSafeAreaInsetsStyle } from "@/src/main/hooks/useSafeAreaInsetsStyle";
 import { movieInfoOPhimState } from "@/src/main/recoil/movie/ophim/selectors";
 import { MovieType } from "@/src/main/recoil/movie/ophim/types";
 import { Image, ImageBackground } from "expo-image";
 import { useLocalSearchParams } from "expo-router";
+import { Play } from "iconsax-react-native";
 import React, { useCallback, useState } from "react";
+import { Pressable } from "react-native";
 import { LayoutChangeEvent, ScrollView, View } from "react-native";
 import { scale, verticalScale } from "react-native-size-matters";
 import { useRecoilValueLoadable } from "recoil";
@@ -52,7 +55,7 @@ const MoviesOPhimInfo = () => {
                 <View style={tw`grow flex-row gap-3 px-3`}>
                   <View style={tw`flex-row`}>
                     <Badge
-                      label={`${movie.currentEpisode} / ${movie.totalEpisodes}`}
+                      label={movie.currentEpisode}
                       style={tw`absolute bottom-0 z-10 m-2`}
                     />
                     <Image
@@ -104,49 +107,87 @@ const MoviesOPhimInfo = () => {
                     </View>
                   </View>
                 </View>
-                <View style={tw`grow bg-white gap-5 p-3`}>
-                  <View style={tw`gap-3`}>
-                    <Text size={15} style={tw`font-bold`}>
-                      Nội Dung
-                    </Text>
-                    <Text>{movie.content.replace(/<[^>]*>?/gm, "")}</Text>
-                  </View>
-                  {movie.countries.length > 0 && (
-                    <View style={tw`gap-3`}>
-                      <Text size={15} style={tw`font-bold`}>
-                        Quốc Gia
-                      </Text>
-                      <View style={tw`flex-row flex-wrap gap-2`}>
-                        {movie.countries.map((director, index) => (
-                          <Badge key={index} label={director} />
-                        ))}
-                      </View>
-                    </View>
-                  )}
-                  {movie.directors.length > 0 && (
-                    <View style={tw`gap-3`}>
-                      <Text size={15} style={tw`font-bold`}>
-                        Đạo Diễn
-                      </Text>
-                      <View style={tw`flex-row flex-wrap gap-2`}>
-                        {movie.directors.map((director, index) => (
-                          <Badge key={index} label={director} />
-                        ))}
-                      </View>
-                    </View>
-                  )}
-                  {movie.casts.length > 0 && (
-                    <View style={tw`gap-3`}>
-                      <Text size={15} style={tw`font-bold`}>
-                        Diễn Viên
-                      </Text>
-                      <View style={tw`flex-row flex-wrap gap-2`}>
-                        {movie.casts.map((cast, index) => (
-                          <Badge key={index} label={cast} />
-                        ))}
-                      </View>
-                    </View>
-                  )}
+                <View style={tw`grow bg-white`}>
+                  <Tabs
+                    items={[
+                      {
+                        title: "Thông tin",
+                        children: (
+                          <View style={tw`grow min-h-full gap-5 p-3`}>
+                            {movie.countries.length > 0 && (
+                              <View style={tw`gap-3`}>
+                                <Text size={15} style={tw`font-bold`}>
+                                  Quốc Gia
+                                </Text>
+                                <View style={tw`flex-row flex-wrap gap-2`}>
+                                  {movie.countries.map((director, index) => (
+                                    <Badge key={index} label={director} />
+                                  ))}
+                                </View>
+                              </View>
+                            )}
+                            <View style={tw`gap-3`}>
+                              <Text size={15} style={tw`font-bold`}>
+                                Nội Dung
+                              </Text>
+                              <Text>
+                                {movie.content.replace(/<[^>]*>?/gm, "")}
+                              </Text>
+                            </View>
+                            {movie.directors.length > 0 && (
+                              <View style={tw`gap-3`}>
+                                <Text size={15} style={tw`font-bold`}>
+                                  Đạo Diễn
+                                </Text>
+                                <View style={tw`flex-row flex-wrap gap-2`}>
+                                  {movie.directors.map((director, index) => (
+                                    <Badge key={index} label={director} />
+                                  ))}
+                                </View>
+                              </View>
+                            )}
+                            {movie.casts.length > 0 && (
+                              <View style={tw`gap-3`}>
+                                <Text size={15} style={tw`font-bold`}>
+                                  Diễn Viên
+                                </Text>
+                                <View style={tw`flex-row flex-wrap gap-2`}>
+                                  {movie.casts.map((cast, index) => (
+                                    <Badge key={index} label={cast} />
+                                  ))}
+                                </View>
+                              </View>
+                            )}
+                          </View>
+                        ),
+                      },
+                      {
+                        title: "Xem phim",
+                        children: (
+                          <View style={tw`grow min-h-full p-3`}>
+                            <View style={tw`gap-2`}>
+                              {movie.episodes.map((item) => (
+                                <Pressable
+                                  key={item.name}
+                                  style={tw`shadow-md bg-white rounded px-3 py-2`}>
+                                  <View style={tw`grow flex-row items-center`}>
+                                    <Play size={20} />
+                                    <View style={tw`px-3 py-2`}>
+                                      <Text size={14} style={tw`font-bold`}>
+                                        Tập {item.name}
+                                      </Text>
+                                      <Text size={12}>{item.filename}</Text>
+                                    </View>
+                                  </View>
+                                </Pressable>
+                              ))}
+                            </View>
+                          </View>
+                        ),
+                      },
+                    ]}
+                    titleStyle={tw`text-[${scale(12)}px]`}
+                  />
                 </View>
               </View>
             </View>
