@@ -1,0 +1,9 @@
+{
+  "buildCommand": "expo export -p web",
+  "cleanUrls": true,
+  "devCommand": "expo",
+  "installCommand": "npm install --force",
+  "outputDirectory": "dist",
+  "framework": null,
+  "rewrites": [{ "source": "/:path*", "destination": "/" }]
+}

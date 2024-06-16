@@ -4,7 +4,7 @@
     "slug": "hmovie-tvos",
     "scheme": "com.yourpackage.yourapp",
     "web": {
-      "output": "server",
+      "output": "static",
       "bundler": "metro"
     },
     "plugins": [
