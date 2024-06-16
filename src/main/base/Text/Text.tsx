@@ -1,9 +1,14 @@
 import React from "react";
-import { Animated, StyleProp, TextStyle } from "react-native";
+import {
+  Animated,
+  Text as DefaultText,
+  TextProps as DefaultTextProps,
+  StyleProp,
+  TextStyle,
+} from "react-native";
 import { scale } from "react-native-size-matters";
-import { Text as DefaultText } from "react-native-ui-lib";
 
-export type TextProps = React.ComponentProps<typeof DefaultText> & {
+export type TextProps = DefaultTextProps & {
   text?: string;
   size?: number;
   style?: StyleProp<TextStyle | Animated.AnimatedProps<TextStyle>>;

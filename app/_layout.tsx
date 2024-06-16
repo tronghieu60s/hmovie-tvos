@@ -1,4 +1,5 @@
 import tw from "@/src/core/tailwind";
+import { useConsole } from "@/src/main/hooks/useConsole";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
@@ -10,6 +11,8 @@ import { RecoilRoot } from "recoil";
 SplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
+  useConsole();
+
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });

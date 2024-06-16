@@ -9,7 +9,7 @@ export const axiosRequest = axios.create({
 axiosRequest.interceptors.request.use(async (config) => {
   // Log for dev
   if (isDev) {
-    console.log("REQUEST: ", config.url);
+    console.info("REQUEST: ", config.url);
   }
 
   return config;

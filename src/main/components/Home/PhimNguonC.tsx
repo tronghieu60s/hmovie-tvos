@@ -7,12 +7,14 @@ import { LayoutChangeEvent, Pressable, ScrollView, View } from "react-native";
 import { useRecoilValueLoadable } from "recoil";
 import { Text } from "../../base/Text";
 import { useSafeAreaInsetsStyle } from "../../hooks/useSafeAreaInsetsStyle";
-import { moviesOPhimState } from "../../recoil/home/selectors";
+import { moviesPhimNguonCState } from "../../recoil/home/selectors";
 
 const gapSize = 15;
 
-const HomeOPhim = () => {
-  const { state, contents: movies } = useRecoilValueLoadable(moviesOPhimState);
+const HomePhimNguonC = () => {
+  const { state, contents: movies } = useRecoilValueLoadable(
+    moviesPhimNguonCState,
+  );
   const [wrapperLayout, setWrapperLayout] = useState({ width: 0, height: 0 });
 
   const onWrapperLayout = useCallback((event: LayoutChangeEvent) => {
@@ -65,4 +67,4 @@ const HomeOPhim = () => {
   );
 };
 
-export default HomeOPhim;
+export default HomePhimNguonC;

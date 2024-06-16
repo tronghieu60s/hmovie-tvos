@@ -2,8 +2,8 @@ import { layout } from "@/src/core/layout";
 import tw from "@/src/core/tailwind";
 import { Tabs } from "@/src/main/base/Flowbite/Tabs";
 import { useSafeAreaInsetsStyle } from "@/src/main/hooks/useSafeAreaInsetsStyle";
-import { movieInfoOPhimState } from "@/src/main/recoil/movie/ophim/selectors";
 import { MovieType } from "@/src/main/recoil/movie/ophim/types";
+import { movieInfoPhimNguonCState } from "@/src/main/recoil/movie/phimnguonc/selectors";
 import { useLocalSearchParams } from "expo-router";
 import React, { useCallback, useState } from "react";
 import { LayoutChangeEvent, ScrollView, View } from "react-native";
@@ -11,14 +11,14 @@ import { scale } from "react-native-size-matters";
 import { useRecoilValueLoadable } from "recoil";
 import MoviesInfoEpisodes from "../../Info/Episodes";
 import MoviesInfoPoster from "../../Info/Poster";
-import MoviesOPhimAbout from "./About";
-import MoviesOPhimTopInfo from "./TopInfo";
+import MoviesPhimNguonCAbout from "./About";
+import MoviesPhimNguonCTopInfo from "./TopInfo";
 
-const MoviesInfoOPhim = () => {
+const MoviesInfoPhimNguonC = () => {
   const { slug } = useLocalSearchParams();
 
   const { state, contents: contentsMovie } = useRecoilValueLoadable(
-    movieInfoOPhimState(`${slug}`),
+    movieInfoPhimNguonCState(`${slug}`),
   );
   const [wrapperLayout, setWrapperLayout] = useState({ width: 0, height: 0 });
 
@@ -47,13 +47,13 @@ const MoviesInfoOPhim = () => {
           {state === "hasValue" && (
             <View
               style={tw`gap-3 mt-[${(layout.window.height / 6) * 2 - 100}px]`}>
-              <MoviesOPhimTopInfo movie={movie} />
+              <MoviesPhimNguonCTopInfo movie={movie} />
               <View style={tw`bg-white`}>
                 <Tabs
                   items={[
                     {
                       title: "Thông tin",
-                      children: <MoviesOPhimAbout movie={movie} />,
+                      children: <MoviesPhimNguonCAbout movie={movie} />,
                     },
                     {
                       title: "Xem phim",
@@ -76,4 +76,4 @@ const MoviesInfoOPhim = () => {
   );
 };
 
-export default MoviesInfoOPhim;
+export default MoviesInfoPhimNguonC;

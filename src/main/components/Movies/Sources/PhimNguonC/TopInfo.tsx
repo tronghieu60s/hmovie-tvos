@@ -1,9 +1,9 @@
 import tw from "@/src/core/tailwind";
 import { Badge } from "@/src/main/base/Flowbite/Badge";
 import { Text } from "@/src/main/base/Text";
-import { MovieType } from "@/src/main/recoil/movie/ophim/types";
+import { MovieType } from "@/src/main/recoil/movie/phimnguonc/types";
 import { Image } from "expo-image";
-import React from "react";
+import React, { useMemo } from "react";
 import { View } from "react-native";
 import { scale } from "react-native-size-matters";
 
@@ -11,8 +11,17 @@ type Props = {
   movie: MovieType;
 };
 
-const MoviesOPhimTopInfo = (props: Props) => {
+const MoviesPhimNguonCTopInfo = (props: Props) => {
   const { movie } = props;
+
+  const categories = useMemo(
+    () =>
+      movie.taxonomies
+        .filter((item) => ["the-loai", "dinh-dang"].includes(item.group.slug))
+        .map((item) => item.categories)
+        .flat(),
+    [movie.taxonomies],
+  );
 
   return (
     <View style={tw`flex-row items-end gap-3 px-3`}>
@@ -55,8 +64,8 @@ const MoviesOPhimTopInfo = (props: Props) => {
               )}
             </View>
             <View style={tw`flex-row flex-wrap gap-2`}>
-              {movie.categories.map((category, index) => (
-                <Badge key={index} label={category} />
+              {categories.map((category, index) => (
+                <Badge key={index} label={category.name} />
               ))}
             </View>
           </View>
@@ -66,4 +75,4 @@ const MoviesOPhimTopInfo = (props: Props) => {
   );
 };
 
-export default MoviesOPhimTopInfo;
+export default MoviesPhimNguonCTopInfo;

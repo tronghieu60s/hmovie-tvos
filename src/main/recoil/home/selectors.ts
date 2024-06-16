@@ -12,3 +12,14 @@ export const moviesOPhimState = selector<MoviesType[]>({
     return [];
   },
 });
+
+export const moviesPhimNguonCState = selector<MoviesType[]>({
+  key: "MoviesPhimNguonCState",
+  get: async () => {
+    const movies = await axiosRequest.get("/phimnguonc/movies");
+    if (movies.data.success) {
+      return movies.data.data.items;
+    }
+    return [];
+  },
+});

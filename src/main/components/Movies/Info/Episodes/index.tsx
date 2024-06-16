@@ -20,29 +20,38 @@ const MoviesInfoEpisodes = (props: Props) => {
   const { source, episodes } = props;
   const { showActionSheetWithOptions } = useActionSheet();
 
-  const onPress = useCallback(
+  const onPressWatch = useCallback(
     (episodes: MovieEpisodeItem) => {
-      const options = ["Xem Ngay", "Huỷ"];
-      console.log(episodes);
+      let watchEmbed = "";
+      if (episodes.linkEmbed) {
+        const linkEmbed = encodeURIComponent(episodes.linkEmbed);
+        watchEmbed = `/${source}/watch/embed/${linkEmbed}`;
+      }
 
-      const linkEmbed = encodeURIComponent(episodes.linkEmbed);
-      const watchEmbed = `/${source}/movie/watch/embed/${linkEmbed}`;
+      if (!watchEmbed) return;
+
+      router.push(watchEmbed);
+    },
+    [source],
+  );
+
+  const onPressEpisode = useCallback(
+    (episodes: MovieEpisodeItem[]) => {
+      const sheetServers = episodes.map((item) => item.server);
+      const sheetOptions = [...sheetServers, "Huỷ hành động"];
 
       showActionSheetWithOptions(
-        { options, cancelButtonIndex: 2 },
+        { options: sheetOptions, cancelButtonIndex: 2 },
         (selected?: number) => {
-          switch (selected) {
-            case 0:
-              router.push(watchEmbed);
-              break;
-
-            case 2:
-              break;
-          }
+          episodes.forEach((item) => {
+            if (selected === sheetServers.indexOf(item.server)) {
+              onPressWatch(item);
+            }
+          });
         },
       );
     },
-    [showActionSheetWithOptions, source],
+    [onPressWatch, showActionSheetWithOptions],
   );
 
   return (
@@ -52,16 +61,16 @@ const MoviesInfoEpisodes = (props: Props) => {
           <Pressable
             key={item.name}
             style={tw`shadow-md bg-white rounded px-3 py-2`}
-            onPress={() => onPress(item.episodes[0])}>
+            onPress={() => onPressEpisode(item.episodes)}>
             <View style={tw`flex-row items-center`}>
               <View style={tw`px-3`}>
                 <Play size={20} />
               </View>
-              <View style={tw`flex-1 grow px-3 py-2`}>
-                <Text size={14} style={tw`font-bold`}>
+              <View style={tw`flex-1 px-3 py-2`}>
+                <Text size={14} style={tw`font-bold capitalize`}>
                   Tập {item.name}
                 </Text>
-                <Text size={12}>{item.filename}</Text>
+                {item.filename && <Text size={12}>{item.filename}</Text>}
               </View>
             </View>
           </Pressable>
