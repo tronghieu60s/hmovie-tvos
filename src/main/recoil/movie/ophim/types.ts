@@ -1,3 +1,5 @@
+import { MovieEpisode } from "../types";
+
 export type MovieType = {
   id: string;
   name: string;
@@ -22,16 +24,8 @@ export type MovieType = {
   countries: string[];
   isTheater: boolean;
   isCopyright: boolean;
-  episodes: {
-    name: string;
-    slug: string;
-    filename: string;
-    episodes: {
-      server: string;
-      linkM3u8: string;
-      linkEmbed: string;
-    }[];
-  }[];
+  episodes: MovieEpisode[];
+  source: "ophim";
 };
 
 export type MoviesType = {
@@ -41,4 +35,5 @@ export type MoviesType = {
   originName: string;
   thumbUrl: string;
   posterUrl: string;
+  source: "ophim";
 };

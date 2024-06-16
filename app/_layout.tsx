@@ -1,4 +1,5 @@
 import tw from "@/src/core/tailwind";
+import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
@@ -25,11 +26,13 @@ const RootLayout = () => {
 
   return (
     <RecoilRoot>
-      <View style={tw`grow`}>
-        <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="index" />
-        </Stack>
-      </View>
+      <ActionSheetProvider>
+        <View style={tw`grow`}>
+          <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="index" />
+          </Stack>
+        </View>
+      </ActionSheetProvider>
     </RecoilRoot>
   );
 };

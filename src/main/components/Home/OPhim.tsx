@@ -42,7 +42,7 @@ const HomeOPhim = () => {
                   key={movie.name}
                   href={{
                     params: { slug: movie.slug },
-                    pathname: "/movie/ophim/[slug]",
+                    pathname: "/ophim/movie/[slug]",
                   }}
                   asChild>
                   <Pressable
