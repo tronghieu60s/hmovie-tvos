@@ -15,7 +15,7 @@ const MoviesOPhimTopInfo = (props: Props) => {
   const { movie } = props;
 
   return (
-    <View style={tw`flex-row items-end gap-3 px-3`}>
+    <View style={tw`flex-row items-end gap-2.5 px-2.5`}>
       <View style={tw`relative flex-row`}>
         <Badge
           label={movie.currentEpisode}

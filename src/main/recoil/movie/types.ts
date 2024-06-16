@@ -1,3 +1,15 @@
+export type MoviesResponse<T = any> = {
+  items: T[];
+  pagination: MoviePagination;
+};
+
+export type MoviePagination = {
+  page: number;
+  limit: number;
+  totalPages: number;
+  totalItems: number;
+};
+
 export type MovieEpisode = {
   name: string;
   slug: string;

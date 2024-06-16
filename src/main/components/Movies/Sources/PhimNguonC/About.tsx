@@ -39,7 +39,10 @@ const MoviesPhimNguonCAbout = (props: Props) => {
         <Text size={15} style={tw`font-bold`}>
           Nội Dung
         </Text>
-        <Text>{movie.content.replace(/<[^>]*>?/gm, "")}</Text>
+        <Text>
+          {movie.content.replace(/<[^>]*>?/gm, "") ||
+            "Không có mô tả cho bộ phim này."}
+        </Text>
       </View>
       {movie.directors.length > 0 && (
         <View style={tw`gap-3`}>

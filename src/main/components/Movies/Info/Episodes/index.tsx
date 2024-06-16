@@ -38,7 +38,7 @@ const MoviesInfoEpisodes = (props: Props) => {
   const onPressEpisode = useCallback(
     (episodes: MovieEpisodeItem[]) => {
       const sheetServers = episodes.map((item) => item.server);
-      const sheetOptions = [...sheetServers, "Huỷ hành động"];
+      const sheetOptions = [...sheetServers, "Huỷ"];
 
       showActionSheetWithOptions(
         { options: sheetOptions, cancelButtonIndex: 2 },
