@@ -1,3 +1,4 @@
+import { isWebPlatform } from "@/src/core/config";
 import tw from "@/src/core/tailwind";
 import { Text } from "@/src/main/base/Text";
 import {
@@ -9,7 +10,7 @@ import { useActionSheet } from "@expo/react-native-action-sheet";
 import { router } from "expo-router";
 import { Play } from "iconsax-react-native";
 import React, { useCallback } from "react";
-import { Pressable, View } from "react-native";
+import { Linking, Pressable, View } from "react-native";
 
 type Props = {
   source: MovieSource;
@@ -28,20 +29,45 @@ const MoviesInfoEpisodes = (props: Props) => {
         watchEmbed = `/${source}/watch/embed/${linkEmbed}`;
       }
 
-      if (!watchEmbed) return;
+      if (isWebPlatform) {
+        if (!watchEmbed) return;
+        router.push(watchEmbed);
+      }
 
-      router.push(watchEmbed);
+      const sheetOptions = ["Xem ngay", "Xem qua ứng dụng khác", "Huỷ"];
+      showActionSheetWithOptions(
+        { options: sheetOptions, cancelButtonIndex: sheetOptions.length - 1 },
+        (selected?: number) => {
+          if (selected === 0) {
+            if (!watchEmbed) return;
+            router.push(watchEmbed);
+          }
+
+          if (selected === 1) {
+            if (episodes.linkM3u8) {
+              Linking.openURL(episodes.linkM3u8);
+            }
+          }
+        },
+      );
     },
-    [source],
+    [showActionSheetWithOptions, source],
   );
 
   const onPressEpisode = useCallback(
     (episodes: MovieEpisodeItem[]) => {
       const sheetServers = episodes.map((item) => item.server);
-      const sheetOptions = [...sheetServers, "Huỷ"];
+      const sheetOptions = [...sheetServers];
+
+      if (!isWebPlatform) {
+        sheetOptions.push("Huỷ");
+      }
 
       showActionSheetWithOptions(
-        { options: sheetOptions, cancelButtonIndex: 2 },
+        {
+          options: sheetOptions,
+          ...(!isWebPlatform && { cancelButtonIndex: sheetOptions.length - 1 }),
+        },
         (selected?: number) => {
           episodes.forEach((item) => {
             if (selected === sheetServers.indexOf(item.server)) {
