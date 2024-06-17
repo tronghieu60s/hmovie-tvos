@@ -19,6 +19,10 @@ const MoviesInfoSkeleton = () => {
         <Skeleton style={tw`h-[${scale(18)}px]`} />
         <Skeleton style={tw`h-[${scale(30)}px]`} />
       </View>
+      <View style={tw`gap-3 p-3`}>
+        <Skeleton style={tw`h-[${scale(18)}px]`} />
+        <Skeleton style={tw`h-[${scale(30)}px]`} />
+      </View>
     </View>
   );
 };

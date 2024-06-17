@@ -4,7 +4,7 @@ import { Text } from "@/src/main/base/Text";
 import { MovieType } from "@/src/main/recoil/movie/phimnguonc/types";
 import { Image } from "expo-image";
 import React, { useMemo } from "react";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { scale } from "react-native-size-matters";
 
 type Props = {
@@ -43,31 +43,37 @@ const MoviesPhimNguonCTopInfo = (props: Props) => {
             <Text size={16} style={tw`font-bold`} numberOfLines={1}>
               {movie.name}
             </Text>
-            <Text size={12}>{movie.originName}</Text>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              <Text size={12}>{movie.originName}</Text>
+            </ScrollView>
           </View>
           <View style={tw`gap-2`}>
-            <View style={tw`flex-row flex-wrap gap-x-2 gap-y-1 ml-0.5`}>
-              {movie.language && (
-                <Text style={tw`font-semibold`}>{movie.language}</Text>
-              )}
-              {movie.quality && (
-                <View style={tw`flex-row gap-2`}>
-                  <Text>•</Text>
-                  <Text style={tw`font-semibold`}>{movie.quality}</Text>
-                </View>
-              )}
-              {movie.duration && (
-                <View style={tw`flex-row gap-2`}>
-                  <Text>•</Text>
-                  <Text style={tw`font-semibold`}>{movie.duration}</Text>
-                </View>
-              )}
-            </View>
-            <View style={tw`flex-row flex-wrap gap-2`}>
-              {categories.map((category, index) => (
-                <Badge key={index} label={category.name} />
-              ))}
-            </View>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              <View style={tw`flex-row flex-wrap gap-x-2 gap-y-1 ml-0.5`}>
+                {movie.language && (
+                  <Text style={tw`font-semibold`}>{movie.language}</Text>
+                )}
+                {movie.quality && (
+                  <View style={tw`flex-row gap-2`}>
+                    <Text>•</Text>
+                    <Text style={tw`font-semibold`}>{movie.quality}</Text>
+                  </View>
+                )}
+                {movie.duration && (
+                  <View style={tw`flex-row gap-2`}>
+                    <Text>•</Text>
+                    <Text style={tw`font-semibold`}>{movie.duration}</Text>
+                  </View>
+                )}
+              </View>
+            </ScrollView>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              <View style={tw`flex-row flex-wrap gap-2`}>
+                {categories.map((category, index) => (
+                  <Badge key={index} label={category.name} />
+                ))}
+              </View>
+            </ScrollView>
           </View>
         </View>
       </View>

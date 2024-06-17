@@ -1,4 +1,3 @@
-import { layout } from "@/src/core/layout";
 import tw from "@/src/core/tailwind";
 import { Tabs } from "@/src/main/base/Flowbite/Tabs";
 import { useSafeAreaInsetsStyle } from "@/src/main/hooks/useSafeAreaInsetsStyle";
@@ -17,6 +16,7 @@ import MoviesInfoTopInfoSkeleton from "../../Info/TopInfo/Skeleton";
 import MoviesPhimNguonCAbout from "./About";
 import MoviesPhimNguonCTopInfo from "./TopInfo";
 import { Text } from "@/src/main/base/Text";
+import { isTVPlatform } from "@/src/core/config";
 
 const MoviesInfoPhimNguonC = () => {
   const { slug } = useLocalSearchParams();
@@ -47,7 +47,7 @@ const MoviesInfoPhimNguonC = () => {
               contentContainerStyle={[tw`grow`, insets]}
               showsVerticalScrollIndicator={false}>
               <View
-                style={tw`gap-3 mt-[${(layout.window.height / 6) * 2 - scale(80)}px]`}>
+                style={tw`gap-3 mt-[${isTVPlatform ? scale(120) : scale(140)}px]`}>
                 <MoviesInfoTopInfoSkeleton />
                 <MoviesInfoSkeleton />
               </View>
@@ -62,7 +62,8 @@ const MoviesInfoPhimNguonC = () => {
               style={tw`h-[${wrapperLayout.height}px]`}
               contentContainerStyle={[tw`grow`, insets]}
               showsVerticalScrollIndicator={false}>
-              <View style={tw`gap-3 mt-[${scale(80)}px]`}>
+              <View
+                style={tw`gap-3 mt-[${isTVPlatform ? scale(120) : scale(140)}px]`}>
                 <MoviesPhimNguonCTopInfo movie={movie} />
                 <View style={tw`bg-white`}>
                   <Tabs
@@ -74,14 +75,11 @@ const MoviesInfoPhimNguonC = () => {
                       {
                         title: "Xem phim",
                         children: (
-                          <MoviesInfoEpisodes
-                            source={movie.source}
-                            episodes={movie.episodes}
-                          />
+                          <MoviesInfoEpisodes episodes={movie.episodes} />
                         ),
                       },
                     ]}
-                    titleStyle={tw`text-[${scale(12)}px]`}
+                    itemStyles={{ size: 13 }}
                   />
                 </View>
               </View>

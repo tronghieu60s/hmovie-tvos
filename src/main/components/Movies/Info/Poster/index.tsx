@@ -12,7 +12,7 @@ const MoviesInfoPoster = (props: Props) => {
 
   return (
     <ImageBackground
-      style={tw`absolute w-full h-[${scale(150)}px] top-0 left-0`}
+      style={tw`absolute w-full h-[${scale(200)}px] top-0 left-0`}
       source={{ uri: posterUrl }}
       contentFit="cover"></ImageBackground>
   );

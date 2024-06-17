@@ -23,6 +23,12 @@ const MoviesPhimNguonCAbout = (props: Props) => {
 
   return (
     <View style={tw`grow min-h-full gap-5 p-3`}>
+      <View style={tw`gap-1`}>
+        <Text size={15} style={tw`font-bold`}>
+          {movie.name}
+        </Text>
+        <Text size={14}>{movie.originName}</Text>
+      </View>
       {countries.length > 0 && (
         <View style={tw`gap-3`}>
           <Text size={15} style={tw`font-bold`}>

@@ -59,7 +59,7 @@ const HomeTabOPhim = () => {
             </View>
           )}
           {state === "hasValue" && (
-            <View style={tw`py-3 gap-3`}>
+            <View style={tw`py-3 gap-5`}>
               <View style={tw`flex-row flex-wrap gap-[${gapSize}px]`}>
                 {movies.items.map((movie, index) => (
                   <Link

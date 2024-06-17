@@ -27,25 +27,25 @@ export const Pagination = (props: PaginationProps) => {
   return (
     <View style={[tw`flex flex-col items-center gap-2`, style]} {...restProps}>
       <View style={tw`flex-row gap-1`}>
-        <Text size={12} style={tw`text-gray-700`}>
+        <Text size={13} style={tw`text-gray-700`}>
           Hiển thị
         </Text>
-        <Text size={12} style={tw`font-semibold text-gray-900`}>
+        <Text size={13} style={tw`font-semibold text-gray-900`}>
           {startItem}
         </Text>
-        <Text size={12} style={tw`text-gray-700`}>
+        <Text size={13} style={tw`text-gray-700`}>
           đến
         </Text>
-        <Text size={12} style={tw`font-semibold text-gray-900`}>
+        <Text size={13} style={tw`font-semibold text-gray-900`}>
           {endItem}
         </Text>
-        <Text size={12} style={tw`text-gray-700`}>
+        <Text size={13} style={tw`text-gray-700`}>
           của
         </Text>
-        <Text size={12} style={tw`font-semibold text-gray-900`}>
+        <Text size={13} style={tw`font-semibold text-gray-900`}>
           {totalItems}
         </Text>
-        <Text size={12} style={tw`text-gray-700`}>
+        <Text size={13} style={tw`text-gray-700`}>
           mục
         </Text>
       </View>
@@ -55,14 +55,14 @@ export const Pagination = (props: PaginationProps) => {
           onPress={() =>
             onPageChange && onPageChange(currentPage > 1 ? currentPage - 1 : 1)
           }>
-          <Text size={12} style={tw`font-medium text-white`}>
+          <Text size={13} style={tw`font-medium text-white`}>
             Trang trước
           </Text>
         </Pressable>
         <Pressable
           style={tw`h-8 flex items-center justify-center px-3 bg-gray-800 rounded`}
           onPress={() => onPageChange && onPageChange(currentPage + 1)}>
-          <Text size={12} style={tw`font-medium text-white`}>
+          <Text size={13} style={tw`font-medium text-white`}>
             Trang tiếp
           </Text>
         </Pressable>

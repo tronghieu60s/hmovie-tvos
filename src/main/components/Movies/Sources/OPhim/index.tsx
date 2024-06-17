@@ -16,6 +16,7 @@ import MoviesInfoSkeleton from "../../Info/Skeleton";
 import MoviesInfoTopInfoSkeleton from "../../Info/TopInfo/Skeleton";
 import MoviesOPhimAbout from "./About";
 import MoviesOPhimTopInfo from "./TopInfo";
+import { isTVPlatform } from "@/src/core/config";
 
 const MoviesInfoOPhim = () => {
   const { slug } = useLocalSearchParams();
@@ -45,7 +46,8 @@ const MoviesInfoOPhim = () => {
               style={tw`h-[${wrapperLayout.height}px]`}
               contentContainerStyle={[tw`grow`, insets]}
               showsVerticalScrollIndicator={false}>
-              <View style={tw`gap-3`}>
+              <View
+                style={tw`gap-3 mt-[${isTVPlatform ? scale(120) : scale(140)}px]`}>
                 <MoviesInfoTopInfoSkeleton />
                 <MoviesInfoSkeleton />
               </View>
@@ -60,7 +62,8 @@ const MoviesInfoOPhim = () => {
               style={tw`h-[${wrapperLayout.height}px]`}
               contentContainerStyle={[tw`grow`, insets]}
               showsVerticalScrollIndicator={false}>
-              <View style={tw`gap-3 mt-[${scale(80)}px]`}>
+              <View
+                style={tw`gap-3 mt-[${isTVPlatform ? scale(120) : scale(140)}px]`}>
                 <MoviesOPhimTopInfo movie={movie} />
                 <View style={tw`bg-white`}>
                   <Tabs
@@ -72,14 +75,11 @@ const MoviesInfoOPhim = () => {
                       {
                         title: "Xem phim",
                         children: (
-                          <MoviesInfoEpisodes
-                            source={movie.source}
-                            episodes={movie.episodes}
-                          />
+                          <MoviesInfoEpisodes episodes={movie.episodes} />
                         ),
                       },
                     ]}
-                    titleStyle={tw`text-[${scale(12)}px]`}
+                    itemStyles={{ size: 13 }}
                   />
                 </View>
               </View>

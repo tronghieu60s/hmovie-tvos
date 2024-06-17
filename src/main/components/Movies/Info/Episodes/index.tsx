@@ -1,11 +1,7 @@
 import { isWebPlatform } from "@/src/core/config";
 import tw from "@/src/core/tailwind";
 import { Text } from "@/src/main/base/Text";
-import {
-  MovieEpisode,
-  MovieEpisodeItem,
-  MovieSource,
-} from "@/src/main/recoil/movie/types";
+import { MovieEpisode, MovieEpisodeItem } from "@/src/main/recoil/movie/types";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { router } from "expo-router";
 import { Play } from "iconsax-react-native";
@@ -13,12 +9,11 @@ import React, { useCallback } from "react";
 import { Linking, Pressable, View } from "react-native";
 
 type Props = {
-  source: MovieSource;
   episodes: MovieEpisode[];
 };
 
 const MoviesInfoEpisodes = (props: Props) => {
-  const { source, episodes } = props;
+  const { episodes } = props;
   const { showActionSheetWithOptions } = useActionSheet();
 
   const onPressWatch = useCallback(
@@ -26,7 +21,7 @@ const MoviesInfoEpisodes = (props: Props) => {
       let watchEmbed = "";
       if (episodes.linkEmbed) {
         const linkEmbed = encodeURIComponent(episodes.linkEmbed);
-        watchEmbed = `/${source}/watch/embed/${linkEmbed}`;
+        watchEmbed = `/watch/embed/${linkEmbed}`;
       }
 
       if (isWebPlatform) {
@@ -54,7 +49,7 @@ const MoviesInfoEpisodes = (props: Props) => {
         },
       );
     },
-    [showActionSheetWithOptions, source],
+    [showActionSheetWithOptions],
   );
 
   const onPressEpisode = useCallback(
