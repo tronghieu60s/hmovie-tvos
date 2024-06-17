@@ -4,7 +4,7 @@ import { useSafeAreaInsetsStyle } from "@/src/main/hooks/useSafeAreaInsetsStyle"
 import React from "react";
 import { View } from "react-native";
 
-const Index = () => {
+const IndexTab = () => {
   const insets = useSafeAreaInsetsStyle(["top"]);
 
   return (
@@ -14,4 +14,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default IndexTab;

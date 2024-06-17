@@ -1,5 +1,5 @@
 import tw from "@/src/core/tailwind";
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { StyleProp, TextStyle, View, ViewProps } from "react-native";
 import { TabsItem } from "./TabsItem";
 
@@ -7,12 +7,29 @@ export type TabsProps = ViewProps & {
   type?: "default";
   items: { title: string; children: React.ReactNode }[];
   titleStyle?: StyleProp<TextStyle>;
+  currentTab?: number;
+  onChangeTab?: (index: number) => void;
 };
 
 export const Tabs = (props: TabsProps) => {
-  const { items, style, titleStyle, ...restProps } = props;
+  const {
+    items,
+    style,
+    titleStyle,
+    currentTab = 0,
+    onChangeTab,
+    ...restProps
+  } = props;
 
-  const [currentTab, setCurrentTab] = useState(0);
+  const [current, setCurrent] = useState(currentTab);
+
+  const onChangeTabProxy = useCallback(
+    (index: number) => {
+      setCurrent(index);
+      onChangeTab && onChangeTab(index);
+    },
+    [onChangeTab],
+  );
 
   return (
     <View style={[tw`grow`, style]} {...restProps}>
@@ -23,12 +40,12 @@ export const Tabs = (props: TabsProps) => {
             key={index}
             title={item.title}
             titleStyle={titleStyle}
-            active={currentTab === index}
-            onPress={() => setCurrentTab(index)}
+            active={current === index}
+            onPress={() => onChangeTabProxy(index)}
           />
         ))}
       </View>
-      <View style={tw`grow`}>{items[currentTab].children}</View>
+      <View style={tw`grow`}>{items[current].children}</View>
     </View>
   );
 };

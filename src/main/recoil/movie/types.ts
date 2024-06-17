@@ -23,4 +23,4 @@ export type MovieEpisodeItem = {
   linkEmbed?: string;
 };
 
-export type MovieSource = "ophim";
+export type MovieSource = "ophim" | "phimnguonc";

@@ -64,7 +64,7 @@ const MoviesInfoEpisodes = (props: Props) => {
             onPress={() => onPressEpisode(item.episodes)}>
             <View style={tw`flex-row items-center`}>
               <View style={tw`px-3`}>
-                <Play size={20} />
+                <Play size={20} color="#000000" />
               </View>
               <View style={tw`flex-1 px-3 py-2`}>
                 <Text size={14} style={tw`font-bold capitalize`}>

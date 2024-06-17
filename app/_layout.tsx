@@ -30,7 +30,7 @@ const RootLayout = () => {
       <ActionSheetProvider>
         <View style={tw`grow`}>
           <Stack screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="index" />
+            <Stack.Screen name="(tabs)" />
           </Stack>
         </View>
       </ActionSheetProvider>
