@@ -95,7 +95,7 @@ const HomeTabOPhim = () => {
           )}
           {state === "hasError" && (
             <View style={tw`grow justify-center items-center`}>
-              <Text>
+              <Text size={12}>
                 Có lỗi trong quá trình tải phim, vui lòng thử lại sau.
               </Text>
             </View>

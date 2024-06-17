@@ -30,8 +30,10 @@ const MoviesInfoEpisodes = (props: Props) => {
       }
 
       if (isWebPlatform) {
-        if (!watchEmbed) return;
-        router.push(watchEmbed);
+        if (watchEmbed) {
+          router.push(watchEmbed);
+        }
+        return;
       }
 
       const sheetOptions = ["Xem ngay", "Xem qua ứng dụng khác", "Huỷ"];
@@ -39,8 +41,9 @@ const MoviesInfoEpisodes = (props: Props) => {
         { options: sheetOptions, cancelButtonIndex: sheetOptions.length - 1 },
         (selected?: number) => {
           if (selected === 0) {
-            if (!watchEmbed) return;
-            router.push(watchEmbed);
+            if (watchEmbed) {
+              router.push(watchEmbed);
+            }
           }
 
           if (selected === 1) {
@@ -57,17 +60,10 @@ const MoviesInfoEpisodes = (props: Props) => {
   const onPressEpisode = useCallback(
     (episodes: MovieEpisodeItem[]) => {
       const sheetServers = episodes.map((item) => item.server);
-      const sheetOptions = [...sheetServers];
-
-      if (!isWebPlatform) {
-        sheetOptions.push("Huỷ");
-      }
+      const sheetOptions = [...sheetServers, "Huỷ"];
 
       showActionSheetWithOptions(
-        {
-          options: sheetOptions,
-          ...(!isWebPlatform && { cancelButtonIndex: sheetOptions.length - 1 }),
-        },
+        { options: sheetOptions, cancelButtonIndex: sheetOptions.length - 1 },
         (selected?: number) => {
           episodes.forEach((item) => {
             if (selected === sheetServers.indexOf(item.server)) {

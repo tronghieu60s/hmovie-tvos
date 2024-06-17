@@ -1,4 +1,3 @@
-import { layout } from "@/src/core/layout";
 import tw from "@/src/core/tailwind";
 import { Tabs } from "@/src/main/base/Flowbite/Tabs";
 import { Text } from "@/src/main/base/Text";
@@ -46,8 +45,7 @@ const MoviesInfoOPhim = () => {
               style={tw`h-[${wrapperLayout.height}px]`}
               contentContainerStyle={[tw`grow`, insets]}
               showsVerticalScrollIndicator={false}>
-              <View
-                style={tw`gap-3 mt-[${(layout.window.height / 6) * 2 - 100}px]`}>
+              <View style={tw`gap-3`}>
                 <MoviesInfoTopInfoSkeleton />
                 <MoviesInfoSkeleton />
               </View>
@@ -62,8 +60,7 @@ const MoviesInfoOPhim = () => {
               style={tw`h-[${wrapperLayout.height}px]`}
               contentContainerStyle={[tw`grow`, insets]}
               showsVerticalScrollIndicator={false}>
-              <View
-                style={tw`gap-3 mt-[${(layout.window.height / 6) * 2 - 100}px]`}>
+              <View style={tw`gap-3 mt-[${scale(80)}px]`}>
                 <MoviesOPhimTopInfo movie={movie} />
                 <View style={tw`bg-white`}>
                   <Tabs
@@ -91,7 +88,9 @@ const MoviesInfoOPhim = () => {
         )}
         {state === "hasError" && (
           <View style={tw`grow justify-center items-center`}>
-            <Text>Có lỗi xảy ra quá trình tải phim, vui lòng thử lại sau.</Text>
+            <Text size={12}>
+              Có lỗi xảy ra quá trình tải phim, vui lòng thử lại sau.
+            </Text>
           </View>
         )}
       </View>

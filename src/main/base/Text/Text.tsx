@@ -1,4 +1,5 @@
-import React from "react";
+import { isTVPlatform } from "@/src/core/config";
+import React, { useMemo } from "react";
 import {
   Animated,
   Text as DefaultText,
@@ -20,10 +21,18 @@ export const Text = (props: TextProps) => {
 
   const contentText = text || children;
 
+  const fontSize = useMemo(() => {
+    if (!size) return undefined;
+
+    if (isTVPlatform) {
+      return scale(size - 4);
+    }
+
+    return scale(size);
+  }, [size]);
+
   return (
-    <DefaultText
-      style={[{ ...(size && { fontSize: scale(size) }) }, style]}
-      {...restProps}>
+    <DefaultText style={[{ fontSize }, style]} {...restProps}>
       {contentText}
     </DefaultText>
   );

@@ -7,7 +7,7 @@
     "android": "expo run:android",
     "web": "expo start --web",
     "web:vercel": "vercel deploy",
-    "web:vercel:prod": "vercel deploy:prod",
+    "web:vercel:prod": "vercel deploy --prod",
     "start": "expo start",
     "test": "jest --watchAll",
     "lint": "expo lint",

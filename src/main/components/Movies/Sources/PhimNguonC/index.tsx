@@ -6,7 +6,7 @@ import { movieInfoPhimNguonCState } from "@/src/main/recoil/movie/phimnguonc/sel
 import { MovieType } from "@/src/main/recoil/movie/phimnguonc/types";
 import { useLocalSearchParams } from "expo-router";
 import React, { useCallback, useState } from "react";
-import { LayoutChangeEvent, ScrollView, Text, View } from "react-native";
+import { LayoutChangeEvent, ScrollView, View } from "react-native";
 import { scale } from "react-native-size-matters";
 import { useRecoilValueLoadable } from "recoil";
 import MoviesInfoEpisodes from "../../Info/Episodes";
@@ -16,6 +16,7 @@ import MoviesInfoSkeleton from "../../Info/Skeleton";
 import MoviesInfoTopInfoSkeleton from "../../Info/TopInfo/Skeleton";
 import MoviesPhimNguonCAbout from "./About";
 import MoviesPhimNguonCTopInfo from "./TopInfo";
+import { Text } from "@/src/main/base/Text";
 
 const MoviesInfoPhimNguonC = () => {
   const { slug } = useLocalSearchParams();
@@ -46,7 +47,7 @@ const MoviesInfoPhimNguonC = () => {
               contentContainerStyle={[tw`grow`, insets]}
               showsVerticalScrollIndicator={false}>
               <View
-                style={tw`gap-3 mt-[${(layout.window.height / 6) * 2 - 100}px]`}>
+                style={tw`gap-3 mt-[${(layout.window.height / 6) * 2 - scale(80)}px]`}>
                 <MoviesInfoTopInfoSkeleton />
                 <MoviesInfoSkeleton />
               </View>
@@ -61,8 +62,7 @@ const MoviesInfoPhimNguonC = () => {
               style={tw`h-[${wrapperLayout.height}px]`}
               contentContainerStyle={[tw`grow`, insets]}
               showsVerticalScrollIndicator={false}>
-              <View
-                style={tw`gap-3 mt-[${(layout.window.height / 6) * 2 - 100}px]`}>
+              <View style={tw`gap-3 mt-[${scale(80)}px]`}>
                 <MoviesPhimNguonCTopInfo movie={movie} />
                 <View style={tw`bg-white`}>
                   <Tabs
@@ -90,7 +90,9 @@ const MoviesInfoPhimNguonC = () => {
         )}
         {state === "hasError" && (
           <View style={tw`grow justify-center items-center`}>
-            <Text>Có lỗi xảy ra quá trình tải phim, vui lòng thử lại sau.</Text>
+            <Text size={12}>
+              Có lỗi xảy ra quá trình tải phim, vui lòng thử lại sau.
+            </Text>
           </View>
         )}
       </View>

@@ -39,7 +39,7 @@ const MoviesPhimNguonCAbout = (props: Props) => {
         <Text size={15} style={tw`font-bold`}>
           Nội Dung
         </Text>
-        <Text>
+        <Text size={12}>
           {movie.content.replace(/<[^>]*>?/gm, "") ||
             "Không có mô tả cho bộ phim này."}
         </Text>

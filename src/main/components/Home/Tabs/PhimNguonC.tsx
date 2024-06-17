@@ -95,7 +95,7 @@ const HomeTabPhimNguonC = () => {
           )}
           {state === "hasError" && (
             <View style={tw`py-3 gap-3`}>
-              <Text>
+              <Text size={12}>
                 Có lỗi trong quá trình tải phim, vui lòng thử lại sau.
               </Text>
             </View>
