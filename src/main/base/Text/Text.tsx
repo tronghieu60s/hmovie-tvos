@@ -1,4 +1,4 @@
-import { isTVPlatform } from "@/src/core/config";
+import { isTVPlatform, isWebPlatform } from "@/src/core/config";
 import React, { useMemo } from "react";
 import {
   Animated,
@@ -24,7 +24,7 @@ export const Text = (props: TextProps) => {
   const fontSize = useMemo(() => {
     if (!size) return undefined;
 
-    if (isTVPlatform) {
+    if (isTVPlatform || isWebPlatform) {
       return scale(size - 4);
     }
 
