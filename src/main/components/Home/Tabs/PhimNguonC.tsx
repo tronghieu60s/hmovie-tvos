@@ -1,4 +1,4 @@
-import { calculatePerItemSize } from "@/src/core/commonFuncs";
+import { calculateListItemStyle } from "@/src/core/commonFuncs";
 import tw from "@/src/core/tailwind";
 import { Image } from "expo-image";
 import { Link, router, useLocalSearchParams } from "expo-router";
@@ -11,8 +11,6 @@ import { moviesPhimNguonCState } from "../../../recoil/home/selectors";
 import { Pagination } from "../../../base/Flowbite/Pagination";
 import Skeleton from "@/src/main/base/Skeleton/Skeleton";
 import { scale } from "react-native-size-matters";
-
-const gapSize = 15;
 
 const HomeTabPhimNguonC = () => {
   const { page = 1 } = useLocalSearchParams();
@@ -33,8 +31,8 @@ const HomeTabPhimNguonC = () => {
 
   const insets = useSafeAreaInsetsStyle(["bottom"]);
 
-  const perItemSize = useMemo(
-    () => calculatePerItemSize(wrapperLayout.width, gapSize),
+  const listItemStyle = useMemo(
+    () => calculateListItemStyle(wrapperLayout.width),
     [wrapperLayout.width],
   );
 
@@ -48,11 +46,12 @@ const HomeTabPhimNguonC = () => {
           showsVerticalScrollIndicator={false}>
           {state === "loading" && (
             <View style={tw`py-3 gap-3`}>
-              <View style={tw`flex-row flex-wrap gap-[${gapSize}px]`}>
+              <View
+                style={tw`flex-row flex-wrap gap-[${listItemStyle.gapSize}px]`}>
                 {[...Array(10)].map((_, index) => (
                   <Skeleton
                     key={index}
-                    style={tw`w-[${perItemSize - 0.15}px] h-[${perItemSize + 50 + scale(18)}px]`}
+                    style={tw`w-[${listItemStyle.perItemSize - 0.15}px] h-[${listItemStyle.perItemSize + 50 + scale(18)}px]`}
                   />
                 ))}
               </View>
@@ -60,7 +59,8 @@ const HomeTabPhimNguonC = () => {
           )}
           {state === "hasValue" && (
             <View style={tw`py-3 gap-5`}>
-              <View style={tw`flex-row flex-wrap gap-[${gapSize}px]`}>
+              <View
+                style={tw`flex-row flex-wrap gap-[${listItemStyle.gapSize}px]`}>
                 {movies.items.map((movie) => (
                   <Link
                     key={movie.name}
@@ -69,9 +69,10 @@ const HomeTabPhimNguonC = () => {
                       pathname: `/${movie.source}/movie/[slug]`,
                     }}
                     asChild>
-                    <Pressable style={tw`w-[${perItemSize - 0.15}px] gap-1`}>
+                    <Pressable
+                      style={tw`w-[${listItemStyle.perItemSize - 0.15}px] gap-1`}>
                       <Image
-                        style={tw`w-full h-[${perItemSize + 50}px]`}
+                        style={tw`w-full h-[${listItemStyle.perItemSize + 50}px]`}
                         source={movie.thumbUrl}
                         contentFit="cover"
                       />

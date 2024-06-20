@@ -1,19 +1,36 @@
 import { scale } from "react-native-size-matters";
+import {
+  BREAKPOINT_RESPONSIVE_LG,
+  BREAKPOINT_RESPONSIVE_MD,
+  BREAKPOINT_RESPONSIVE_SM,
+} from "./responsive/breakpoints";
 
-export const calculatePerItemSize = (widthSize: number, gapSize: number) => {
-  let perItemSize = scale(70);
-  let numberOfItem = 0;
+export const calculateListItemStyle = (widthSize: number) => {
+  const gapSize = 15;
 
-  if (widthSize < 400) {
+  let perItemSize = 0;
+  let numberOfItems = 0;
+
+  if (widthSize < BREAKPOINT_RESPONSIVE_SM) {
     perItemSize = scale(100);
+  } else if (widthSize < BREAKPOINT_RESPONSIVE_MD) {
+    perItemSize = scale(80);
+  } else if (widthSize < BREAKPOINT_RESPONSIVE_LG) {
+    perItemSize = scale(70);
+  } else {
+    perItemSize = scale(60);
   }
 
-  numberOfItem = Math.floor(widthSize / perItemSize);
-  if (numberOfItem > 0) {
-    let totalGapSize = gapSize * (numberOfItem - 1);
+  numberOfItems = Math.floor(widthSize / perItemSize);
+  if (numberOfItems > 0) {
+    let totalGapSize = gapSize * (numberOfItems - 1);
     let remainingWidth = widthSize - totalGapSize;
-    perItemSize = remainingWidth / numberOfItem;
+    perItemSize = remainingWidth / numberOfItems;
   }
 
-  return perItemSize;
+  return {
+    gapSize,
+    perItemSize,
+    numberOfItems,
+  };
 };

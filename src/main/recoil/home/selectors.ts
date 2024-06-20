@@ -6,19 +6,28 @@ import { MoviesResponse } from "../movie/types";
 
 export const moviesOPhimState = selectorFamily<
   MoviesResponse<MoviesOPhimType>,
-  number
+  { page: number; limit?: number }
 >({
   key: "MoviesOPhimState",
-  get: (page: number) => async () => {
-    const movies = await axiosRequest.get(`/ophim/movies?page=${page}`);
-    if (movies.data.success) {
-      return movies.data.data;
-    }
-    return {
-      items: [],
-      pagination: {},
-    };
-  },
+  get:
+    ({ page, limit }) =>
+    async () => {
+      const queryParams = new URLSearchParams();
+      queryParams.set("page", `${page}`);
+
+      if (limit) {
+        queryParams.set("limit", `${limit}`);
+      }
+
+      const queryString = queryParams.toString();
+
+      const movies = await axiosRequest.get(`/ophim/movies?${queryString}`);
+      if (movies.data.success) {
+        return movies.data.data;
+      }
+
+      return { items: [], pagination: {} };
+    },
 });
 
 export const moviesPhimNguonCState = selectorFamily<
@@ -31,9 +40,6 @@ export const moviesPhimNguonCState = selectorFamily<
     if (movies.data.success) {
       return movies.data.data;
     }
-    return {
-      items: [],
-      pagination: {},
-    };
+    return { items: [], pagination: {} };
   },
 });

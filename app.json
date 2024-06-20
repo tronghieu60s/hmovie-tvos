@@ -8,6 +8,19 @@
       "bundler": "metro"
     },
     "plugins": [
+      "expo-router",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "newArchEnabled": false
+          },
+          "android": {
+            "newArchEnabled": false,
+            "usesCleartextTraffic": true
+          }
+        }
+      ],
       [
         "@react-native-tvos/config-tv",
         {
@@ -22,26 +35,14 @@
             "topShelfWide2x": "./assets/tv_icons/icon-4640x1440.png"
           }
         }
-      ],
-      [
-        "expo-build-properties",
-        {
-          "ios": {
-            "newArchEnabled": false
-          },
-          "android": {
-            "newArchEnabled": false,
-            "usesCleartextTraffic": true
-          }
-        }
-      ],
-      "expo-router"
+      ]
     ],
     "experiments": {
       "typedRoutes": true
     },
     "android": {
       "package": "com.tronghieu60s.hmovietvos"
-    }
+    },
+    "userInterfaceStyle": "automatic"
   }
 }

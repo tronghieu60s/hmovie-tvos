@@ -1,5 +1,5 @@
-import { isTVPlatform, isWebPlatform } from "@/src/core/config";
-import React, { useMemo } from "react";
+import tw from "@/src/core/tailwind";
+import React from "react";
 import {
   Animated,
   Text as DefaultText,
@@ -7,7 +7,7 @@ import {
   StyleProp,
   TextStyle,
 } from "react-native";
-import { scale } from "react-native-size-matters";
+import { s } from "react-native-size-matters";
 
 export type TextProps = DefaultTextProps & {
   text?: string;
@@ -17,22 +17,14 @@ export type TextProps = DefaultTextProps & {
 };
 
 export const Text = (props: TextProps) => {
-  const { text, size, style, children, ...restProps } = props;
+  const { text, size = 14, style, children, ...restProps } = props;
 
   const contentText = text || children;
 
-  const fontSize = useMemo(() => {
-    if (!size) return undefined;
-
-    if (isTVPlatform || isWebPlatform) {
-      return scale(size - 4);
-    }
-
-    return scale(size);
-  }, [size]);
-
   return (
-    <DefaultText style={[{ fontSize }, style]} {...restProps}>
+    <DefaultText
+      style={[tw`text-[${s(size)}px] web:xl:text-[${size + 2}px]`, style]}
+      {...restProps}>
       {contentText}
     </DefaultText>
   );

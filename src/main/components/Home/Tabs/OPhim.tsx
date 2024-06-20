@@ -1,24 +1,22 @@
-import { calculatePerItemSize } from "@/src/core/commonFuncs";
+import { calculateListItemStyle } from "@/src/core/commonFuncs";
 import tw from "@/src/core/tailwind";
+import Skeleton from "@/src/main/base/Skeleton/Skeleton";
 import { Image } from "expo-image";
 import { Link, router, useLocalSearchParams } from "expo-router";
 import React, { useCallback, useMemo, useState } from "react";
 import { LayoutChangeEvent, Pressable, ScrollView, View } from "react-native";
 import { useRecoilValueLoadable } from "recoil";
+import { Pagination } from "../../../base/Flowbite/Pagination";
 import { Text } from "../../../base/Text";
 import { useSafeAreaInsetsStyle } from "../../../hooks/useSafeAreaInsetsStyle";
 import { moviesOPhimState } from "../../../recoil/home/selectors";
-import { Pagination } from "../../../base/Flowbite/Pagination";
-import Skeleton from "@/src/main/base/Skeleton/Skeleton";
-import { scale } from "react-native-size-matters";
-
-const gapSize = 15;
+import { s } from "react-native-size-matters";
 
 const HomeTabOPhim = () => {
   const { page = 1 } = useLocalSearchParams();
 
   const { state, contents: movies } = useRecoilValueLoadable(
-    moviesOPhimState(Number(page)),
+    moviesOPhimState({ page: Number(page), limit: 24 }),
   );
   const [wrapperLayout, setWrapperLayout] = useState({ width: 0, height: 0 });
 
@@ -33,8 +31,8 @@ const HomeTabOPhim = () => {
 
   const insets = useSafeAreaInsetsStyle(["bottom"]);
 
-  const perItemSize = useMemo(
-    () => calculatePerItemSize(wrapperLayout.width, gapSize),
+  const listItemStyle = useMemo(
+    () => calculateListItemStyle(wrapperLayout.width),
     [wrapperLayout.width],
   );
 
@@ -48,11 +46,12 @@ const HomeTabOPhim = () => {
           showsVerticalScrollIndicator={false}>
           {state === "loading" && (
             <View style={tw`py-3 gap-3`}>
-              <View style={tw`flex-row flex-wrap gap-[${gapSize}px]`}>
-                {[...Array(10)].map((_, index) => (
+              <View
+                style={tw`flex-row flex-wrap gap-[${listItemStyle.gapSize}px]`}>
+                {[...Array(listItemStyle.numberOfItems * 2)].map((_, index) => (
                   <Skeleton
                     key={index}
-                    style={tw`w-[${perItemSize - 0.15}px] h-[${perItemSize + 50 + scale(18)}px]`}
+                    style={tw`w-[${listItemStyle.perItemSize - 0.15}px] h-[${listItemStyle.perItemSize + 50 + s(18)}px]`}
                   />
                 ))}
               </View>
@@ -60,7 +59,8 @@ const HomeTabOPhim = () => {
           )}
           {state === "hasValue" && (
             <View style={tw`py-3 gap-5`}>
-              <View style={tw`flex-row flex-wrap gap-[${gapSize}px]`}>
+              <View
+                style={tw`flex-row flex-wrap gap-[${listItemStyle.gapSize}px]`}>
                 {movies.items.map((movie, index) => (
                   <Link
                     key={index}
@@ -69,9 +69,10 @@ const HomeTabOPhim = () => {
                       pathname: `/${movie.source}/movie/[slug]`,
                     }}
                     asChild>
-                    <Pressable style={tw`w-[${perItemSize - 0.15}px] gap-1`}>
+                    <Pressable
+                      style={tw`w-[${listItemStyle.perItemSize - 0.15}px] gap-1`}>
                       <Image
-                        style={tw`w-full h-[${perItemSize + 50}px]`}
+                        style={tw`w-full h-[${listItemStyle.perItemSize + 50}px]`}
                         source={movie.thumbUrl}
                         contentFit="cover"
                       />
@@ -95,7 +96,7 @@ const HomeTabOPhim = () => {
           )}
           {state === "hasError" && (
             <View style={tw`grow justify-center items-center`}>
-              <Text size={12}>
+              <Text size={12} style={tw`font-semibold`}>
                 Có lỗi trong quá trình tải phim, vui lòng thử lại sau.
               </Text>
             </View>
