@@ -2,7 +2,7 @@
   "expo": {
     "name": "hmovie-tvos",
     "slug": "hmovie-tvos",
-    "scheme": "com.yourpackage.yourapp",
+    "scheme": "com.hmovie.tvos",
     "web": {
       "output": "static",
       "bundler": "metro"
@@ -41,8 +41,16 @@
       "typedRoutes": true
     },
     "android": {
-      "package": "com.tronghieu60s.hmovietvos"
+      "package": "com.hmovie.tvos"
     },
-    "userInterfaceStyle": "automatic"
+    "userInterfaceStyle": "automatic",
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "a4302d39-aa7e-4591-af92-2332244258fc"
+      }
+    }
   }
 }

@@ -3,25 +3,6 @@
     "version": ">= 3.15.1"
   },
   "build": {
-    "development": {
-      "extends": "production",
-      "distribution": "internal",
-      "android": {
-        "buildType": "apk",
-        "withoutCredentials": true,
-        "gradleCommand": ":app:assembleDebug"
-      },
-      "ios": {
-        "buildConfiguration": "Debug",
-        "simulator": true
-      }
-    },
-    "development_tv": {
-      "extends": "development",
-      "env": {
-        "EXPO_TV": "1"
-      }
-    },
     "preview": {
       "extends": "production",
       "distribution": "internal",
@@ -41,7 +22,26 @@
     },
     "production": {},
     "production_tv": {
-      "extends": "production", 
+      "extends": "production",
+      "env": {
+        "EXPO_TV": "1"
+      }
+    },
+    "development": {
+      "extends": "production",
+      "distribution": "internal",
+      "android": {
+        "buildType": "apk",
+        "withoutCredentials": true,
+        "gradleCommand": ":app:assembleDebug"
+      },
+      "ios": {
+        "buildConfiguration": "Debug",
+        "simulator": true
+      }
+    },
+    "development_tv": {
+      "extends": "development",
       "env": {
         "EXPO_TV": "1"
       }
