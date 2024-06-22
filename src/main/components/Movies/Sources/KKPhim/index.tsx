@@ -45,7 +45,8 @@ const MoviesInfoKKPhim = () => {
               style={tw`h-[${wrapperLayout.height}px]`}
               contentContainerStyle={[tw`grow`, insets]}
               showsVerticalScrollIndicator={false}>
-              <View style={tw`gap-3 mt-[${scale(140)}px]`}>
+              <View
+                style={tw`gap-3 mt-[${scale(180)}px] sm:mt-[${scale(100)}px]`}>
                 <MoviesInfoTopInfoSkeleton />
                 <MoviesInfoSkeleton />
               </View>
@@ -61,7 +62,7 @@ const MoviesInfoKKPhim = () => {
               contentContainerStyle={[tw`grow`, insets]}
               showsVerticalScrollIndicator={false}>
               <View
-                style={tw`gap-3 mt-[${scale(140)}px] sm:mt-[${scale(100)}px]`}>
+                style={tw`gap-3 mt-[${scale(180)}px] sm:mt-[${scale(100)}px]`}>
                 <MoviesKKPhimTopInfo movie={movie} />
                 <View style={tw`flex-1 bg-white`}>
                   <Tabs
@@ -77,7 +78,7 @@ const MoviesInfoKKPhim = () => {
                         ),
                       },
                     ]}
-                    itemStyles={{ size: 13 }}
+                    itemStyles={{ size: 13.5 }}
                   />
                 </View>
               </View>

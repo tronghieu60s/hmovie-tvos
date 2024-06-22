@@ -5,7 +5,7 @@ import { scale } from "react-native-size-matters";
 
 const MoviesInfoPosterSkeleton = () => {
   return (
-    <Skeleton style={tw`absolute w-full h-[${scale(200)}px] top-0 left-0`} />
+    <Skeleton style={tw`absolute w-full h-[${scale(250)}px] top-0 left-0`} />
   );
 };
 

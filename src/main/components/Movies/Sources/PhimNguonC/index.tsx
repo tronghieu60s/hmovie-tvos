@@ -1,5 +1,6 @@
 import tw from "@/src/core/tailwind";
 import { Tabs } from "@/src/main/base/Flowbite/Tabs";
+import { Text } from "@/src/main/base/Text";
 import { useSafeAreaInsetsStyle } from "@/src/main/hooks/useSafeAreaInsetsStyle";
 import { movieInfoPhimNguonCState } from "@/src/main/recoil/movie/phimnguonc/selectors";
 import { MovieType } from "@/src/main/recoil/movie/phimnguonc/types";
@@ -15,8 +16,6 @@ import MoviesInfoSkeleton from "../../Info/Skeleton";
 import MoviesInfoTopInfoSkeleton from "../../Info/TopInfo/Skeleton";
 import MoviesPhimNguonCAbout from "./About";
 import MoviesPhimNguonCTopInfo from "./TopInfo";
-import { Text } from "@/src/main/base/Text";
-import { isTVPlatform } from "@/src/core/config";
 
 const MoviesInfoPhimNguonC = () => {
   const { slug } = useLocalSearchParams();
@@ -47,7 +46,7 @@ const MoviesInfoPhimNguonC = () => {
               contentContainerStyle={[tw`grow`, insets]}
               showsVerticalScrollIndicator={false}>
               <View
-                style={tw`gap-3 mt-[${isTVPlatform ? scale(120) : scale(140)}px]`}>
+                style={tw`gap-3 mt-[${scale(180)}px] sm:mt-[${scale(100)}px]`}>
                 <MoviesInfoTopInfoSkeleton />
                 <MoviesInfoSkeleton />
               </View>
@@ -63,7 +62,7 @@ const MoviesInfoPhimNguonC = () => {
               contentContainerStyle={[tw`grow`, insets]}
               showsVerticalScrollIndicator={false}>
               <View
-                style={tw`gap-3 mt-[${isTVPlatform ? scale(120) : scale(140)}px]`}>
+                style={tw`gap-3 mt-[${scale(180)}px] sm:mt-[${scale(100)}px]`}>
                 <MoviesPhimNguonCTopInfo movie={movie} />
                 <View style={tw`bg-white`}>
                   <Tabs
@@ -79,7 +78,7 @@ const MoviesInfoPhimNguonC = () => {
                         ),
                       },
                     ]}
-                    itemStyles={{ size: 13 }}
+                    itemStyles={{ size: 13.5 }}
                   />
                 </View>
               </View>

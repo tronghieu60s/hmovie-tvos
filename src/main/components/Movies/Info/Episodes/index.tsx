@@ -19,6 +19,7 @@ const MoviesInfoEpisodes = (props: Props) => {
   const onPressWatch = useCallback(
     (episodes: MovieEpisodeItem) => {
       let watchEmbed = "";
+
       if (episodes.linkEmbed) {
         const linkEmbed = encodeURIComponent(episodes.linkEmbed);
         watchEmbed = `/watch/embed/${linkEmbed}`;
@@ -61,7 +62,7 @@ const MoviesInfoEpisodes = (props: Props) => {
         { options: sheetOptions, cancelButtonIndex: sheetOptions.length - 1 },
         (selected?: number) => {
           episodes.forEach((item) => {
-            if (selected === sheetServers.indexOf(item.server)) {
+            if (selected === sheetServers.indexOf(`Server: ${item.server}`)) {
               onPressWatch(item);
             }
           });
@@ -85,7 +86,8 @@ const MoviesInfoEpisodes = (props: Props) => {
               </View>
               <View style={tw`flex-1 px-3 py-2`}>
                 <Text size={14} style={tw`font-bold capitalize`}>
-                  Tập {item.name}
+                  {!item.name.toLowerCase().includes("tập") && "Tập "}
+                  {item.name}
                 </Text>
                 {item.filename && <Text size={12}>{item.filename}</Text>}
               </View>
