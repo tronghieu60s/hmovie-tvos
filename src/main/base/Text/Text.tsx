@@ -23,7 +23,10 @@ export const Text = (props: TextProps) => {
 
   return (
     <DefaultText
-      style={[tw`text-[${s(size)}px] web:xl:text-[${size + 2}px]`, style]}
+      style={[
+        tw`text-[${s(size)}px] sm:text-[${s(size - 5)}px] web:xl:text-[${size + 2}px]`,
+        style,
+      ]}
       {...restProps}>
       {contentText}
     </DefaultText>

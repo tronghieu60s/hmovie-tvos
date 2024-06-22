@@ -16,8 +16,8 @@ type ColorType =
   | "pink";
 
 const sizeScheme = {
-  xs: 10,
-  sm: 12,
+  xs: 12,
+  sm: 14,
 };
 
 const getSize = (size: SizeType) => {

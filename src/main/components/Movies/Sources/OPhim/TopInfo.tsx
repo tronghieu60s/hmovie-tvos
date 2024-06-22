@@ -22,7 +22,11 @@ const MoviesOPhimTopInfo = (props: Props) => {
           style={tw`absolute bottom-0 z-10 m-2`}
         />
         <Image
-          style={tw`w-[${scale(100)}px] h-[${scale(140)}px] rounded-lg`}
+          style={[
+            tw`w-[${scale(100)}px] h-[${scale(140)}px] rounded-lg`,
+            tw`sm:w-[${scale(80)}px] sm:h-[${scale(110)}px]`,
+            tw`xl:w-[${scale(65)}px] xl:h-[${scale(90)}px]`,
+          ]}
           source={{ uri: movie.thumbUrl }}
           contentFit="cover"
         />

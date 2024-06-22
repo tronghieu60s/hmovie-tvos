@@ -11,6 +11,7 @@ import { moviesPhimNguonCState } from "../../../recoil/home/selectors";
 import { Pagination } from "../../../base/Flowbite/Pagination";
 import Skeleton from "@/src/main/base/Skeleton/Skeleton";
 import { scale } from "react-native-size-matters";
+import { isMobilePlatform } from "@/src/core/config";
 
 const HomeTabPhimNguonC = () => {
   const { page = 1 } = useLocalSearchParams();
@@ -36,6 +37,10 @@ const HomeTabPhimNguonC = () => {
     [wrapperLayout.width],
   );
 
+  const numberOfItemsSkeleton = [
+    ...Array(listItemStyle.numberOfItems * (isMobilePlatform ? 3 : 1)),
+  ];
+
   return (
     <View style={tw`flex-1 px-3`}>
       <View style={tw`grow`} onLayout={onWrapperLayout}>
@@ -48,7 +53,7 @@ const HomeTabPhimNguonC = () => {
             <View style={tw`py-3 gap-3`}>
               <View
                 style={tw`flex-row flex-wrap gap-[${listItemStyle.gapSize}px]`}>
-                {[...Array(10)].map((_, index) => (
+                {numberOfItemsSkeleton.map((_, index) => (
                   <Skeleton
                     key={index}
                     style={tw`w-[${listItemStyle.perItemSize - 0.15}px] h-[${listItemStyle.perItemSize + 50 + scale(18)}px]`}
@@ -95,7 +100,7 @@ const HomeTabPhimNguonC = () => {
             </View>
           )}
           {state === "hasError" && (
-            <View style={tw`py-3 gap-3`}>
+            <View style={tw`grow justify-center items-center`}>
               <Text size={12}>
                 Có lỗi trong quá trình tải phim, vui lòng thử lại sau.
               </Text>

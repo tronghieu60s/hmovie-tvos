@@ -16,7 +16,6 @@ import MoviesInfoSkeleton from "../../Info/Skeleton";
 import MoviesInfoTopInfoSkeleton from "../../Info/TopInfo/Skeleton";
 import MoviesOPhimAbout from "./About";
 import MoviesOPhimTopInfo from "./TopInfo";
-import { isTVPlatform } from "@/src/core/config";
 
 const MoviesInfoOPhim = () => {
   const { slug } = useLocalSearchParams();
@@ -46,8 +45,7 @@ const MoviesInfoOPhim = () => {
               style={tw`h-[${wrapperLayout.height}px]`}
               contentContainerStyle={[tw`grow`, insets]}
               showsVerticalScrollIndicator={false}>
-              <View
-                style={tw`gap-3 mt-[${isTVPlatform ? scale(120) : scale(140)}px]`}>
+              <View style={tw`gap-3 mt-[${scale(140)}px]`}>
                 <MoviesInfoTopInfoSkeleton />
                 <MoviesInfoSkeleton />
               </View>
@@ -63,9 +61,9 @@ const MoviesInfoOPhim = () => {
               contentContainerStyle={[tw`grow`, insets]}
               showsVerticalScrollIndicator={false}>
               <View
-                style={tw`gap-3 mt-[${isTVPlatform ? scale(120) : scale(140)}px]`}>
+                style={tw`gap-3 mt-[${scale(140)}px] sm:mt-[${scale(100)}px]`}>
                 <MoviesOPhimTopInfo movie={movie} />
-                <View style={tw`bg-white`}>
+                <View style={tw`flex-1 bg-white`}>
                   <Tabs
                     items={[
                       {
