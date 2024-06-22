@@ -71,7 +71,7 @@ const HomeTabOPhim = () => {
                     key={index}
                     href={{
                       params: { slug: movie.slug },
-                      pathname: `/${movie.source}/movie/[slug]`,
+                      pathname: `/movie/${movie.source}/[slug]`,
                     }}
                     asChild>
                     <Pressable

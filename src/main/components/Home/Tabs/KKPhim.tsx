@@ -1,23 +1,23 @@
 import { calculateListItemStyle } from "@/src/core/commonFuncs";
+import { isMobilePlatform } from "@/src/core/config";
 import tw from "@/src/core/tailwind";
+import Skeleton from "@/src/main/base/Skeleton/Skeleton";
 import { Image } from "expo-image";
 import { Link, router, useLocalSearchParams } from "expo-router";
 import React, { useCallback, useMemo, useState } from "react";
 import { LayoutChangeEvent, Pressable, ScrollView, View } from "react-native";
+import { s } from "react-native-size-matters";
 import { useRecoilValueLoadable } from "recoil";
+import { Pagination } from "../../../base/Flowbite/Pagination";
 import { Text } from "../../../base/Text";
 import { useSafeAreaInsetsStyle } from "../../../hooks/useSafeAreaInsetsStyle";
-import { moviesPhimNguonCState } from "../../../recoil/home/selectors";
-import { Pagination } from "../../../base/Flowbite/Pagination";
-import Skeleton from "@/src/main/base/Skeleton/Skeleton";
-import { scale } from "react-native-size-matters";
-import { isMobilePlatform } from "@/src/core/config";
+import { moviesKKPhimState } from "../../../recoil/home/selectors";
 
-const HomeTabPhimNguonC = () => {
+const HomeTabKKPhim = () => {
   const { page = 1 } = useLocalSearchParams();
 
   const { state, contents: movies } = useRecoilValueLoadable(
-    moviesPhimNguonCState(Number(page)),
+    moviesKKPhimState({ page: Number(page), limit: 24 }),
   );
   const [wrapperLayout, setWrapperLayout] = useState({ width: 0, height: 0 });
 
@@ -56,7 +56,7 @@ const HomeTabPhimNguonC = () => {
                 {numberOfItemsSkeleton.map((_, index) => (
                   <Skeleton
                     key={index}
-                    style={tw`w-[${listItemStyle.perItemSize - 0.15}px] h-[${listItemStyle.perItemSize + 50 + scale(18)}px]`}
+                    style={tw`w-[${listItemStyle.perItemSize - 0.15}px] h-[${listItemStyle.perItemSize + 50 + s(18)}px]`}
                   />
                 ))}
               </View>
@@ -66,9 +66,9 @@ const HomeTabPhimNguonC = () => {
             <View style={tw`py-3 gap-5`}>
               <View
                 style={tw`flex-row flex-wrap gap-[${listItemStyle.gapSize}px]`}>
-                {movies.items.map((movie) => (
+                {movies.items.map((movie, index) => (
                   <Link
-                    key={movie.name}
+                    key={index}
                     href={{
                       params: { slug: movie.slug },
                       pathname: `/movie/${movie.source}/[slug]`,
@@ -112,4 +112,4 @@ const HomeTabPhimNguonC = () => {
   );
 };
 
-export default HomeTabPhimNguonC;
+export default HomeTabKKPhim;

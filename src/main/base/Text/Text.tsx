@@ -1,3 +1,5 @@
+import { layout } from "@/src/core/layout";
+import { BREAKPOINT_RESPONSIVE_XL } from "@/src/core/responsive/breakpoints";
 import tw from "@/src/core/tailwind";
 import React from "react";
 import {
@@ -24,11 +26,21 @@ export const Text = (props: TextProps) => {
   return (
     <DefaultText
       style={[
-        tw`text-[${s(size)}px] sm:text-[${s(size - 5)}px] web:xl:text-[${size + 2}px]`,
+        tw`text-[${s(size)}px]`,
+        tw`sm:text-[${s(size - 5)}px]`,
+        tw`web:xl:text-[${size + 2}px]`,
         style,
       ]}
       {...restProps}>
       {contentText}
     </DefaultText>
   );
+};
+
+export const getFontSize = (size: number) => {
+  if (layout.window.width > BREAKPOINT_RESPONSIVE_XL) {
+    return size + 2;
+  }
+
+  return s(size);
 };
