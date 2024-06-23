@@ -1,6 +1,6 @@
 import tw from "@/src/core/tailwind";
 import { Badge } from "@/src/main/base/Flowbite/Badge";
-import { Text } from "@/src/main/base/Text";
+import { Text } from "@/src/main/base/Native/Text";
 import { MovieType } from "@/src/main/recoil/movie/phimnguonc/types";
 import React, { useMemo } from "react";
 import { View } from "react-native";

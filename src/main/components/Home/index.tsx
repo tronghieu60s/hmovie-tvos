@@ -19,12 +19,12 @@ const HomeScreen = () => {
 
   return (
     <View style={[tw`grow bg-white`, insets]}>
-      <View style={[tw`grow sm:pt-3`]}>
+      <View style={[tw`grow pt-3`]}>
         <Tabs
           items={[
             { title: "Ổ Phim", children: <HomeTabOPhim /> },
-            { title: "Phim Nguồn C", children: <HomeTabPhimNguonC /> },
             { title: "KK Phim", children: <HomeTabKKPhim /> },
+            { title: "Phim Nguồn C", children: <HomeTabPhimNguonC /> },
           ]}
           currentTab={tab ? Number(tab) : 0}
           onChangeTab={onChangeTab}

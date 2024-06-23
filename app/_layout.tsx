@@ -1,30 +1,44 @@
+import { delay } from "@/src/core/commonFuncs";
 import "@/src/core/logs/console";
 import tw from "@/src/core/tailwind";
+import SplashScreen from "@/src/main/components/Splash";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
-import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
-import { View } from "react-native";
+import * as ExpoSplashScreen from "expo-splash-screen";
+import { StatusBar } from "expo-status-bar";
+import { useEffect, useState } from "react";
+import { Platform, View, useColorScheme } from "react-native";
 import { RecoilRoot } from "recoil";
 import { useDeviceContext } from "twrnc";
 
-SplashScreen.preventAutoHideAsync();
+ExpoSplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
-  const [loaded] = useFonts({
+  const [loaded, setLoaded] = useState(false);
+  const [loadedFonts] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
+
   useDeviceContext(tw);
+  const colorScheme = useColorScheme();
 
   useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
+    (async () => {
+      if (loadedFonts) {
+        console.log(`Theme: ${colorScheme}`);
+        ExpoSplashScreen.hideAsync();
 
-  if (!loaded) {
-    return null;
+        if (Platform.OS === "web") {
+          await delay(2000);
+        }
+        setLoaded(true);
+      }
+    })();
+  }, [colorScheme, loadedFonts]);
+
+  if (!loaded || !loadedFonts) {
+    return <SplashScreen />;
   }
 
   return (
@@ -34,6 +48,7 @@ const RootLayout = () => {
           <Stack screenOptions={{ headerShown: false }}>
             <Stack.Screen name="(tabs)" />
           </Stack>
+          <StatusBar style="auto" />
         </View>
       </ActionSheetProvider>
     </RecoilRoot>

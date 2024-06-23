@@ -9,7 +9,7 @@ import { LayoutChangeEvent, Pressable, ScrollView, View } from "react-native";
 import { s } from "react-native-size-matters";
 import { useRecoilValueLoadable } from "recoil";
 import { Pagination } from "../../../base/Flowbite/Pagination";
-import { Text } from "../../../base/Text";
+import { Text } from "../../../base/Native/Text";
 import { useSafeAreaInsetsStyle } from "../../../hooks/useSafeAreaInsetsStyle";
 import { moviesKKPhimState } from "../../../recoil/home/selectors";
 

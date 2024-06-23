@@ -1,7 +1,7 @@
 import tw from "@/src/core/tailwind";
 import React from "react";
 import { Pressable, View, ViewProps } from "react-native";
-import { Text } from "../../Text";
+import { Text } from "../../Native/Text";
 
 export type PaginationProps = ViewProps & {
   type?: "default";

@@ -1,4 +1,5 @@
 import tw from "@/src/core/tailwind";
+import { useSafeAreaInsetsStyle } from "@/src/main/hooks/useSafeAreaInsetsStyle";
 import { useLocalSearchParams } from "expo-router";
 import React, { useState } from "react";
 import { ActivityIndicator, View } from "react-native";
@@ -8,8 +9,10 @@ const MovieOPhimWatchEmbed = () => {
 
   const [loading, setLoading] = useState(true);
 
+  const insets = useSafeAreaInsetsStyle(["top"]);
+
   return (
-    <View style={tw`flex-1`}>
+    <View style={[tw`flex-1`, insets]}>
       <iframe
         style={tw`flex-1 border-0`}
         src={`${link}`}

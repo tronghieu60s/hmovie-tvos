@@ -1,24 +1,23 @@
 {
   "expo": {
-    "name": "hmovie-tvos",
+    "name": "Hmovie TV",
     "slug": "hmovie-tvos",
+    "description": "Hmovie TV is a multi-platform watching movie application.",
     "scheme": "com.hmovie.tvos",
-    "web": {
-      "output": "static",
-      "bundler": "metro"
+    "icon": "./assets/images/logo/logo_light.png",
+    "splash": {
+      "image": "./assets/images/logo/logo_full_light.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FFFFFF"
     },
+    "platforms": ["web", "ios", "android"],
     "plugins": [
       "expo-router",
       [
         "expo-build-properties",
         {
-          "ios": {
-            "newArchEnabled": false
-          },
-          "android": {
-            "newArchEnabled": false,
-            "usesCleartextTraffic": true
-          }
+          "ios": { "newArchEnabled": false },
+          "android": { "newArchEnabled": false, "usesCleartextTraffic": true }
         }
       ],
       [
@@ -40,17 +39,19 @@
     "experiments": {
       "typedRoutes": true
     },
+    "web": {
+      "name": "Hmovie TV",
+      "output": "static",
+      "bundler": "metro",
+      "favicon": "./assets/images/favicon.png"
+    },
     "android": {
       "package": "com.hmovie.tvos"
     },
     "userInterfaceStyle": "automatic",
     "extra": {
-      "router": {
-        "origin": false
-      },
-      "eas": {
-        "projectId": "a4302d39-aa7e-4591-af92-2332244258fc"
-      }
+      "eas": { "projectId": "a4302d39-aa7e-4591-af92-2332244258fc" },
+      "router": { "origin": false }
     }
   }
 }

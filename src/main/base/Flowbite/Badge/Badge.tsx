@@ -1,7 +1,7 @@
 import tw from "@/src/core/tailwind";
 import React from "react";
 import { StyleProp, TextStyle, View, ViewProps } from "react-native";
-import { Text } from "../../Text";
+import { Text } from "../../Native/Text";
 
 type SizeType = "xs" | "sm" | number;
 
@@ -16,8 +16,8 @@ type ColorType =
   | "pink";
 
 const sizeScheme = {
-  xs: 12,
-  sm: 14,
+  xs: 11.5,
+  sm: 13.5,
 };
 
 const getSize = (size: SizeType) => {

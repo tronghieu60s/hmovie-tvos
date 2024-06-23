@@ -5,7 +5,7 @@ import { Link, router, useLocalSearchParams } from "expo-router";
 import React, { useCallback, useMemo, useState } from "react";
 import { LayoutChangeEvent, Pressable, ScrollView, View } from "react-native";
 import { useRecoilValueLoadable } from "recoil";
-import { Text } from "../../../base/Text";
+import { Text } from "../../../base/Native/Text";
 import { useSafeAreaInsetsStyle } from "../../../hooks/useSafeAreaInsetsStyle";
 import { moviesPhimNguonCState } from "../../../recoil/home/selectors";
 import { Pagination } from "../../../base/Flowbite/Pagination";

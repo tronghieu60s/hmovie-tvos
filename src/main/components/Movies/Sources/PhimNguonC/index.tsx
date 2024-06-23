@@ -1,6 +1,6 @@
 import tw from "@/src/core/tailwind";
 import { Tabs } from "@/src/main/base/Flowbite/Tabs";
-import { Text } from "@/src/main/base/Text";
+import { Text } from "@/src/main/base/Native/Text";
 import { useSafeAreaInsetsStyle } from "@/src/main/hooks/useSafeAreaInsetsStyle";
 import { movieInfoPhimNguonCState } from "@/src/main/recoil/movie/phimnguonc/selectors";
 import { MovieType } from "@/src/main/recoil/movie/phimnguonc/types";

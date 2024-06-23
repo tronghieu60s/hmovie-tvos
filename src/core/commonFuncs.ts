@@ -5,6 +5,8 @@ import {
   BREAKPOINT_RESPONSIVE_SM,
 } from "./responsive/breakpoints";
 
+export const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
 export const calculateListItemStyle = (widthSize: number) => {
   const gapSize = 15;
 

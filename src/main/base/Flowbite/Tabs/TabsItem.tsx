@@ -1,7 +1,7 @@
 import tw from "@/src/core/tailwind";
 import { useState } from "react";
 import { Pressable, TextProps } from "react-native";
-import { Text } from "../../Text";
+import { Text } from "../../Native/Text";
 
 export type TabsItemStyles = {
   size?: number;

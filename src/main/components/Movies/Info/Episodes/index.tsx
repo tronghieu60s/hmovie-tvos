@@ -1,6 +1,6 @@
 import { isWebPlatform } from "@/src/core/config";
 import tw from "@/src/core/tailwind";
-import { Text } from "@/src/main/base/Text";
+import { Text } from "@/src/main/base/Native/Text";
 import { MovieEpisode, MovieEpisodeItem } from "@/src/main/recoil/movie/types";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { router } from "expo-router";
