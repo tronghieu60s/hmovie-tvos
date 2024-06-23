@@ -16,8 +16,13 @@
       [
         "expo-build-properties",
         {
-          "ios": { "newArchEnabled": false },
-          "android": { "newArchEnabled": false, "usesCleartextTraffic": true }
+          "ios": {
+            "newArchEnabled": false
+          },
+          "android": {
+            "newArchEnabled": false,
+            "usesCleartextTraffic": true
+          }
         }
       ],
       [
@@ -39,6 +44,7 @@
     "experiments": {
       "typedRoutes": true
     },
+    "ios": {},
     "web": {
       "name": "Hmovie TV",
       "output": "static",
@@ -50,8 +56,18 @@
     },
     "userInterfaceStyle": "automatic",
     "extra": {
-      "eas": { "projectId": "a4302d39-aa7e-4591-af92-2332244258fc" },
-      "router": { "origin": false }
+      "eas": {
+        "projectId": "a4302d39-aa7e-4591-af92-2332244258fc"
+      },
+      "router": {
+        "origin": false
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/a4302d39-aa7e-4591-af92-2332244258fc"
     }
   }
 }

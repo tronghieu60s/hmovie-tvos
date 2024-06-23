@@ -14,7 +14,7 @@ export type TabsItemProps = TextProps &
   };
 
 export const TabsItem = (props: TabsItemProps) => {
-  const { size = 14, title, active, ...restProps } = props;
+  const { size = 14, title, active: itemActive, ...restProps } = props;
 
   const [hovered, setHovered] = useState(false);
 
@@ -28,7 +28,7 @@ export const TabsItem = (props: TabsItemProps) => {
         style={[
           tw`font-medium rounded-t-lg p-4`,
           tw`${hovered ? "text-gray-600 bg-gray-50" : ""}`,
-          tw`${active ? "bg-gray-100 text-blue-600" : "text-gray-500"}`,
+          tw`${itemActive ? "bg-gray-100 text-blue-600" : "text-gray-500"}`,
         ]}>
         {title}
       </Text>

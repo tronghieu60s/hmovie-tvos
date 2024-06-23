@@ -1,17 +1,14 @@
 import { calculateListItemStyle } from "@/src/core/commonFuncs";
-import { isMobilePlatform } from "@/src/core/config";
 import tw from "@/src/core/tailwind";
-import Skeleton from "@/src/main/base/Skeleton/Skeleton";
-import { Image } from "expo-image";
-import { Link, router, useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import React, { useCallback, useMemo, useState } from "react";
-import { LayoutChangeEvent, Pressable, ScrollView, View } from "react-native";
-import { s } from "react-native-size-matters";
+import { LayoutChangeEvent, ScrollView, View } from "react-native";
 import { useRecoilValueLoadable } from "recoil";
-import { Pagination } from "../../../base/Flowbite/Pagination";
 import { Text } from "../../../base/Native/Text";
 import { useSafeAreaInsetsStyle } from "../../../hooks/useSafeAreaInsetsStyle";
 import { moviesKKPhimState } from "../../../recoil/home/selectors";
+import MoviesListPortrait from "../../Movies/List/Portrait";
+import MoviesListPortraitSkeleton from "../../Movies/List/Portrait/Skeleton";
 
 const HomeTabKKPhim = () => {
   const { page = 1 } = useLocalSearchParams();
@@ -37,10 +34,6 @@ const HomeTabKKPhim = () => {
     [wrapperLayout.width],
   );
 
-  const numberOfItemsSkeleton = [
-    ...Array(listItemStyle.numberOfItems * (isMobilePlatform ? 3 : 1)),
-  ];
-
   return (
     <View style={tw`flex-1 px-3`}>
       <View style={tw`grow`} onLayout={onWrapperLayout}>
@@ -49,55 +42,20 @@ const HomeTabKKPhim = () => {
           style={tw`h-[${wrapperLayout.height}px]`}
           contentContainerStyle={[tw`grow`, insets]}
           showsVerticalScrollIndicator={false}>
-          {state === "loading" && (
-            <View style={tw`py-3 gap-3`}>
-              <View
-                style={tw`flex-row flex-wrap gap-[${listItemStyle.gapSize}px]`}>
-                {numberOfItemsSkeleton.map((_, index) => (
-                  <Skeleton
-                    key={index}
-                    style={tw`w-[${listItemStyle.perItemSize - 0.15}px] h-[${listItemStyle.perItemSize + 50 + s(18)}px]`}
-                  />
-                ))}
-              </View>
-            </View>
-          )}
           {state === "hasValue" && (
-            <View style={tw`py-3 gap-5`}>
-              <View
-                style={tw`flex-row flex-wrap gap-[${listItemStyle.gapSize}px]`}>
-                {movies.items.map((movie, index) => (
-                  <Link
-                    key={index}
-                    href={{
-                      params: { slug: movie.slug },
-                      pathname: `/movie/${movie.source}/[slug]`,
-                    }}
-                    asChild>
-                    <Pressable
-                      style={tw`w-[${listItemStyle.perItemSize - 0.15}px] gap-1`}>
-                      <Image
-                        style={tw`w-full h-[${listItemStyle.perItemSize + 50}px]`}
-                        source={movie.thumbUrl}
-                        contentFit="cover"
-                      />
-                      <Text
-                        size={13}
-                        style={tw`font-semibold`}
-                        numberOfLines={1}>
-                        {movie.name}
-                      </Text>
-                    </Pressable>
-                  </Link>
-                ))}
-              </View>
-              <Pagination
-                pageSize={movies.pagination.limit}
-                currentPage={movies.pagination.page}
-                totalItems={movies.pagination.totalItems}
-                onPageChange={onPageChange}
-              />
-            </View>
+            <MoviesListPortrait
+              movies={movies}
+              gapSize={listItemStyle.gapSize}
+              perItemSize={listItemStyle.perItemSize}
+              onPageChange={onPageChange}
+            />
+          )}
+          {state === "loading" && (
+            <MoviesListPortraitSkeleton
+              gapSize={listItemStyle.gapSize}
+              perItemSize={listItemStyle.perItemSize}
+              numberOfItems={listItemStyle.numberOfItems}
+            />
           )}
           {state === "hasError" && (
             <View style={tw`grow justify-center items-center`}>

@@ -25,12 +25,7 @@ export const Text = (props: TextProps) => {
 
   return (
     <DefaultText
-      style={[
-        tw`text-[${s(size)}px]`,
-        tw`sm:text-[${s(size - 5)}px]`,
-        tw`web:xl:text-[${size + 2}px]`,
-        style,
-      ]}
+      style={[tw`text-[${s(size)}px]`, tw`sm:text-[${s(size - 5)}px]`, style]}
       {...restProps}>
       {contentText}
     </DefaultText>
