@@ -1,0 +1,13 @@
+diff --git a/node_modules/@expo/server/build/vendor/vercel.js b/node_modules/@expo/server/build/vendor/vercel.js
+index bf59a82..4360187 100644
+--- a/node_modules/@expo/server/build/vendor/vercel.js
++++ b/node_modules/@expo/server/build/vendor/vercel.js
+@@ -59,7 +59,7 @@ function convertRequest(req, res) {
+ exports.convertRequest = convertRequest;
+ async function respond(res, expoRes) {
+     res.statusMessage = expoRes.statusText;
+-    res.writeHead(expoRes.status, expoRes.statusText, [...expoRes.headers.entries()]);
++    res.writeHead(expoRes.status, expoRes.statusText, [...expoRes.headers.entries()].flat());
+     if (expoRes.body) {
+         await (0, node_1.writeReadableStreamToWritable)(expoRes.body, res);
+     }

@@ -1,9 +1,12 @@
 {
   "buildCommand": "expo export -p web",
-  "cleanUrls": true,
-  "devCommand": "expo",
-  "installCommand": "npm install --force",
-  "outputDirectory": "dist",
-  "framework": null,
-  "rewrites": [{ "source": "/:path*", "destination": "/" }]
+  "installCommand": "yarn",
+  "outputDirectory": "dist/client",
+  "functions": {
+    "api/index.js": {
+      "runtime": "@vercel/node@3.0.11",
+      "includeFiles": "dist/server/**"
+    }
+  },
+  "rewrites": [{ "source": "/(.*)", "destination": "/api/index.js" }]
 }
