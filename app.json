@@ -47,7 +47,7 @@
     "ios": {},
     "web": {
       "name": "Hmovie TV",
-      "output": "server",
+      "output": "static",
       "bundler": "metro",
       "favicon": "./assets/images/favicon.png"
     },
