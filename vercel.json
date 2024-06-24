@@ -8,5 +8,5 @@
       "includeFiles": "dist/server/**"
     }
   },
-  "rewrites": [{ "source": "/(.*)", "destination": "/api/index.js" }]
+  "rewrites": [{ "source": "/(.*)", "destination": "/vercel/index.js" }]
 }
