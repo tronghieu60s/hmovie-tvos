@@ -1,3 +1,4 @@
+import { isTVPlatform } from "@/src/core/config";
 import tw from "@/src/core/tailwind";
 import { Text } from "@/src/main/base/Native/Text";
 import { useTouchable, withTouchable } from "@/src/main/base/Touchable";
@@ -28,8 +29,10 @@ const DefaultMoviesItemPortrait = (props: Props) => {
       <Pressable style={tw`w-[${perItemSize - 0.15}px]`}>
         <View
           style={[
-            tw`border-2 rounded-md overflow-hidden`,
-            hasFocus ? tw`border-black` : tw`border-transparent`,
+            tw`border-2 rounded-md`,
+            isTVPlatform && hasFocus
+              ? tw`border-black`
+              : tw`border-transparent`,
           ]}>
           <Image
             style={tw`w-full h-[${perItemSize + 50}px]`}

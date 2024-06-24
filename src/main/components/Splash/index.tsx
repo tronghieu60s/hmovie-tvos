@@ -5,7 +5,7 @@ import tw from "@/src/core/tailwind";
 
 const SplashScreen = () => {
   return (
-    <View style={tw`flex-1`}>
+    <View style={tw`flex-1 bg-white`}>
       <Image
         style={tw`w-full h-full`}
         source={require("@/assets/images/logo/logo_full_light.svg")}

@@ -1,21 +1,13 @@
 import tw from "@/src/core/tailwind";
-import { Tabs } from "@/src/main/base/Flowbite/Tabs";
-import { Text } from "@/src/main/base/Native/Text";
-import { useSafeAreaInsetsStyle } from "@/src/main/hooks/useSafeAreaInsetsStyle";
 import { movieInfoOPhimState } from "@/src/main/recoil/movie/ophim/selectors";
 import { MovieType } from "@/src/main/recoil/movie/ophim/types";
 import { useLocalSearchParams } from "expo-router";
 import React, { useCallback, useState } from "react";
-import { LayoutChangeEvent, ScrollView, View } from "react-native";
-import { scale } from "react-native-size-matters";
+import { LayoutChangeEvent, View } from "react-native";
 import { useRecoilValueLoadable } from "recoil";
-import MoviesInfoEpisodes from "../../Info/Episodes";
-import MoviesInfoPoster from "../../Info/Poster";
-import MoviesInfoPosterSkeleton from "../../Info/Poster/Skeleton";
+import MoviesError from "../../Error";
 import MoviesInfoSkeleton from "../../Info/Skeleton";
-import MoviesInfoTopInfoSkeleton from "../../Info/TopInfo/Skeleton";
-import MoviesOPhimAbout from "./About";
-import MoviesOPhimTopInfo from "./TopInfo";
+import MoviesOPhimInfo from "./Info";
 
 const MoviesInfoOPhim = () => {
   const { slug } = useLocalSearchParams();
@@ -32,66 +24,16 @@ const MoviesInfoOPhim = () => {
     setWrapperLayout({ width, height });
   }, []);
 
-  const insets = useSafeAreaInsetsStyle(["bottom"]);
-
   return (
     <View style={tw`flex-1`}>
       <View style={tw`grow`} onLayout={onWrapperLayout}>
         {state === "loading" && (
-          <View>
-            <MoviesInfoPosterSkeleton />
-            <ScrollView
-              overScrollMode="never"
-              style={tw`h-[${wrapperLayout.height}px]`}
-              contentContainerStyle={[tw`grow`, insets]}
-              showsVerticalScrollIndicator={false}>
-              <View
-                style={tw`gap-3 mt-[${scale(180)}px] sm:mt-[${scale(100)}px]`}>
-                <MoviesInfoTopInfoSkeleton />
-                <MoviesInfoSkeleton />
-              </View>
-            </ScrollView>
-          </View>
+          <MoviesInfoSkeleton height={wrapperLayout.height} />
         )}
         {state === "hasValue" && (
-          <View>
-            <MoviesInfoPoster posterUrl={movie.posterUrl} />
-            <ScrollView
-              overScrollMode="never"
-              style={tw`h-[${wrapperLayout.height}px]`}
-              contentContainerStyle={[tw`grow`, insets]}
-              showsVerticalScrollIndicator={false}>
-              <View
-                style={tw`gap-3 mt-[${scale(180)}px] sm:mt-[${scale(100)}px]`}>
-                <MoviesOPhimTopInfo movie={movie} />
-                <View style={tw`flex-1 bg-white`}>
-                  <Tabs
-                    items={[
-                      {
-                        title: "Thông tin",
-                        children: <MoviesOPhimAbout movie={movie} />,
-                      },
-                      {
-                        title: "Xem phim",
-                        children: (
-                          <MoviesInfoEpisodes episodes={movie.episodes} />
-                        ),
-                      },
-                    ]}
-                    itemStyles={{ size: 13.5 }}
-                  />
-                </View>
-              </View>
-            </ScrollView>
-          </View>
+          <MoviesOPhimInfo movie={movie} height={wrapperLayout.height} />
         )}
-        {state === "hasError" && (
-          <View style={tw`grow justify-center items-center`}>
-            <Text size={12}>
-              Có lỗi xảy ra quá trình tải phim, vui lòng thử lại sau.
-            </Text>
-          </View>
-        )}
+        {state === "hasError" && <MoviesError />}
       </View>
     </View>
   );

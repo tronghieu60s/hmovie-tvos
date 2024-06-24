@@ -51,18 +51,24 @@ const MoviesPhimNguonCTopInfo = (props: Props) => {
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <View style={tw`flex-row flex-wrap gap-x-2 gap-y-1 ml-0.5`}>
                 {movie.language && (
-                  <Text style={tw`font-semibold`}>{movie.language}</Text>
+                  <Text size={13} style={tw`font-semibold`}>
+                    {movie.language}
+                  </Text>
                 )}
                 {movie.quality && (
                   <View style={tw`flex-row gap-2`}>
                     <Text>•</Text>
-                    <Text style={tw`font-semibold`}>{movie.quality}</Text>
+                    <Text size={13} style={tw`font-semibold`}>
+                      {movie.quality}
+                    </Text>
                   </View>
                 )}
                 {movie.duration && (
                   <View style={tw`flex-row gap-2`}>
                     <Text>•</Text>
-                    <Text style={tw`font-semibold`}>{movie.duration}</Text>
+                    <Text size={13} style={tw`font-semibold`}>
+                      {movie.duration}
+                    </Text>
                   </View>
                 )}
               </View>

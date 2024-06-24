@@ -8,7 +8,7 @@ export const appApiUrl = process.env.EXPO_PUBLIC_APP_API_URL;
 export const isTVPlatform = Platform.isTV;
 export const isWebPlatform = Platform.OS === "web";
 export const isMobilePlatform =
-  Platform.OS === "android" ||
   Platform.OS === "ios" ||
+  Platform.OS === "android" ||
   (Platform.OS === "web" && layout.window.width < BREAKPOINT_RESPONSIVE_SM);
 export const notMobilePlatform = Platform.OS === "web" || Platform.isTV;

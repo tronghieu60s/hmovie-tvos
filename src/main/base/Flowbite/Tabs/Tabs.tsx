@@ -1,6 +1,6 @@
 import tw from "@/src/core/tailwind";
 import React, { useCallback, useState } from "react";
-import { View, ViewProps } from "react-native";
+import { ScrollView, View, ViewProps } from "react-native";
 import { TabsItem, TabsItemStyles } from "./TabsItem";
 
 export type TabsProps = ViewProps & {
@@ -33,8 +33,12 @@ export const Tabs = (props: TabsProps) => {
 
   return (
     <View style={[tw`grow`, style]} {...restProps}>
-      <View
-        style={tw`flex flex-row flex-wrap gap-2 border-b border-gray-200 px-3`}>
+      <ScrollView
+        horizontal
+        overScrollMode="never"
+        style={tw`border-b border-gray-200`}
+        contentContainerStyle={tw`flex-row flex-wrap gap-2 px-3`}
+        showsHorizontalScrollIndicator={false}>
         {items.map((item, index) => (
           <TabsItem
             key={index}
@@ -44,7 +48,7 @@ export const Tabs = (props: TabsProps) => {
             {...itemStyles}
           />
         ))}
-      </View>
+      </ScrollView>
       <View style={tw`grow`}>{items[current].children}</View>
     </View>
   );

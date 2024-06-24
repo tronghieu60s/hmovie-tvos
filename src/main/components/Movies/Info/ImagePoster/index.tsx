@@ -9,7 +9,7 @@ type Props = {
   posterUrl: string;
 };
 
-const MoviesInfoPoster = (props: Props) => {
+const MoviesInfoImagePoster = (props: Props) => {
   const { posterUrl } = props;
 
   const insets = useSafeAreaInsetsStyle(["top"]);
@@ -30,4 +30,4 @@ const MoviesInfoPoster = (props: Props) => {
   );
 };
 
-export default MoviesInfoPoster;
+export default MoviesInfoImagePoster;

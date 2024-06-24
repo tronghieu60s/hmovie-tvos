@@ -25,7 +25,7 @@ export type MovieType = {
   isTheater: boolean;
   isCopyright: boolean;
   episodes: MovieEpisode[];
-  source: "ophim";
+  source: "kkphim";
 };
 
 export type MoviesType = {
@@ -35,5 +35,5 @@ export type MoviesType = {
   originName: string;
   thumbUrl: string;
   posterUrl: string;
-  source: "ophim";
+  source: "kkphim";
 };

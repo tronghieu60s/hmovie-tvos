@@ -4,9 +4,9 @@ import { router, useLocalSearchParams } from "expo-router";
 import React, { useCallback, useMemo, useState } from "react";
 import { LayoutChangeEvent, ScrollView, View } from "react-native";
 import { useRecoilValueLoadable } from "recoil";
-import { Text } from "../../../base/Native/Text";
 import { useSafeAreaInsetsStyle } from "../../../hooks/useSafeAreaInsetsStyle";
 import { moviesKKPhimState } from "../../../recoil/home/selectors";
+import MoviesError from "../../Movies/Error";
 import MoviesListPortrait from "../../Movies/List/Portrait";
 import MoviesListPortraitSkeleton from "../../Movies/List/Portrait/Skeleton";
 
@@ -57,13 +57,7 @@ const HomeTabKKPhim = () => {
               numberOfItems={listItemStyle.numberOfItems}
             />
           )}
-          {state === "hasError" && (
-            <View style={tw`grow justify-center items-center`}>
-              <Text size={12}>
-                Có lỗi trong quá trình tải phim, vui lòng thử lại sau.
-              </Text>
-            </View>
-          )}
+          {state === "hasError" && <MoviesError />}
         </ScrollView>
       </View>
     </View>

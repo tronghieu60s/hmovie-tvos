@@ -1,7 +1,7 @@
 import tw from "@/src/core/tailwind";
 import { Badge } from "@/src/main/base/Flowbite/Badge";
 import { Text } from "@/src/main/base/Native/Text";
-import { MovieType } from "@/src/main/recoil/movie/ophim/types";
+import { MovieType } from "@/src/main/recoil/movie/kkphim/types";
 import { Image } from "expo-image";
 import React from "react";
 import { ScrollView, View } from "react-native";
@@ -46,18 +46,24 @@ const MoviesKKPhimTopInfo = (props: Props) => {
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               <View style={tw`flex-row flex-wrap gap-x-2 gap-y-1 ml-0.5`}>
                 {movie.language && (
-                  <Text style={tw`font-semibold`}>{movie.language}</Text>
+                  <Text size={13} style={tw`font-semibold`}>
+                    {movie.language}
+                  </Text>
                 )}
                 {movie.quality && (
                   <View style={tw`flex-row gap-2`}>
                     <Text>•</Text>
-                    <Text style={tw`font-semibold`}>{movie.quality}</Text>
+                    <Text size={13} style={tw`font-semibold`}>
+                      {movie.quality}
+                    </Text>
                   </View>
                 )}
                 {movie.duration && (
                   <View style={tw`flex-row gap-2`}>
                     <Text>•</Text>
-                    <Text style={tw`font-semibold`}>{movie.duration}</Text>
+                    <Text size={13} style={tw`font-semibold`}>
+                      {movie.duration}
+                    </Text>
                   </View>
                 )}
               </View>

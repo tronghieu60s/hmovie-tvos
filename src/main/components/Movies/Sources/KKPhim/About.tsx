@@ -1,7 +1,7 @@
 import tw from "@/src/core/tailwind";
 import { Badge } from "@/src/main/base/Flowbite/Badge";
 import { Text } from "@/src/main/base/Native/Text";
-import { MovieType } from "@/src/main/recoil/movie/ophim/types";
+import { MovieType } from "@/src/main/recoil/movie/kkphim/types";
 import React from "react";
 import { View } from "react-native";
 
