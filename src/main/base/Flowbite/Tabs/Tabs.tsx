@@ -33,22 +33,24 @@ export const Tabs = (props: TabsProps) => {
 
   return (
     <View style={[tw`grow`, style]} {...restProps}>
-      <ScrollView
-        horizontal
-        overScrollMode="never"
-        style={tw`border-b border-gray-200`}
-        contentContainerStyle={tw`flex-row flex-wrap gap-2 px-3`}
-        showsHorizontalScrollIndicator={false}>
-        {items.map((item, index) => (
-          <TabsItem
-            key={index}
-            title={item.title}
-            active={current === index}
-            onPress={() => onChangeTabProxy(index)}
-            {...itemStyles}
-          />
-        ))}
-      </ScrollView>
+      <View>
+        <ScrollView
+          horizontal
+          overScrollMode="never"
+          style={tw`border-b border-gray-200`}
+          contentContainerStyle={tw`flex-row flex-wrap gap-2 px-3`}
+          showsHorizontalScrollIndicator={false}>
+          {items.map((item, index) => (
+            <TabsItem
+              key={index}
+              title={item.title}
+              active={current === index}
+              onPress={() => onChangeTabProxy(index)}
+              {...itemStyles}
+            />
+          ))}
+        </ScrollView>
+      </View>
       <View style={tw`grow`}>{items[current].children}</View>
     </View>
   );

@@ -19,7 +19,7 @@ const HomeScreen = () => {
 
   return (
     <View style={[tw`grow bg-white`, insets]}>
-      <View style={[tw`grow pt-3`]}>
+      <View style={[tw`grow pt-0 web:pt-3`]}>
         <Tabs
           items={[
             { title: "Ổ Phim", children: <HomeTabOPhim /> },
