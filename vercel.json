@@ -3,10 +3,10 @@
   "installCommand": "yarn",
   "outputDirectory": "dist/client",
   "functions": {
-    "vercel/index.js": {
+    "api/index.js": {
       "runtime": "@vercel/node@3.0.11",
       "includeFiles": "dist/server/**"
     }
   },
-  "rewrites": [{ "source": "/(.*)", "destination": "/vercel/index.js" }]
+  "rewrites": [{ "source": "/(.*)", "destination": "/api/index.js" }]
 }

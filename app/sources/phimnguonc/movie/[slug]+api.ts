@@ -41,12 +41,14 @@ export async function POST(_request: Request, { slug }: { slug: string }) {
       episodes: Object.entries(
         movie.movie.episodes
           .flatMap((ep: any) =>
-            ep.items.map((data: any) => ({
-              name: data.name,
-              slug: data.slug,
-              server: ep.server_name,
-              linkEmbed: data.embed,
-            })),
+            ep.items
+              .map((data: any) => ({
+                name: data.name,
+                slug: data.slug,
+                server: ep.server_name,
+                linkEmbed: data.embed,
+              }))
+              .filter((data: any) => data.name),
           )
           .reduce((acc: any, cur: any) => {
             if (!acc[cur.name])

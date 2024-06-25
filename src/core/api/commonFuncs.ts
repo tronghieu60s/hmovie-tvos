@@ -1,5 +1,5 @@
 // @ts-ignore
-import * as uslug from "uslug";
+import uslug from "uslug";
 
 export const getSlug = (str: string) => {
   let uSlug = str

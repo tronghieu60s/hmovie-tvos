@@ -24,7 +24,7 @@ const DefaultMoviesItemPortrait = (props: Props) => {
 
   return (
     <Link
-      href={{ params: { slug }, pathname: `/movie/${source}/[slug]` }}
+      href={{ params: { slug }, pathname: `/sources/${source}/movie/[slug]` }}
       asChild>
       <Pressable style={tw`w-[${perItemSize - 0.15}px]`}>
         <View

@@ -2,7 +2,7 @@ import { apiCaller } from "@/src/core/api";
 import { selectorFamily } from "recoil";
 import { MovieType } from "./types";
 
-export const movieInfoPhimNguonCState = selectorFamily<MovieType[], string>({
+export const movieInfoPhimNguonCState = selectorFamily<MovieType, string>({
   key: "MovieInfoPhimNguonCState",
   get: (slug: string) => async () => {
     const apiUrl = `/sources/phimnguonc/movie/${slug}`;
@@ -12,6 +12,6 @@ export const movieInfoPhimNguonCState = selectorFamily<MovieType[], string>({
       return movie.data;
     }
 
-    return [];
+    return null;
   },
 });

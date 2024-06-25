@@ -2,7 +2,7 @@ import { apiCaller } from "@/src/core/api";
 import { selectorFamily } from "recoil";
 import { MovieType } from "./types";
 
-export const movieInfoKKPhimState = selectorFamily<MovieType[], string>({
+export const movieInfoKKPhimState = selectorFamily<MovieType | null, string>({
   key: "MovieInfoKKPhimState",
   get: (slug: string) => async () => {
     const apiUrl = `/sources/kkphim/movie/${slug}`;
@@ -12,6 +12,6 @@ export const movieInfoKKPhimState = selectorFamily<MovieType[], string>({
       return movie.data;
     }
 
-    return [];
+    return null;
   },
 });

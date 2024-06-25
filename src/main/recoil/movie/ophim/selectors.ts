@@ -2,7 +2,7 @@ import { selectorFamily } from "recoil";
 import { MovieType } from "./types";
 import { apiCaller } from "@/src/core/api";
 
-export const movieInfoOPhimState = selectorFamily<MovieType[], string>({
+export const movieInfoOPhimState = selectorFamily<MovieType | null, string>({
   key: "MovieInfoOPhimState",
   get: (slug: string) => async () => {
     const apiUrl = `/sources/ophim/movie/${slug}`;
@@ -12,6 +12,6 @@ export const movieInfoOPhimState = selectorFamily<MovieType[], string>({
       return movie.data;
     }
 
-    return [];
+    return null;
   },
 });
