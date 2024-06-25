@@ -1,9 +1,29 @@
 import { apiCaller } from "@/src/core/api";
 import { selectorFamily } from "recoil";
+import { MoviesType as MoviesAnimeHayType } from "../movie/animehay/types";
 import { MoviesType as MoviesKKPhimType } from "../movie/kkphim/types";
 import { MoviesType as MoviesOPhimType } from "../movie/ophim/types";
 import { MoviesType as MoviesPhimNguonCType } from "../movie/phimnguonc/types";
 import { MoviesResponse } from "../movie/types";
+import { getMoviesAnimeHay } from "@/src/mobile/animehay/movies";
+
+export const moviesAnimeHayState = selectorFamily<
+  MoviesResponse<MoviesAnimeHayType>,
+  { page: number; limit: number }
+>({
+  key: "MoviesAnimeHayState",
+  get:
+    ({ page, limit }) =>
+    async () => {
+      const movies = await getMoviesAnimeHay({ page, limit });
+
+      if (movies.success) {
+        return movies.data as any;
+      }
+
+      return { items: [], pagination: {} };
+    },
+});
 
 export const moviesOPhimState = selectorFamily<
   MoviesResponse<MoviesOPhimType>,

@@ -4,9 +4,10 @@ import React, { useCallback } from "react";
 import { View } from "react-native";
 import { Tabs } from "../../base/Flowbite/Tabs";
 import { useSafeAreaInsetsStyle } from "../../hooks/useSafeAreaInsetsStyle";
+import HomeTabAnimeHay from "./Tabs/AnimeHay";
+import HomeTabKKPhim from "./Tabs/KKPhim";
 import HomeTabOPhim from "./Tabs/OPhim";
 import HomeTabPhimNguonC from "./Tabs/PhimNguonC";
-import HomeTabKKPhim from "./Tabs/KKPhim";
 
 const HomeScreen = () => {
   const { tab } = useLocalSearchParams();
@@ -25,6 +26,7 @@ const HomeScreen = () => {
             { title: "Ổ Phim", children: <HomeTabOPhim /> },
             { title: "KK Phim", children: <HomeTabKKPhim /> },
             { title: "Phim Nguồn C", children: <HomeTabPhimNguonC /> },
+            { title: "Anime Hay", children: <HomeTabAnimeHay /> },
           ]}
           currentTab={tab ? Number(tab) : 0}
           onChangeTab={onChangeTab}
