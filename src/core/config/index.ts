@@ -3,8 +3,6 @@ import { layout } from "../layout";
 import { BREAKPOINT_RESPONSIVE_SM } from "../responsive/breakpoints";
 
 export const isDev = __DEV__;
-export const appApiUrl = process.env.EXPO_PUBLIC_APP_API_URL;
-
 export const isTVPlatform = Platform.isTV;
 export const isWebPlatform = Platform.OS === "web";
 export const isMobilePlatform =

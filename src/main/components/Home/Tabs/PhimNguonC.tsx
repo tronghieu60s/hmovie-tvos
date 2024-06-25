@@ -14,7 +14,7 @@ const HomeTabPhimNguonC = () => {
   const { page = 1 } = useLocalSearchParams();
 
   const { state, contents: movies } = useRecoilValueLoadable(
-    moviesPhimNguonCState(Number(page)),
+    moviesPhimNguonCState({ page: Number(page), limit: 24 }),
   );
   const [wrapperLayout, setWrapperLayout] = useState({ width: 0, height: 0 });
 

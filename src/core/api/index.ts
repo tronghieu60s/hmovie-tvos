@@ -1,16 +1,20 @@
-import axios from "axios";
-import { appApiUrl, isDev } from "../config";
+import { isDev } from "../config";
 
-export const axiosRequest = axios.create({
-  baseURL: appApiUrl,
-  headers: { "Content-Type": "application/json" },
-});
-
-axiosRequest.interceptors.request.use(async (config) => {
-  // Log for dev
+export async function apiCaller(
+  url: string,
+  method: "GET" | "POST" | "PUT" | "DELETE" = "GET",
+  options: RequestInit = {},
+) {
   if (isDev) {
-    console.info("REQUEST: ", config.url);
+    console.info("REQUEST: ", url);
   }
 
-  return config;
-});
+  return fetch(url, { method, ...options })
+    .then((response) => response)
+    .catch((error) => {
+      if (isDev) {
+        console.error(`${error}`);
+      }
+      return error;
+    });
+}

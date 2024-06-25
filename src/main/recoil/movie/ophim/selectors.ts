@@ -1,14 +1,17 @@
-import { axiosRequest } from "@/src/core/api";
 import { selectorFamily } from "recoil";
 import { MovieType } from "./types";
+import { apiCaller } from "@/src/core/api";
 
 export const movieInfoOPhimState = selectorFamily<MovieType[], string>({
   key: "MovieInfoOPhimState",
   get: (slug: string) => async () => {
-    const movies = await axiosRequest.get(`/ophim/movie/${slug}`);
-    if (movies.data.success) {
-      return movies.data.data;
+    const apiUrl = `/sources/ophim/movie/${slug}`;
+    const movie = await apiCaller(apiUrl, "POST").then((res) => res.json());
+
+    if (movie.success) {
+      return movie.data;
     }
+
     return [];
   },
 });

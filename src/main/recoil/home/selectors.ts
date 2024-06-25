@@ -1,8 +1,8 @@
-import { axiosRequest } from "@/src/core/api";
+import { apiCaller } from "@/src/core/api";
 import { selectorFamily } from "recoil";
+import { MoviesType as MoviesKKPhimType } from "../movie/kkphim/types";
 import { MoviesType as MoviesOPhimType } from "../movie/ophim/types";
 import { MoviesType as MoviesPhimNguonCType } from "../movie/phimnguonc/types";
-import { MoviesType as MoviesKKPhimType } from "../movie/kkphim/types";
 import { MoviesResponse } from "../movie/types";
 
 export const moviesOPhimState = selectorFamily<
@@ -22,27 +22,15 @@ export const moviesOPhimState = selectorFamily<
 
       const queryString = queryParams.toString();
 
-      const movies = await axiosRequest.get(`/ophim/movies?${queryString}`);
-      if (movies.data.success) {
-        return movies.data.data;
+      const apiUrl = `/sources/ophim/movies?${queryString}`;
+      const movies = await apiCaller(apiUrl, "POST").then((res) => res.json());
+
+      if (movies.success) {
+        return movies.data;
       }
 
       return { items: [], pagination: {} };
     },
-});
-
-export const moviesPhimNguonCState = selectorFamily<
-  MoviesResponse<MoviesPhimNguonCType>,
-  number
->({
-  key: "MoviesPhimNguonCState",
-  get: (page: number) => async () => {
-    const movies = await axiosRequest.get(`/phimnguonc/movies?page=${page}`);
-    if (movies.data.success) {
-      return movies.data.data;
-    }
-    return { items: [], pagination: {} };
-  },
 });
 
 export const moviesKKPhimState = selectorFamily<
@@ -62,9 +50,39 @@ export const moviesKKPhimState = selectorFamily<
 
       const queryString = queryParams.toString();
 
-      const movies = await axiosRequest.get(`/kkphim/movies?${queryString}`);
-      if (movies.data.success) {
-        return movies.data.data;
+      const apiUrl = `/sources/kkphim/movies?${queryString}`;
+      const movies = await apiCaller(apiUrl, "POST").then((res) => res.json());
+
+      if (movies.success) {
+        return movies.data;
+      }
+
+      return { items: [], pagination: {} };
+    },
+});
+
+export const moviesPhimNguonCState = selectorFamily<
+  MoviesResponse<MoviesPhimNguonCType>,
+  { page: number; limit?: number }
+>({
+  key: "MoviesPhimNguonCState",
+  get:
+    ({ page, limit }) =>
+    async () => {
+      const queryParams = new URLSearchParams();
+      queryParams.set("page", `${page}`);
+
+      if (limit) {
+        queryParams.set("limit", `${limit}`);
+      }
+
+      const queryString = queryParams.toString();
+
+      const apiUrl = `/sources/phimnguonc/movies?${queryString}`;
+      const movies = await apiCaller(apiUrl, "POST").then((res) => res.json());
+
+      if (movies.success) {
+        return movies.data;
       }
 
       return { items: [], pagination: {} };
