@@ -1,6 +1,12 @@
 {
   "buildCommand": "expo export -p web",
   "installCommand": "yarn",
-  "outputDirectory": "dist",
-  "rewrites": [{ "source": "/:path*", "destination": "/" }]
+  "outputDirectory": "dist/client",
+  "functions": {
+    "vercel/index.js": {
+      "runtime": "@vercel/node@3.0.11",
+      "includeFiles": "dist/server/**"
+    }
+  },
+  "rewrites": [{ "source": "/(.*)", "destination": "/vercel/index.js" }]
 }
