@@ -6,8 +6,8 @@ import { View } from "react-native";
 const MoviesError = () => {
   return (
     <View style={tw`grow justify-center items-center`}>
-      <Text size={12}>
-        Có lỗi xảy ra quá trình tải phim, vui lòng thử lại sau.
+      <Text size={12} style={tw`font-semibold text-center`}>
+        {`Có lỗi xảy ra quá trình tải phim, vui lòng thử lại sau.`}
       </Text>
     </View>
   );

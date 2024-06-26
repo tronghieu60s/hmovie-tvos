@@ -21,7 +21,7 @@ export const moviesAnimeHayState = selectorFamily<
         return movies.data as any;
       }
 
-      return { items: [], pagination: {} };
+      return { items: [], pagination: null };
     },
 });
 
@@ -49,7 +49,7 @@ export const moviesOPhimState = selectorFamily<
         return movies.data;
       }
 
-      return { items: [], pagination: {} };
+      return { items: [], pagination: null };
     },
 });
 
@@ -77,7 +77,7 @@ export const moviesKKPhimState = selectorFamily<
         return movies.data;
       }
 
-      return { items: [], pagination: {} };
+      return { items: [], pagination: null };
     },
 });
 
@@ -105,6 +105,6 @@ export const moviesPhimNguonCState = selectorFamily<
         return movies.data;
       }
 
-      return { items: [], pagination: {} };
+      return { items: [], pagination: null };
     },
 });

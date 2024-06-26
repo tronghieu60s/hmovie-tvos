@@ -6,9 +6,8 @@ import { View } from "react-native";
 const MoviesErrorOnlyMobile = () => {
   return (
     <View style={tw`grow justify-center items-center`}>
-      <Text size={12}>
-        Nguồn này chỉ hỗ trợ trên các thiết bị di động, vui lòng tải ứng dụng để
-        tải nghiệm.
+      <Text size={12} style={tw`font-semibold text-center`}>
+        {`Nguồn này chỉ hỗ trợ trên các thiết bị di động\nVui lòng tải ứng dụng để trải nghiệm.`}
       </Text>
     </View>
   );
