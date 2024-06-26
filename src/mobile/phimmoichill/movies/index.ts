@@ -2,10 +2,10 @@ import { getPaginationNewPerPage } from "@/src/core/api/commonFuncs";
 import { ApiResponse } from "@/src/core/api/dto/api-result.dto";
 import * as cheerio from "cheerio";
 
-const apiUrl = "https://animehay.bio/phim-moi-cap-nhap/trang";
-const pageSize = 30;
+const apiUrl = "https://phimmoichillu.net/tim-kiem//page-";
+const pageSize = 25;
 
-export async function getMoviesAnimeHay(params: {
+export async function getMoviesPhimMoiChill(params: {
   page: number;
   limit: number;
 }) {
@@ -30,7 +30,7 @@ export async function getMoviesAnimeHay(params: {
     let totalPages = 0;
 
     do {
-      const apiReq = `${apiUrl}-${queryPage}.html`;
+      const apiReq = `${apiUrl}-${queryPage}`;
       console.info(apiReq);
 
       const response = await fetch(apiReq).then((res) => res.text());
@@ -39,40 +39,24 @@ export async function getMoviesAnimeHay(params: {
 
       if (response) {
         const $ = cheerio.load(response);
-        const items = $(".movies-list .movie-item");
+        const items = $(".list-film .item");
 
         const itemsData = Array.from(items).map((item) => {
           const href = $(item).children("a").attr("href");
-          const episode = $(item).find(".episode-latest").text();
 
-          const id = href?.split("-")?.pop()?.replace(".html", "") || "";
+          const id = href?.split("-")?.pop()?.replace("pm", "") || "";
           const name = $(item).children("a").attr("title") || "";
           const slug = href?.split("/")?.pop()?.replace(".html", "") || "";
           const thumbUrl = $(item).find("img").attr("src") || "";
           const posterUrl = $(item).find("img").attr("src") || "";
-          const totalEpisodes = episode.split("/")?.[1]?.trim() || "";
-          const currentEpisode = episode.split("/")?.[0]?.trim() || "";
-          const rating =
-            $(item).children("a").children(".score").text().trim() || "";
           return {
             id,
             name,
             slug,
             thumbUrl,
             posterUrl,
-            totalEpisodes,
-            currentEpisode,
-            rating,
-            source: "animehay",
           };
         });
-
-        if (!totalPages) {
-          const pagination = $(".pagination").find("a").last().attr("href");
-          totalPages = Number(
-            pagination?.split("-")?.pop()?.replace(".html", "") || 0,
-          );
-        }
 
         movies.push(...itemsData);
       }

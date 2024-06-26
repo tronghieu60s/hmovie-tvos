@@ -10,6 +10,7 @@ import HomeTabAnimeHay from "./Tabs/AnimeHay";
 import HomeTabKKPhim from "./Tabs/KKPhim";
 import HomeTabOPhim from "./Tabs/OPhim";
 import HomeTabPhimNguonC from "./Tabs/PhimNguonC";
+import HomeTabPhimMoiChill from "./Tabs/PhimMoiChill";
 
 const tabs = [
   { title: "Ổ Phim", children: <HomeTabOPhim /> },
@@ -26,6 +27,18 @@ const tabs = [
       </View>
     ),
     children: <HomeTabAnimeHay />,
+  },
+  {
+    title: (
+      <View style={tw`flex-row items-center gap-1`}>
+        <Text>Phim Mới Chill</Text>
+        <View style={tw`flex-row items-center gap-1`}>
+          <Android size={20} />
+          <Apple size={20} />
+        </View>
+      </View>
+    ),
+    children: <HomeTabPhimMoiChill />,
   },
 ];
 

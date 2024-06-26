@@ -1,11 +1,13 @@
 import { apiCaller } from "@/src/core/api";
+import { getMoviesAnimeHay } from "@/src/mobile/animehay/movies";
+import { getMoviesPhimMoiChill } from "@/src/mobile/phimmoichill/movies";
 import { selectorFamily } from "recoil";
 import { MoviesType as MoviesAnimeHayType } from "../movie/animehay/types";
 import { MoviesType as MoviesKKPhimType } from "../movie/kkphim/types";
 import { MoviesType as MoviesOPhimType } from "../movie/ophim/types";
+import { MoviesType as MoviesPhimMoiChillType } from "../movie/phimmoichill/types";
 import { MoviesType as MoviesPhimNguonCType } from "../movie/phimnguonc/types";
 import { MoviesResponse } from "../movie/types";
-import { getMoviesAnimeHay } from "@/src/mobile/animehay/movies";
 
 export const moviesAnimeHayState = selectorFamily<
   MoviesResponse<MoviesAnimeHayType>,
@@ -19,6 +21,34 @@ export const moviesAnimeHayState = selectorFamily<
 
       if (movies.success) {
         return movies.data as any;
+      }
+
+      return { items: [], pagination: null };
+    },
+});
+
+export const moviesKKPhimState = selectorFamily<
+  MoviesResponse<MoviesKKPhimType>,
+  { page: number; limit?: number }
+>({
+  key: "MoviesKKPhimState",
+  get:
+    ({ page, limit }) =>
+    async () => {
+      const queryParams = new URLSearchParams();
+      queryParams.set("page", `${page}`);
+
+      if (limit) {
+        queryParams.set("limit", `${limit}`);
+      }
+
+      const queryString = queryParams.toString();
+
+      const apiUrl = `/sources/kkphim/movies?${queryString}`;
+      const movies = await apiCaller(apiUrl, "POST").then((res) => res.json());
+
+      if (movies.success) {
+        return movies.data;
       }
 
       return { items: [], pagination: null };
@@ -53,28 +83,18 @@ export const moviesOPhimState = selectorFamily<
     },
 });
 
-export const moviesKKPhimState = selectorFamily<
-  MoviesResponse<MoviesKKPhimType>,
-  { page: number; limit?: number }
+export const moviesPhimMoiChillState = selectorFamily<
+  MoviesResponse<MoviesPhimMoiChillType>,
+  { page: number; limit: number }
 >({
-  key: "MoviesKKPhimState",
+  key: "MoviesPhimMoiChillState",
   get:
     ({ page, limit }) =>
     async () => {
-      const queryParams = new URLSearchParams();
-      queryParams.set("page", `${page}`);
-
-      if (limit) {
-        queryParams.set("limit", `${limit}`);
-      }
-
-      const queryString = queryParams.toString();
-
-      const apiUrl = `/sources/kkphim/movies?${queryString}`;
-      const movies = await apiCaller(apiUrl, "POST").then((res) => res.json());
+      const movies = await getMoviesPhimMoiChill({ page, limit });
 
       if (movies.success) {
-        return movies.data;
+        return movies.data as any;
       }
 
       return { items: [], pagination: null };

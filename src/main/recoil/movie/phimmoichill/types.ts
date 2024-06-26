@@ -5,5 +5,5 @@ export type MoviesType = {
   originName: string;
   thumbUrl: string;
   posterUrl: string;
-  source: "phimmoichill";
+  source: "animehay";
 };
