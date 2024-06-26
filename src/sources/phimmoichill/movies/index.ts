@@ -55,6 +55,7 @@ export async function getMoviesPhimMoiChill(params: {
             slug,
             thumbUrl,
             posterUrl,
+            source: "phimmoichill",
           };
         });
 

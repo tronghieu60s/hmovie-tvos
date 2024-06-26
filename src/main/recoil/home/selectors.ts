@@ -1,6 +1,6 @@
 import { apiCaller } from "@/src/core/api";
-import { getMoviesAnimeHay } from "@/src/mobile/animehay/movies";
-import { getMoviesPhimMoiChill } from "@/src/mobile/phimmoichill/movies";
+import { getMoviesAnimeHay } from "@/src/sources/animehay/movies";
+import { getMoviesPhimMoiChill } from "@/src/sources/phimmoichill/movies";
 import { selectorFamily } from "recoil";
 import { MoviesType as MoviesAnimeHayType } from "../movie/animehay/types";
 import { MoviesType as MoviesKKPhimType } from "../movie/kkphim/types";

@@ -1,5 +1,5 @@
 import { ApiResponse } from "@/src/core/api/dto/api-result.dto";
-import { getMoviesOPhim } from "@/src/sources/ophim/movies";
+import { getMoviesAnimeHay } from "@/src/sources/animehay/movies";
 
 export async function POST(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -8,7 +8,7 @@ export async function POST(request: Request) {
   const _limit = searchParams.get("limit") || 24;
 
   try {
-    const response = await getMoviesOPhim({
+    const response = await getMoviesAnimeHay({
       page: Number(_page),
       limit: Number(_limit),
     });

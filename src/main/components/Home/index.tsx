@@ -13,16 +13,39 @@ import HomeTabPhimNguonC from "./Tabs/PhimNguonC";
 import HomeTabPhimMoiChill from "./Tabs/PhimMoiChill";
 
 const tabs = [
-  { title: "Ổ Phim", children: <HomeTabOPhim /> },
-  { title: "KK Phim", children: <HomeTabKKPhim /> },
-  { title: "Phim Nguồn C", children: <HomeTabPhimNguonC /> },
+  {
+    title: (
+      <Text size={15} style={tw`text-white font-bold px-3 py-1`}>
+        Ổ Phim
+      </Text>
+    ),
+    children: <HomeTabOPhim />,
+  },
+  {
+    title: (
+      <Text size={15} style={tw`text-white font-bold px-3 py-1`}>
+        KK Phim
+      </Text>
+    ),
+    children: <HomeTabKKPhim />,
+  },
+  {
+    title: (
+      <Text size={15} style={tw`text-white font-bold px-3 py-1`}>
+        Phim Nguồn C
+      </Text>
+    ),
+    children: <HomeTabPhimNguonC />,
+  },
   {
     title: (
       <View style={tw`flex-row items-center gap-1`}>
-        <Text>Anime Hay</Text>
+        <Text size={15} style={tw`text-white font-bold px-3 py-1`}>
+          Anime Hay
+        </Text>
         <View style={tw`flex-row items-center gap-1`}>
-          <Android size={20} />
-          <Apple size={20} />
+          <Android color={tw.color("white")} size={20} />
+          <Apple color={tw.color("white")} size={20} />
         </View>
       </View>
     ),
@@ -31,10 +54,12 @@ const tabs = [
   {
     title: (
       <View style={tw`flex-row items-center gap-1`}>
-        <Text>Phim Mới Chill</Text>
+        <Text size={15} style={tw`text-white font-bold px-3 py-1`}>
+          Phim Mới Chill
+        </Text>
         <View style={tw`flex-row items-center gap-1`}>
-          <Android size={20} />
-          <Apple size={20} />
+          <Android color={tw.color("white")} size={20} />
+          <Apple color={tw.color("white")} size={20} />
         </View>
       </View>
     ),
@@ -89,9 +114,7 @@ const HomeScreen = () => {
               contentContainerStyle={tw`grow justify-center items-center`}>
               {tabs.map((item, index) => (
                 <Pressable key={index} onPress={() => onChangeTab(index)}>
-                  <Text size={15} style={tw`text-white font-bold px-3 py-1`}>
-                    {item.title}
-                  </Text>
+                  {item.title}
                 </Pressable>
               ))}
             </ScrollView>
