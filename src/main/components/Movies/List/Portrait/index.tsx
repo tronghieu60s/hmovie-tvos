@@ -5,9 +5,10 @@ import React from "react";
 import { View } from "react-native";
 import { scale } from "react-native-size-matters";
 import MoviesItemPortrait from "./Item";
+import MoviesError from "../../Error";
 
 type Props = {
-  movies: MoviesResponse;
+  movies: MoviesResponse | null;
   gapSize?: number;
   perItemSize?: number;
   onPageChange?: (page: number) => void;
@@ -15,11 +16,17 @@ type Props = {
 
 const MoviesListPortrait = (props: Props) => {
   const {
-    movies: { items, pagination },
+    movies,
     gapSize = 15,
     perItemSize = scale(100),
     onPageChange,
   } = props;
+
+  if (!movies || !movies?.items.length) {
+    return <MoviesError />;
+  }
+
+  const { items, pagination } = movies || {};
 
   return (
     <View style={tw`py-3 gap-5`}>
@@ -28,6 +35,7 @@ const MoviesListPortrait = (props: Props) => {
           <MoviesItemPortrait
             key={index}
             {...movie}
+            hasTVPreferredFocus={index === 0}
             perItemSize={perItemSize}
           />
         ))}

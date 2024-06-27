@@ -29,7 +29,7 @@ const DefaultMoviesItemPortrait = (props: Props) => {
       <Pressable style={tw`w-[${perItemSize - 0.15}px]`}>
         <View
           style={[
-            tw`border-2 rounded-md`,
+            tw`border-2 rounded overflow-hidden`,
             isTVPlatform && hasFocus
               ? tw`border-black`
               : tw`border-transparent`,

@@ -10,8 +10,23 @@ import { MoviesType as MoviesPhimNguonCType } from "../movie/phimnguonc/types";
 import { MoviePaginationInput, MoviesResponse } from "../movie/types";
 import { isDev, isWebPlatform } from "@/src/core/config";
 
+const getMoviesApi = (url: string, pagination: MoviePaginationInput) => {
+  const { page, limit } = pagination;
+
+  const queryParams = new URLSearchParams();
+  queryParams.set("page", `${page}`);
+
+  if (limit) {
+    queryParams.set("limit", `${limit}`);
+  }
+
+  const queryString = queryParams.toString();
+
+  return apiCaller(`${url}?${queryString}`, "POST").then((res) => res.json());
+};
+
 export const moviesAnimeHayState = selectorFamily<
-  MoviesResponse<MoviesAnimeHayType>,
+  MoviesResponse<MoviesAnimeHayType> | null,
   MoviePaginationInput
 >({
   key: "MoviesAnimeHayState",
@@ -19,128 +34,90 @@ export const moviesAnimeHayState = selectorFamily<
     ({ page, limit }) =>
     async () => {
       let movies = null;
+
       if (isDev && isWebPlatform) {
-        const queryParams = new URLSearchParams();
-        queryParams.set("page", `${page}`);
-
-        if (limit) {
-          queryParams.set("limit", `${limit}`);
-        }
-
-        const queryString = queryParams.toString();
-
-        const apiUrl = `/sources/animehay/movies?${queryString}`;
-        movies = await apiCaller(apiUrl, "POST").then((res) => res.json());
+        movies = await getMoviesApi("/sources/animehay/movies", {
+          page,
+          limit,
+        });
       } else {
         movies = await getMoviesAnimeHay({ page, limit });
       }
 
-      if (movies && movies.success) {
-        return movies.data as any;
-      }
-
-      return { items: [], pagination: null };
+      return movies.data as MoviesResponse<MoviesAnimeHayType> | null;
     },
 });
 
 export const moviesKKPhimState = selectorFamily<
-  MoviesResponse<MoviesKKPhimType>,
+  MoviesResponse<MoviesKKPhimType> | null,
   MoviePaginationInput
 >({
   key: "MoviesKKPhimState",
   get:
     ({ page, limit }) =>
     async () => {
-      const queryParams = new URLSearchParams();
-      queryParams.set("page", `${page}`);
+      const movies = await getMoviesApi("/sources/kkphim/movies", {
+        page,
+        limit,
+      });
 
-      if (limit) {
-        queryParams.set("limit", `${limit}`);
-      }
-
-      const queryString = queryParams.toString();
-
-      const apiUrl = `/sources/kkphim/movies?${queryString}`;
-      const movies = await apiCaller(apiUrl, "POST").then((res) => res.json());
-
-      if (movies.success) {
-        return movies.data;
-      }
-
-      return { items: [], pagination: null };
+      return movies.data as MoviesResponse<MoviesKKPhimType> | null;
     },
 });
 
 export const moviesOPhimState = selectorFamily<
-  MoviesResponse<MoviesOPhimType>,
+  MoviesResponse<MoviesOPhimType> | null,
   MoviePaginationInput
 >({
   key: "MoviesOPhimState",
   get:
     ({ page, limit }) =>
     async () => {
-      const queryParams = new URLSearchParams();
-      queryParams.set("page", `${page}`);
+      const movies = await getMoviesApi("/sources/ophim/movies", {
+        page,
+        limit,
+      });
 
-      if (limit) {
-        queryParams.set("limit", `${limit}`);
-      }
-
-      const queryString = queryParams.toString();
-
-      const apiUrl = `/sources/ophim/movies?${queryString}`;
-      const movies = await apiCaller(apiUrl, "POST").then((res) => res.json());
-
-      if (movies.success) {
-        return movies.data;
-      }
-
-      return { items: [], pagination: null };
+      return movies.data as MoviesResponse<MoviesOPhimType> | null;
     },
 });
 
 export const moviesPhimMoiChillState = selectorFamily<
-  MoviesResponse<MoviesPhimMoiChillType>,
+  MoviesResponse<MoviesPhimMoiChillType> | null,
   MoviePaginationInput
 >({
   key: "MoviesPhimMoiChillState",
   get:
     ({ page, limit }) =>
     async () => {
-      const movies = await getMoviesPhimMoiChill({ page, limit });
+      let movies = null;
 
-      if (movies.success) {
-        return movies.data as any;
+      if (isDev && isWebPlatform) {
+        movies = await getMoviesApi("/sources/phimmoichill/movies", {
+          page,
+          limit,
+        });
+      } else {
+        movies = await getMoviesPhimMoiChill({ page, limit });
       }
 
-      return { items: [], pagination: null };
+      return movies.data as MoviesResponse<MoviesPhimMoiChillType> | null;
     },
 });
 
 export const moviesPhimNguonCState = selectorFamily<
-  MoviesResponse<MoviesPhimNguonCType>,
+  MoviesResponse<MoviesPhimNguonCType> | null,
   MoviePaginationInput
 >({
   key: "MoviesPhimNguonCState",
   get:
     ({ page, limit }) =>
     async () => {
-      const queryParams = new URLSearchParams();
-      queryParams.set("page", `${page}`);
+      const movies = await getMoviesApi("/sources/phimnguonc/movies", {
+        page,
+        limit,
+      });
 
-      if (limit) {
-        queryParams.set("limit", `${limit}`);
-      }
-
-      const queryString = queryParams.toString();
-
-      const apiUrl = `/sources/phimnguonc/movies?${queryString}`;
-      const movies = await apiCaller(apiUrl, "POST").then((res) => res.json());
-
-      if (movies.success) {
-        return movies.data;
-      }
-
-      return { items: [], pagination: null };
+      return movies.data as MoviesResponse<MoviesPhimNguonCType> | null;
     },
 });

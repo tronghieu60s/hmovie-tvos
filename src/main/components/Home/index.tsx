@@ -1,21 +1,21 @@
 import tw from "@/src/core/tailwind";
-import { router, useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams } from "expo-router";
 import { Android, Apple } from "iconsax-react-native";
-import React, { useCallback, useMemo, useState } from "react";
-import { Pressable, ScrollView, View } from "react-native";
-import Modal from "react-native-modal";
+import React, { useMemo } from "react";
+import { View } from "react-native";
 import { Text } from "../../base/Native/Text";
 import { useSafeAreaInsetsStyle } from "../../hooks/useSafeAreaInsetsStyle";
-import HomeTabAnimeHay from "./Tabs/AnimeHay";
-import HomeTabKKPhim from "./Tabs/KKPhim";
-import HomeTabOPhim from "./Tabs/OPhim";
-import HomeTabPhimNguonC from "./Tabs/PhimNguonC";
-import HomeTabPhimMoiChill from "./Tabs/PhimMoiChill";
+import HomeTabAnimeHay from "./TabsSources/AnimeHay";
+import HomeTabKKPhim from "./TabsSources/KKPhim";
+import HomeTabOPhim from "./TabsSources/OPhim";
+import HomeTabPhimMoiChill from "./TabsSources/PhimMoiChill";
+import HomeTabPhimNguonC from "./TabsSources/PhimNguonC";
+import HomeTabsSourcesSwitch from "./TabsSourcesSwitch";
 
 const tabs = [
   {
     title: (
-      <Text size={15} style={tw`text-white font-bold px-3 py-1`}>
+      <Text size={15} style={tw`text-white font-bold`}>
         Ổ Phim
       </Text>
     ),
@@ -23,7 +23,7 @@ const tabs = [
   },
   {
     title: (
-      <Text size={15} style={tw`text-white font-bold px-3 py-1`}>
+      <Text size={15} style={tw`text-white font-bold`}>
         KK Phim
       </Text>
     ),
@@ -31,7 +31,7 @@ const tabs = [
   },
   {
     title: (
-      <Text size={15} style={tw`text-white font-bold px-3 py-1`}>
+      <Text size={15} style={tw`text-white font-bold`}>
         Phim Nguồn C
       </Text>
     ),
@@ -40,7 +40,7 @@ const tabs = [
   {
     title: (
       <View style={tw`flex-row items-center gap-1`}>
-        <Text size={15} style={tw`text-white font-bold px-3 py-1`}>
+        <Text size={15} style={tw`text-white font-bold`}>
           Anime Hay
         </Text>
         <View style={tw`flex-row items-center gap-1`}>
@@ -54,7 +54,7 @@ const tabs = [
   {
     title: (
       <View style={tw`flex-row items-center gap-1`}>
-        <Text size={15} style={tw`text-white font-bold px-3 py-1`}>
+        <Text size={15} style={tw`text-white font-bold`}>
           Phim Mới Chill
         </Text>
         <View style={tw`flex-row items-center gap-1`}>
@@ -70,17 +70,6 @@ const tabs = [
 const HomeScreen = () => {
   const { tab = 0 } = useLocalSearchParams();
 
-  const [visibleTabs, setVisibleTabs] = useState(false);
-
-  const onChangeTab = useCallback((index: number) => {
-    router.setParams({ tab: `${index}`, page: `1` });
-    setVisibleTabs(false);
-  }, []);
-
-  const onToggleVisibleTabs = useCallback(() => {
-    setVisibleTabs((prev) => !prev);
-  }, []);
-
   const insets = useSafeAreaInsetsStyle(["top"]);
 
   const currentTab = useMemo(
@@ -89,39 +78,22 @@ const HomeScreen = () => {
   );
 
   return (
-    <View style={[tw`grow bg-white`, insets]}>
-      <View style={[tw`grow pt-0`]}>
-        {currentTab && (
-          <View style={tw`grow`}>
+    <View style={tw`grow bg-white`}>
+      {currentTab && (
+        <View style={tw`grow`}>
+          <View
+            style={[tw`bg-sky-500`, insets.paddingTop > 0 ? insets : tw`pt-3`]}>
             <View
-              style={tw`bg-sky-500 flex-row justify-between items-center p-3`}>
-              <Text size={18} style={tw`font-bold py-1`}>
+              style={tw`flex-row justify-between items-center px-3 pt-0 pb-3`}>
+              <Text size={18} style={tw`font-bold p-0`}>
                 {currentTab.title}
               </Text>
-              <Pressable
-                style={tw`bg-black justify-center items-center rounded px-3 py-1`}
-                onPress={onToggleVisibleTabs}>
-                <Text size={12} style={tw`text-white`}>
-                  Đổi Nguồn Phim
-                </Text>
-              </Pressable>
+              <HomeTabsSourcesSwitch tabs={tabs} />
             </View>
-            {currentTab.children}
           </View>
-        )}
-        <Modal isVisible={visibleTabs} onBackdropPress={onToggleVisibleTabs}>
-          <View>
-            <ScrollView
-              contentContainerStyle={tw`grow justify-center items-center`}>
-              {tabs.map((item, index) => (
-                <Pressable key={index} onPress={() => onChangeTab(index)}>
-                  {item.title}
-                </Pressable>
-              ))}
-            </ScrollView>
-          </View>
-        </Modal>
-      </View>
+          {currentTab.children}
+        </View>
+      )}
     </View>
   );
 };

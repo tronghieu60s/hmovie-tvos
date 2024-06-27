@@ -51,7 +51,7 @@ export const Pagination = (props: PaginationProps) => {
       </View>
       <View style={tw`flex-row gap-2`}>
         <Pressable
-          style={tw`h-8 flex items-center justify-center px-3 bg-gray-800 rounded`}
+          style={tw`flex items-center justify-center px-3 py-1 bg-gray-800 rounded`}
           onPress={() =>
             onPageChange && onPageChange(currentPage > 1 ? currentPage - 1 : 1)
           }>
@@ -60,7 +60,7 @@ export const Pagination = (props: PaginationProps) => {
           </Text>
         </Pressable>
         <Pressable
-          style={tw`h-8 flex items-center justify-center px-3 bg-gray-800 rounded`}
+          style={tw`flex items-center justify-center px-3 py-1 bg-gray-800 rounded`}
           onPress={() => onPageChange && onPageChange(currentPage + 1)}>
           <Text size={13} style={tw`font-medium text-white`}>
             Trang tiếp

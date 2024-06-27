@@ -1,1 +1,1 @@
-export async function getMovieAnimeHayBySlug(params: { slug: string }) {}
+export async function getMovieAnimeHaySlug(params: { slug: string }) {}

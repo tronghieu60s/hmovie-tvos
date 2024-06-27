@@ -1,6 +1,6 @@
 export type MoviesResponse<T = any> = {
   items: T[];
-  pagination: MoviePagination | null;
+  pagination: MoviePagination;
 };
 
 export type MoviePagination = {
