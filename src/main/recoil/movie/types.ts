@@ -10,6 +10,11 @@ export type MoviePagination = {
   totalItems: number;
 };
 
+export type MoviePaginationInput = {
+  page: number;
+  limit: number;
+};
+
 export type MovieEpisode = {
   name: string;
   slug: string;

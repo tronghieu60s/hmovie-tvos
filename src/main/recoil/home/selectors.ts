@@ -7,19 +7,35 @@ import { MoviesType as MoviesKKPhimType } from "../movie/kkphim/types";
 import { MoviesType as MoviesOPhimType } from "../movie/ophim/types";
 import { MoviesType as MoviesPhimMoiChillType } from "../movie/phimmoichill/types";
 import { MoviesType as MoviesPhimNguonCType } from "../movie/phimnguonc/types";
-import { MoviesResponse } from "../movie/types";
+import { MoviePaginationInput, MoviesResponse } from "../movie/types";
+import { isDev, isWebPlatform } from "@/src/core/config";
 
 export const moviesAnimeHayState = selectorFamily<
   MoviesResponse<MoviesAnimeHayType>,
-  { page: number; limit: number }
+  MoviePaginationInput
 >({
   key: "MoviesAnimeHayState",
   get:
     ({ page, limit }) =>
     async () => {
-      const movies = await getMoviesAnimeHay({ page, limit });
+      let movies = null;
+      if (isDev && isWebPlatform) {
+        const queryParams = new URLSearchParams();
+        queryParams.set("page", `${page}`);
 
-      if (movies.success) {
+        if (limit) {
+          queryParams.set("limit", `${limit}`);
+        }
+
+        const queryString = queryParams.toString();
+
+        const apiUrl = `/sources/animehay/movies?${queryString}`;
+        movies = await apiCaller(apiUrl, "POST").then((res) => res.json());
+      } else {
+        movies = await getMoviesAnimeHay({ page, limit });
+      }
+
+      if (movies && movies.success) {
         return movies.data as any;
       }
 
@@ -29,7 +45,7 @@ export const moviesAnimeHayState = selectorFamily<
 
 export const moviesKKPhimState = selectorFamily<
   MoviesResponse<MoviesKKPhimType>,
-  { page: number; limit?: number }
+  MoviePaginationInput
 >({
   key: "MoviesKKPhimState",
   get:
@@ -57,7 +73,7 @@ export const moviesKKPhimState = selectorFamily<
 
 export const moviesOPhimState = selectorFamily<
   MoviesResponse<MoviesOPhimType>,
-  { page: number; limit?: number }
+  MoviePaginationInput
 >({
   key: "MoviesOPhimState",
   get:
@@ -85,7 +101,7 @@ export const moviesOPhimState = selectorFamily<
 
 export const moviesPhimMoiChillState = selectorFamily<
   MoviesResponse<MoviesPhimMoiChillType>,
-  { page: number; limit: number }
+  MoviePaginationInput
 >({
   key: "MoviesPhimMoiChillState",
   get:
@@ -103,7 +119,7 @@ export const moviesPhimMoiChillState = selectorFamily<
 
 export const moviesPhimNguonCState = selectorFamily<
   MoviesResponse<MoviesPhimNguonCType>,
-  { page: number; limit?: number }
+  MoviePaginationInput
 >({
   key: "MoviesPhimNguonCState",
   get:

@@ -1,14 +1,12 @@
 import { getPaginationNewPerPage } from "@/src/core/api/commonFuncs";
 import { ApiResponse } from "@/src/core/api/dto/api-result.dto";
+import { MoviePaginationInput } from "@/src/main/recoil/movie/types";
 
 const apiUrl = "https://phim.nguonc.com/api/films/phim-moi-cap-nhat";
 const pageSize = 10;
 
-export async function getMoviesPhimNguonC(params: {
-  page: number;
-  limit: number;
-}) {
-  const { page: _page, limit: _limit } = params;
+export async function getMoviesPhimNguonC(params: MoviePaginationInput) {
+  const { page: _page = 1, limit: _limit = 24 } = params;
 
   try {
     let limit = Number(_limit);

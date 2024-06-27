@@ -4,7 +4,7 @@ import { LayoutChangeEvent, ScrollView, View } from "react-native";
 import { useSafeAreaInsetsStyle } from "../../../../hooks/useSafeAreaInsetsStyle";
 import MoviesErrorOnlyMobile from "../../../Movies/Error/OnlyMobile";
 
-const HomeTabAnimeHay = () => {
+const HomeTabAnimeHayWeb = () => {
   const [wrapperLayout, setWrapperLayout] = useState({ width: 0, height: 0 });
 
   const onWrapperLayout = useCallback((event: LayoutChangeEvent) => {
@@ -29,4 +29,4 @@ const HomeTabAnimeHay = () => {
   );
 };
 
-export default HomeTabAnimeHay;
+export default HomeTabAnimeHayWeb;

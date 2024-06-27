@@ -1,15 +1,13 @@
 import { getPaginationNewPerPage } from "@/src/core/api/commonFuncs";
 import { ApiResponse } from "@/src/core/api/dto/api-result.dto";
+import { MoviePaginationInput } from "@/src/main/recoil/movie/types";
 import * as cheerio from "cheerio";
 
 const apiUrl = "https://animehay.bio/phim-moi-cap-nhap/trang";
 const pageSize = 30;
 
-export async function getMoviesAnimeHay(params: {
-  page: number;
-  limit: number;
-}) {
-  const { page: _page, limit: _limit } = params;
+export async function getMoviesAnimeHay(params: MoviePaginationInput) {
+  const { page: _page = 1, limit: _limit = 24 } = params;
 
   try {
     let limit = Number(_limit);

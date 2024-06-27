@@ -90,15 +90,16 @@ const HomeScreen = () => {
 
   return (
     <View style={[tw`grow bg-white`, insets]}>
-      <View style={[tw`grow pt-0 web:pt-3`]}>
+      <View style={[tw`grow pt-0`]}>
         {currentTab && (
           <View style={tw`grow`}>
-            <View style={tw`flex-row justify-between items-center px-3`}>
+            <View
+              style={tw`bg-sky-500 flex-row justify-between items-center p-3`}>
               <Text size={18} style={tw`font-bold py-1`}>
                 {currentTab.title}
               </Text>
               <Pressable
-                style={tw`bg-sky-500 justify-center items-center rounded px-3 py-1`}
+                style={tw`bg-black justify-center items-center rounded px-3 py-1`}
                 onPress={onToggleVisibleTabs}>
                 <Text size={12} style={tw`text-white`}>
                   Đổi Nguồn Phim

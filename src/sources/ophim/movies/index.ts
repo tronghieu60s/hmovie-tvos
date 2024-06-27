@@ -1,11 +1,12 @@
 import { getPaginationNewPerPage } from "@/src/core/api/commonFuncs";
 import { ApiResponse } from "@/src/core/api/dto/api-result.dto";
+import { MoviePaginationInput } from "@/src/main/recoil/movie/types";
 
 const apiUrl = "https://ophim1.com/danh-sach/phim-moi-cap-nhat";
 const pageSize = 24;
 
-export async function getMoviesOPhim(params: { page: number; limit: number }) {
-  const { page: _page, limit: _limit } = params;
+export async function getMoviesOPhim(params: MoviePaginationInput) {
+  const { page: _page = 1, limit: _limit = 24 } = params;
 
   try {
     let limit = Number(_limit);
