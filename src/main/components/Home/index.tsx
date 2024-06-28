@@ -1,21 +1,18 @@
 import tw from "@/src/core/tailwind";
 import { useLocalSearchParams } from "expo-router";
-import { Android, Apple } from "iconsax-react-native";
 import React, { useMemo } from "react";
 import { View } from "react-native";
 import { Text } from "../../base/Native/Text";
 import { useSafeAreaInsetsStyle } from "../../hooks/useSafeAreaInsetsStyle";
-import HomeTabAnimeHay from "./TabsSources/AnimeHay";
-import HomeTabKKPhim from "./TabsSources/KKPhim";
-import HomeTabOPhim from "./TabsSources/OPhim";
-import HomeTabPhimMoiChill from "./TabsSources/PhimMoiChill";
-import HomeTabPhimNguonC from "./TabsSources/PhimNguonC";
-import HomeTabsSourcesSwitch from "./TabsSourcesSwitch";
+import HomeTabKKPhim from "./Tabs/Sources/KKPhim";
+import HomeTabOPhim from "./Tabs/Sources/OPhim";
+import HomeTabPhimNguonC from "./Tabs/Sources/PhimNguonC";
+import HomeTabsSwitch from "./Tabs/TabSwitch";
 
 const tabs = [
   {
     title: (
-      <Text size={15} style={tw`text-white font-bold`}>
+      <Text size={16} style={tw`text-white font-bold`}>
         Ổ Phim
       </Text>
     ),
@@ -23,7 +20,7 @@ const tabs = [
   },
   {
     title: (
-      <Text size={15} style={tw`text-white font-bold`}>
+      <Text size={16} style={tw`text-white font-bold`}>
         KK Phim
       </Text>
     ),
@@ -31,39 +28,11 @@ const tabs = [
   },
   {
     title: (
-      <Text size={15} style={tw`text-white font-bold`}>
+      <Text size={16} style={tw`text-white font-bold`}>
         Phim Nguồn C
       </Text>
     ),
     children: <HomeTabPhimNguonC />,
-  },
-  {
-    title: (
-      <View style={tw`flex-row items-center gap-1`}>
-        <Text size={15} style={tw`text-white font-bold`}>
-          Anime Hay
-        </Text>
-        <View style={tw`flex-row items-center gap-1`}>
-          <Android color={tw.color("white")} size={20} />
-          <Apple color={tw.color("white")} size={20} />
-        </View>
-      </View>
-    ),
-    children: <HomeTabAnimeHay />,
-  },
-  {
-    title: (
-      <View style={tw`flex-row items-center gap-1`}>
-        <Text size={15} style={tw`text-white font-bold`}>
-          Phim Mới Chill
-        </Text>
-        <View style={tw`flex-row items-center gap-1`}>
-          <Android color={tw.color("white")} size={20} />
-          <Apple color={tw.color("white")} size={20} />
-        </View>
-      </View>
-    ),
-    children: <HomeTabPhimMoiChill />,
   },
 ];
 
@@ -88,7 +57,7 @@ const HomeScreen = () => {
               <Text size={18} style={tw`font-bold p-0`}>
                 {currentTab.title}
               </Text>
-              <HomeTabsSourcesSwitch tabs={tabs} />
+              <HomeTabsSwitch tabs={tabs} />
             </View>
           </View>
           {currentTab.children}

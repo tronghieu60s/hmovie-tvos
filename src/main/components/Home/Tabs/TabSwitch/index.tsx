@@ -12,7 +12,7 @@ type Props = {
   }[];
 };
 
-const HomeTabsSourcesSwitch = (props: Props) => {
+const HomeTabsSwitch = (props: Props) => {
   const { tabs } = props;
 
   const [visibleTabs, setVisibleTabs] = useState(false);
@@ -51,4 +51,4 @@ const HomeTabsSourcesSwitch = (props: Props) => {
   );
 };
 
-export default HomeTabsSourcesSwitch;
+export default HomeTabsSwitch;

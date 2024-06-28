@@ -62,6 +62,7 @@
     "react-native-webview": "^13.10.3",
     "recoil": "^0.7.7",
     "twrnc": "^4.2.0",
+    "use-debounce": "^10.0.1",
     "uslug": "^1.0.4"
   },
   "devDependencies": {

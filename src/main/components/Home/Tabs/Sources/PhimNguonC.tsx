@@ -4,11 +4,11 @@ import { router, useLocalSearchParams } from "expo-router";
 import React, { useCallback, useMemo, useState } from "react";
 import { LayoutChangeEvent, ScrollView, View } from "react-native";
 import { useRecoilValueLoadable } from "recoil";
-import { useSafeAreaInsetsStyle } from "../../../hooks/useSafeAreaInsetsStyle";
-import { moviesPhimNguonCState } from "../../../recoil/home/selectors";
-import MoviesError from "../../Movies/Error";
-import MoviesListPortrait from "../../Movies/List/Portrait";
-import MoviesListPortraitSkeleton from "../../Movies/List/Portrait/Skeleton";
+import { useSafeAreaInsetsStyle } from "../../../../hooks/useSafeAreaInsetsStyle";
+import { moviesPhimNguonCState } from "../../../../recoil/home/selectors";
+import MoviesError from "../../../Movies/Error";
+import MoviesListPortrait from "../../../Movies/List/Portrait";
+import MoviesListPortraitSkeleton from "../../../Movies/List/Portrait/Skeleton";
 
 const HomeTabPhimNguonC = () => {
   const { page = 1 } = useLocalSearchParams();

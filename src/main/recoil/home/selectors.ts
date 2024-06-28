@@ -9,6 +9,9 @@ import { MoviesType as MoviesPhimMoiChillType } from "../movie/phimmoichill/type
 import { MoviesType as MoviesPhimNguonCType } from "../movie/phimnguonc/types";
 import { MoviePaginationInput, MoviesResponse } from "../movie/types";
 import { isDev, isWebPlatform } from "@/src/core/config";
+import { getMoviesOPhim } from "@/src/sources/ophim/movies";
+import { getMoviesKKPhim } from "@/src/sources/kkphim/movies";
+import { getMoviesPhimNguonC } from "@/src/sources/phimnguonc/movies";
 
 const getMoviesApi = (url: string, pagination: MoviePaginationInput) => {
   const { page, limit } = pagination;
@@ -33,17 +36,15 @@ export const moviesAnimeHayState = selectorFamily<
   get:
     ({ page, limit }) =>
     async () => {
-      let movies = null;
-
       if (isDev && isWebPlatform) {
-        movies = await getMoviesApi("/sources/animehay/movies", {
+        const movies = await getMoviesApi("/sources/animehay/movies", {
           page,
           limit,
         });
-      } else {
-        movies = await getMoviesAnimeHay({ page, limit });
+        return movies.data as MoviesResponse<MoviesAnimeHayType> | null;
       }
 
+      const movies = await getMoviesAnimeHay({ page, limit });
       return movies.data as MoviesResponse<MoviesAnimeHayType> | null;
     },
 });
@@ -56,11 +57,15 @@ export const moviesKKPhimState = selectorFamily<
   get:
     ({ page, limit }) =>
     async () => {
-      const movies = await getMoviesApi("/sources/kkphim/movies", {
-        page,
-        limit,
-      });
+      if (isWebPlatform) {
+        const movies = await getMoviesApi("/sources/kkphim/movies", {
+          page,
+          limit,
+        });
+        return movies.data as MoviesResponse<MoviesKKPhimType> | null;
+      }
 
+      const movies = await getMoviesKKPhim({ page, limit });
       return movies.data as MoviesResponse<MoviesKKPhimType> | null;
     },
 });
@@ -73,11 +78,15 @@ export const moviesOPhimState = selectorFamily<
   get:
     ({ page, limit }) =>
     async () => {
-      const movies = await getMoviesApi("/sources/ophim/movies", {
-        page,
-        limit,
-      });
+      if (isWebPlatform) {
+        const movies = await getMoviesApi("/sources/ophim/movies", {
+          page,
+          limit,
+        });
+        return movies.data as MoviesResponse<MoviesOPhimType> | null;
+      }
 
+      const movies = await getMoviesOPhim({ page, limit });
       return movies.data as MoviesResponse<MoviesOPhimType> | null;
     },
 });
@@ -90,17 +99,15 @@ export const moviesPhimMoiChillState = selectorFamily<
   get:
     ({ page, limit }) =>
     async () => {
-      let movies = null;
-
       if (isDev && isWebPlatform) {
-        movies = await getMoviesApi("/sources/phimmoichill/movies", {
+        const movies = await getMoviesApi("/sources/phimmoichill/movies", {
           page,
           limit,
         });
-      } else {
-        movies = await getMoviesPhimMoiChill({ page, limit });
+        return movies.data as MoviesResponse<MoviesPhimMoiChillType> | null;
       }
 
+      const movies = await getMoviesPhimMoiChill({ page, limit });
       return movies.data as MoviesResponse<MoviesPhimMoiChillType> | null;
     },
 });
@@ -113,11 +120,15 @@ export const moviesPhimNguonCState = selectorFamily<
   get:
     ({ page, limit }) =>
     async () => {
-      const movies = await getMoviesApi("/sources/phimnguonc/movies", {
-        page,
-        limit,
-      });
+      if (isWebPlatform) {
+        const movies = await getMoviesApi("/sources/phimnguonc/movies", {
+          page,
+          limit,
+        });
+        return movies.data as MoviesResponse<MoviesPhimNguonCType> | null;
+      }
 
+      const movies = await getMoviesPhimNguonC({ page, limit });
       return movies.data as MoviesResponse<MoviesPhimNguonCType> | null;
     },
 });

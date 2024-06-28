@@ -1,8 +1,8 @@
 import tw from "@/src/core/tailwind";
 import React, { useCallback, useState } from "react";
 import { LayoutChangeEvent, ScrollView, View } from "react-native";
-import { useSafeAreaInsetsStyle } from "../../../../hooks/useSafeAreaInsetsStyle";
-import MoviesErrorOnlyMobile from "../../../Movies/Error/OnlyMobile";
+import { useSafeAreaInsetsStyle } from "../../../../../hooks/useSafeAreaInsetsStyle";
+import MoviesErrorOnlyMobile from "../../../../Movies/Error/OnlyMobile";
 
 const HomeTabPhimMoiChill = () => {
   const [wrapperLayout, setWrapperLayout] = useState({ width: 0, height: 0 });

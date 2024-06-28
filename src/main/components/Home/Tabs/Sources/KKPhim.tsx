@@ -5,16 +5,16 @@ import React, { useCallback, useMemo, useState } from "react";
 import { LayoutChangeEvent, ScrollView, View } from "react-native";
 import { useRecoilValueLoadable } from "recoil";
 import { useSafeAreaInsetsStyle } from "../../../../hooks/useSafeAreaInsetsStyle";
-import { moviesAnimeHayState } from "../../../../recoil/home/selectors";
+import { moviesKKPhimState } from "../../../../recoil/home/selectors";
 import MoviesError from "../../../Movies/Error";
 import MoviesListPortrait from "../../../Movies/List/Portrait";
 import MoviesListPortraitSkeleton from "../../../Movies/List/Portrait/Skeleton";
 
-const HomeTabAnimeHay = () => {
+const HomeTabKKPhim = () => {
   const { page = 1 } = useLocalSearchParams();
 
   const { state, contents: movies } = useRecoilValueLoadable(
-    moviesAnimeHayState({ page: Number(page), limit: 24 }),
+    moviesKKPhimState({ page: Number(page), limit: 24 }),
   );
   const [wrapperLayout, setWrapperLayout] = useState({ width: 0, height: 0 });
 
@@ -64,4 +64,4 @@ const HomeTabAnimeHay = () => {
   );
 };
 
-export default HomeTabAnimeHay;
+export default HomeTabKKPhim;

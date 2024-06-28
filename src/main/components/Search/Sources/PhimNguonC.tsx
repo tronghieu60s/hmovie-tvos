@@ -1,0 +1,52 @@
+import { calculateListItemStyle } from "@/src/core/commonFuncs";
+import tw from "@/src/core/tailwind";
+import { Text } from "@/src/main/base/Native/Text";
+import { moviesPhimNguonCSearchState } from "@/src/main/recoil/search/selectors";
+import { useLocalSearchParams } from "expo-router";
+import { useMemo } from "react";
+import { View } from "react-native";
+import { useRecoilValueLoadable } from "recoil";
+import MoviesListPortrait from "../../Movies/List/Portrait";
+import MoviesListPortraitSkeleton from "../../Movies/List/Portrait/Skeleton";
+
+const SearchSourcesPhimNguonC = ({ width }: { width: number }) => {
+  const { keyword = "" } = useLocalSearchParams();
+
+  const { state, contents: movies } = useRecoilValueLoadable(
+    moviesPhimNguonCSearchState({
+      page: 1,
+      limit: 10,
+      keyword: String(keyword),
+    }),
+  );
+
+  const listItemStyle = useMemo(() => calculateListItemStyle(width), [width]);
+
+  if (state === "hasError") {
+    return null;
+  }
+
+  return (
+    <View>
+      <Text size={16} style={tw`text-black font-bold`}>
+        Phim Nguồn C
+      </Text>
+      {state === "hasValue" && (
+        <MoviesListPortrait
+          movies={movies}
+          gapSize={listItemStyle.gapSize}
+          perItemSize={listItemStyle.perItemSize}
+        />
+      )}
+      {state === "loading" && (
+        <MoviesListPortraitSkeleton
+          gapSize={listItemStyle.gapSize}
+          perItemSize={listItemStyle.perItemSize}
+          numberOfItems={listItemStyle.numberOfItems}
+        />
+      )}
+    </View>
+  );
+};
+
+export default SearchSourcesPhimNguonC;

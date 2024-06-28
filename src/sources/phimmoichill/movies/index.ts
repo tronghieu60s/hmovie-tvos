@@ -3,7 +3,7 @@ import { ApiResponse } from "@/src/core/api/dto/api-result.dto";
 import { MoviePaginationInput } from "@/src/main/recoil/movie/types";
 import * as cheerio from "cheerio";
 
-const apiUrl = "https://phimmoichillu.net/tim-kiem//page";
+const apiUrl = "https://phimmoichillu.net/list/phim-le/page";
 const pageSize = 25;
 
 export async function getMoviesPhimMoiChill(params: MoviePaginationInput) {
