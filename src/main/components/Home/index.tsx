@@ -1,15 +1,16 @@
+import { isTVPlatform } from "@/src/core/config";
 import tw from "@/src/core/tailwind";
 import { useLocalSearchParams } from "expo-router";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { BackHandler, View } from "react-native";
+import React, { useMemo } from "react";
+import { View } from "react-native";
+import { useRecoilState } from "recoil";
 import { Text } from "../../base/Native/Text";
 import { useSafeAreaInsetsStyle } from "../../hooks/useSafeAreaInsetsStyle";
+import { visibleSwitchTabsState } from "../../recoil/home/atoms";
 import HomeTabKKPhim from "./Tabs/Sources/KKPhim";
 import HomeTabOPhim from "./Tabs/Sources/OPhim";
 import HomeTabPhimNguonC from "./Tabs/Sources/PhimNguonC";
 import HomeTabsSwitch from "./Tabs/TabSwitch";
-import { isTVPlatform } from "@/src/core/config";
-import { useToast } from "react-native-toast-notifications";
 
 const tabs = [
   {
@@ -27,40 +28,13 @@ const tabs = [
 ];
 
 const HomeScreen = () => {
-  const toast = useToast();
   const { tab = 0 } = useLocalSearchParams();
 
-  const [exitAppCount, setExitAppCount] = useState(0);
+  const [visibleSwitchTabs, setVisibleSwitchTabs] = useRecoilState(
+    visibleSwitchTabsState,
+  );
 
   const insets = useSafeAreaInsetsStyle(["top"]);
-
-  const [visibleSwitchTabs, setVisibleSwitchTabs] = useState(false);
-
-  const onBackHandlerAction = useCallback(() => {
-    if (visibleSwitchTabs) {
-      setVisibleSwitchTabs(false);
-      return true;
-    }
-
-    setExitAppCount((prev) => prev + 1);
-    setTimeout(() => setExitAppCount(0), 2000);
-
-    if (exitAppCount === 1) {
-      BackHandler.exitApp();
-    } else {
-      toast.show("Nhấn lần nữa để thoát ứng dụng", { duration: 2000 });
-    }
-
-    return true;
-  }, [exitAppCount, toast, visibleSwitchTabs]);
-
-  useEffect(() => {
-    const backHandler = BackHandler.addEventListener(
-      "hardwareBackPress",
-      onBackHandlerAction,
-    );
-    return () => backHandler.remove();
-  }, [onBackHandlerAction]);
 
   const currentTab = useMemo(
     () => tabs.find((_, index) => index === Number(tab)),

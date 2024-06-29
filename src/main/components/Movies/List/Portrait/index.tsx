@@ -1,11 +1,12 @@
 import tw from "@/src/core/tailwind";
 import { Pagination } from "@/src/main/base/Flowbite/Pagination";
 import { MoviesResponse } from "@/src/main/recoil/movie/types";
+import { Link } from "expo-router";
 import React from "react";
 import { View } from "react-native";
 import { scale } from "react-native-size-matters";
-import MoviesItemPortrait from "./Item";
 import MoviesError from "../../Error";
+import MoviesItemPortrait from "./Item";
 
 type Props = {
   movies: MoviesResponse | null;
@@ -32,12 +33,19 @@ const MoviesListPortrait = (props: Props) => {
     <View style={tw`py-3 gap-5`}>
       <View style={tw`flex-row flex-wrap gap-[${gapSize}px]`}>
         {items.map((movie, index) => (
-          <MoviesItemPortrait
+          <Link
             key={index}
-            {...movie}
-            hasTVPreferredFocus={index === 0}
-            perItemSize={perItemSize}
-          />
+            href={{
+              params: { slug: movie.slug },
+              pathname: `/sources/${movie.source}/movie/[slug]`,
+            }}
+            asChild>
+            <MoviesItemPortrait
+              {...movie}
+              hasTVPreferredFocus={index === 0}
+              perItemSize={perItemSize}
+            />
+          </Link>
         ))}
       </View>
       {onPageChange && (
