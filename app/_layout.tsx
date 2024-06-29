@@ -3,12 +3,14 @@ import "@/src/core/logs/console";
 import tw from "@/src/core/tailwind";
 import SplashScreen from "@/src/main/components/Splash";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
+import { PortalProvider } from "@gorhom/portal";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as ExpoSplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { Platform, View, useColorScheme } from "react-native";
+import { ToastProvider } from "react-native-toast-notifications";
 import { RecoilRoot } from "recoil";
 import { useDeviceContext } from "twrnc";
 
@@ -43,14 +45,18 @@ const RootLayout = () => {
 
   return (
     <RecoilRoot>
-      <ActionSheetProvider>
-        <View style={tw`grow`}>
-          <Stack screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="(tabs)" />
-          </Stack>
-          <StatusBar style="auto" />
-        </View>
-      </ActionSheetProvider>
+      <ToastProvider>
+        <PortalProvider>
+          <ActionSheetProvider>
+            <View style={tw`grow`}>
+              <Stack screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="(tabs)" />
+              </Stack>
+              <StatusBar style="auto" />
+            </View>
+          </ActionSheetProvider>
+        </PortalProvider>
+      </ToastProvider>
     </RecoilRoot>
   );
 };

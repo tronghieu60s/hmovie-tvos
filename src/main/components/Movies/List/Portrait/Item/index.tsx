@@ -1,4 +1,3 @@
-import { isTVPlatform } from "@/src/core/config";
 import tw from "@/src/core/tailwind";
 import { Text } from "@/src/main/base/Native/Text";
 import { useTouchable, withTouchable } from "@/src/main/base/Touchable";
@@ -6,7 +5,7 @@ import { MovieSource } from "@/src/main/recoil/movie/types";
 import { Image } from "expo-image";
 import { Link } from "expo-router";
 import React from "react";
-import { Pressable, View } from "react-native";
+import { View } from "react-native";
 import { scale } from "react-native-size-matters";
 
 type Props = {
@@ -26,19 +25,19 @@ const DefaultMoviesItemPortrait = (props: Props) => {
     <Link
       href={{ params: { slug }, pathname: `/sources/${source}/movie/[slug]` }}
       asChild>
-      <Pressable style={tw`w-[${perItemSize - 0.15}px]`}>
+      <View style={tw`w-[${perItemSize - 0.15}px]`}>
         <View
           style={[
             tw`border-2 rounded overflow-hidden`,
-            isTVPlatform && hasFocus
-              ? tw`border-black`
-              : tw`border-transparent`,
+            hasFocus ? tw`border-black` : tw`border-transparent`,
           ]}>
-          <Image
-            style={tw`w-full h-[${perItemSize + 50}px]`}
-            source={thumbUrl}
-            contentFit="cover"
-          />
+          <View style={tw`w-full h-[${perItemSize + 50}px] bg-gray-300`}>
+            <Image
+              style={tw`w-full h-full`}
+              source={thumbUrl}
+              contentFit="cover"
+            />
+          </View>
           <Text
             size={13}
             style={tw`font-semibold px-1 py-0.5`}
@@ -46,7 +45,7 @@ const DefaultMoviesItemPortrait = (props: Props) => {
             {name}
           </Text>
         </View>
-      </Pressable>
+      </View>
     </Link>
   );
 };

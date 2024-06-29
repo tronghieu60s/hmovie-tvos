@@ -1,14 +1,15 @@
 import tw from "@/src/core/tailwind";
 import React from "react";
-import { Pressable, View, ViewProps } from "react-native";
+import { View, ViewProps } from "react-native";
 import { Text } from "../../Native/Text";
+import PaginationButton from "./Button";
 
 export type PaginationProps = ViewProps & {
   type?: "default";
   pageSize: number;
   currentPage: number;
   totalItems: number;
-  onPageChange?: (page: number) => void;
+  onPageChange: (page: number) => void;
 };
 
 export const Pagination = (props: PaginationProps) => {
@@ -50,22 +51,16 @@ export const Pagination = (props: PaginationProps) => {
         </Text>
       </View>
       <View style={tw`flex-row gap-2`}>
-        <Pressable
-          style={tw`flex items-center justify-center px-3 py-1 bg-gray-800 rounded`}
+        <PaginationButton
           onPress={() =>
             onPageChange && onPageChange(currentPage > 1 ? currentPage - 1 : 1)
           }>
-          <Text size={13} style={tw`font-medium text-white`}>
-            Trang trước
-          </Text>
-        </Pressable>
-        <Pressable
-          style={tw`flex items-center justify-center px-3 py-1 bg-gray-800 rounded`}
+          Trang Trước
+        </PaginationButton>
+        <PaginationButton
           onPress={() => onPageChange && onPageChange(currentPage + 1)}>
-          <Text size={13} style={tw`font-medium text-white`}>
-            Trang tiếp
-          </Text>
-        </Pressable>
+          Trang Tiếp
+        </PaginationButton>
       </View>
     </View>
   );

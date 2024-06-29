@@ -31,11 +31,3 @@ export const Text = (props: TextProps) => {
     </DefaultText>
   );
 };
-
-export const getFontSize = (size: number) => {
-  if (layout.window.width > BREAKPOINT_RESPONSIVE_XL) {
-    return size + 2;
-  }
-
-  return s(size);
-};
