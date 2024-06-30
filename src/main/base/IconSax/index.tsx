@@ -6,21 +6,29 @@ import { s } from "react-native-size-matters";
 export type IconSaxProps = DefaultIconSax.IconProps & {
   name: keyof typeof DefaultIconSax;
   size?: number;
+  sizeScheme?: { sm: number };
 };
 
 const IconSax = (props: IconSaxProps) => {
-  const { name, size = 14, ...restProps } = props;
+  const { name, size = 14, sizeScheme, ...restProps } = props;
 
   // eslint-disable-next-line import/namespace
   const Icon = DefaultIconSax[name];
 
-  const getSize = useCallback((size: number) => {
-    if (tw.prefixMatch(`sm`)) {
-      return s(size - 5);
-    }
+  const getSize = useCallback(
+    (size: number) => {
+      if (tw.prefixMatch(`sm`)) {
+        if (sizeScheme?.sm) {
+          return s(sizeScheme.sm);
+        }
 
-    return size;
-  }, []);
+        return s(size - 6);
+      }
+
+      return size;
+    },
+    [sizeScheme?.sm],
+  );
 
   return <Icon {...restProps} size={getSize(size)} />;
 };

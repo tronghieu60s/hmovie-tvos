@@ -12,7 +12,7 @@ const MoviesItemPortraitSkeleton = (props: Props) => {
 
   return (
     <Skeleton
-      style={tw`w-[${perItemSize - 0.15}px] h-[${perItemSize + 50 + s(18)}px]`}
+      style={tw`w-[${perItemSize - 0.15}px] h-[${perItemSize + 50 + s(18)}px] rounded`}
     />
   );
 };

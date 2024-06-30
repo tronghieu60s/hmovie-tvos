@@ -27,11 +27,11 @@ const MoviesInfoPhimNguonC = () => {
   return (
     <View style={tw`flex-1`}>
       <View style={tw`grow`} onLayout={onWrapperLayout}>
-        {state === "loading" && (
-          <MoviesInfoSkeleton height={wrapperLayout.height} />
-        )}
         {state === "hasValue" && (
           <MoviesPhimNguonCInfo movie={movie} height={wrapperLayout.height} />
+        )}
+        {state === "loading" && (
+          <MoviesInfoSkeleton height={wrapperLayout.height} />
         )}
         {state === "hasError" && <MoviesError />}
       </View>

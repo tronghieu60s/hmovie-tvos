@@ -1,3 +1,4 @@
+import { calculateListItemStyle } from "@/src/core/commonFuncs";
 import { isWebPlatform } from "@/src/core/config";
 import tw from "@/src/core/tailwind";
 import IconSax from "@/src/main/base/IconSax";
@@ -5,8 +6,9 @@ import { Text } from "@/src/main/base/Native/Text";
 import { MovieEpisode, MovieEpisodeItem } from "@/src/main/recoil/movie/types";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { router } from "expo-router";
-import React, { useCallback } from "react";
-import { Linking, Pressable, View } from "react-native";
+import React, { useCallback, useMemo, useState } from "react";
+import { LayoutChangeEvent, Linking, Pressable, View } from "react-native";
+import MoviesInfoEpisodesItem from "./Item";
 
 type Props = {
   episodes: MovieEpisode[];
@@ -15,6 +17,13 @@ type Props = {
 const MoviesInfoEpisodes = (props: Props) => {
   const { episodes } = props;
   const { showActionSheetWithOptions } = useActionSheet();
+
+  const [wrapperLayout, setWrapperLayout] = useState({ width: 0, height: 0 });
+
+  const onWrapperLayout = useCallback((event: LayoutChangeEvent) => {
+    const { width, height } = event.nativeEvent.layout;
+    setWrapperLayout({ width, height });
+  }, []);
 
   const onPressWatch = useCallback(
     (episodes: MovieEpisodeItem) => {
@@ -72,13 +81,35 @@ const MoviesInfoEpisodes = (props: Props) => {
     [onPressWatch, showActionSheetWithOptions],
   );
 
+  const listItemStyle = useMemo(
+    () => calculateListItemStyle(wrapperLayout.width, 10),
+    [wrapperLayout.width],
+  );
+
+  if (tw.prefixMatch("sm")) {
+    return (
+      <View onLayout={onWrapperLayout}>
+        <View style={tw`flex-row flex-wrap gap-[${listItemStyle.gapSize}px]`}>
+          {episodes.map((item, index) => (
+            <MoviesInfoEpisodesItem
+              key={index}
+              name={item.name}
+              perItemSize={listItemStyle.perItemSize}
+              onPress={() => onPressEpisode(item.episodes)}
+            />
+          ))}
+        </View>
+      </View>
+    );
+  }
+
   return (
-    <View style={tw`grow min-h-full p-3`}>
+    <View style={tw`p-3`}>
       <View style={tw`gap-2`}>
-        {episodes.map((item) => (
+        {episodes.map((item, index) => (
           <Pressable
             key={item.name}
-            style={tw`shadow-md sm:shadow bg-white rounded px-3 py-2`}
+            style={tw`shadow-md bg-white rounded px-3 py-2`}
             onPress={() => onPressEpisode(item.episodes)}>
             <View style={tw`flex-row items-center`}>
               <View style={tw`px-3`}>

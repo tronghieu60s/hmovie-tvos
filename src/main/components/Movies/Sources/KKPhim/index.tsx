@@ -27,11 +27,11 @@ const MoviesInfoKKPhim = () => {
   return (
     <View style={tw`flex-1`}>
       <View style={tw`grow`} onLayout={onWrapperLayout}>
+      	{state === "hasValue" && (
+          <MoviesKKPhimInfo movie={movie} height={wrapperLayout.height} />
+        )}
         {state === "loading" && (
           <MoviesInfoSkeleton height={wrapperLayout.height} />
-        )}
-        {state === "hasValue" && (
-          <MoviesKKPhimInfo movie={movie} height={wrapperLayout.height} />
         )}
         {state === "hasError" && <MoviesError />}
       </View>

@@ -13,7 +13,7 @@ const MoviesOPhimAbout = (props: Props) => {
   const { movie } = props;
 
   return (
-    <View style={tw`grow min-h-full gap-5 p-3`}>
+    <View style={tw`gap-5 p-3 sm:py-0`}>
       <View style={tw`gap-1`}>
         <Text size={15} style={tw`font-bold`}>
           {movie.name}

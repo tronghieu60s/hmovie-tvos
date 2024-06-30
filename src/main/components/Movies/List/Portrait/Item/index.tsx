@@ -21,10 +21,11 @@ const DefaultMoviesItemPortrait = (props: Props) => {
     <View style={tw`w-[${perItemSize - 0.15}px]`}>
       <View
         style={[
-          tw`border-2 rounded overflow-hidden`,
+          tw`border-2 rounded`,
           hasFocus ? tw`border-black` : tw`border-transparent`,
         ]}>
-        <View style={tw`w-full h-[${perItemSize + 50}px] bg-gray-300`}>
+        <View
+          style={tw`w-full h-[${perItemSize + 50}px] bg-gray-300 rounded overflow-hidden`}>
           <Image
             style={tw`w-full h-full`}
             source={thumbUrl}
