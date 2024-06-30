@@ -48,8 +48,9 @@ const SearchScreen = () => {
             <Touchable style={tw`flex-1`} onFocus={onFocus} hasTVPreferredFocus>
               <TextInput
                 ref={textInputRef}
-                style={tw`grow bg-white rounded px-3 py-2 sm:py-1`}
+                style={tw`grow bg-white text-black rounded px-3 py-2 sm:py-1`}
                 placeholder="Tìm kiếm"
+                placeholderTextColor={tw.color("gray-400")}
                 onChangeText={onChangeText}
                 defaultValue={`${keyword}`}
               />

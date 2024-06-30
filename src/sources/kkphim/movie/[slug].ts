@@ -1,3 +1,4 @@
+import { apiCaller } from "@/src/core/api";
 import { ApiResponse } from "@/src/core/api/dto/api-result.dto";
 
 const apiUrl = "https://phimapi.com/phim";
@@ -6,7 +7,8 @@ export async function getMovieKKPhimSlug(params: { slug: string }) {
   const { slug } = params;
 
   try {
-    const movie = await fetch(`${apiUrl}/${slug}`).then((res) => res.json());
+    const apiReq = `${apiUrl}/${slug}`;
+    const movie = await apiCaller(apiReq).then((res) => res.json());
 
     const data = {
       id: movie.movie._id,

@@ -1,3 +1,4 @@
+import { apiCaller } from "@/src/core/api";
 import { ApiResponse } from "@/src/core/api/dto/api-result.dto";
 
 const apiUrl = "https://ophim1.com/phim";
@@ -6,7 +7,8 @@ export async function getMovieOPhimSlug(params: { slug: string }) {
   const { slug } = params;
 
   try {
-    const movie = await fetch(`${apiUrl}/${slug}`).then((res) => res.json());
+    const apiReq = `${apiUrl}/${slug}`;
+    const movie = await apiCaller(apiReq).then((res) => res.json());
 
     if (!movie.status) {
       throw new Error(movie.msg);

@@ -39,16 +39,7 @@
       [
         "@react-native-tvos/config-tv",
         {
-          "androidTVBanner": "./assets/tv_icons/icon-400x240.png",
-          "appleTVImages": {
-            "icon": "./assets/tv_icons/icon-1280x768.png",
-            "iconSmall": "./assets/tv_icons/icon-400x240.png",
-            "iconSmall2x": "./assets/tv_icons/icon-800x480.png",
-            "topShelf": "./assets/tv_icons/icon-1920x720.png",
-            "topShelf2x": "./assets/tv_icons/icon-3840x1440.png",
-            "topShelfWide": "./assets/tv_icons/icon-2320x720.png",
-            "topShelfWide2x": "./assets/tv_icons/icon-4640x1440.png"
-          }
+          "androidTVBanner": "./assets/tv_icons/icon-400x240.png"
         }
       ]
     ],
@@ -68,17 +59,17 @@
     "userInterfaceStyle": "automatic",
     "extra": {
       "eas": {
-        "projectId": "a4302d39-aa7e-4591-af92-2332244258fc"
+        "projectId": "c50ca703-9994-4150-9fc7-37f1ce97cfb2"
       },
       "router": {
-        "origin": false
+        "origin": "https://hmovie-tvos.vercel.app/"
       }
     },
     "runtimeVersion": {
       "policy": "appVersion"
     },
     "updates": {
-      "url": "https://u.expo.dev/a4302d39-aa7e-4591-af92-2332244258fc"
+      "url": "https://u.expo.dev/c50ca703-9994-4150-9fc7-37f1ce97cfb2"
     }
   }
 }

@@ -14,4 +14,8 @@ node_modules/
 npm-debug.*
 web-build/
 
+.vscode
 .vercel
+
+# Local Netlify folder
+.netlify

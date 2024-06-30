@@ -1,3 +1,4 @@
+import { apiCaller } from "@/src/core/api";
 import { getPaginationNewPerPage } from "@/src/core/api/commonFuncs";
 import { ApiResponse } from "@/src/core/api/dto/api-result.dto";
 import { MoviePaginationInput } from "@/src/main/recoil/movie/types";
@@ -33,9 +34,7 @@ export async function getMoviesPhimNguonC(params: MoviePaginationInput) {
       const queryString = params.toString();
 
       const apiReq = `${apiUrl}?${queryString}`;
-      console.info(apiReq);
-
-      const response = await fetch(apiReq).then((res) => res.json());
+      const response = await apiCaller(apiReq).then((res) => res.json());
 
       queryPage += 1;
 

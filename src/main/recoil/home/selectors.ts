@@ -37,10 +37,8 @@ export const moviesAnimeHayState = selectorFamily<
     ({ page, limit }) =>
     async () => {
       if (isDev && isWebPlatform) {
-        const movies = await getMoviesApi("/sources/animehay/movies", {
-          page,
-          limit,
-        });
+        const apiUrl = `/sources/animehay/movies`;
+        const movies = await getMoviesApi(apiUrl, { page, limit });
         return movies.data as MoviesResponse<MoviesAnimeHayType> | null;
       }
 
@@ -58,10 +56,8 @@ export const moviesKKPhimState = selectorFamily<
     ({ page, limit }) =>
     async () => {
       if (isWebPlatform) {
-        const movies = await getMoviesApi("/sources/kkphim/movies", {
-          page,
-          limit,
-        });
+        const apiUrl = `/sources/kkphim/movies`;
+        const movies = await getMoviesApi(apiUrl, { page, limit });
         return movies.data as MoviesResponse<MoviesKKPhimType> | null;
       }
 
@@ -79,10 +75,8 @@ export const moviesOPhimState = selectorFamily<
     ({ page, limit }) =>
     async () => {
       if (isWebPlatform) {
-        const movies = await getMoviesApi("/sources/ophim/movies", {
-          page,
-          limit,
-        });
+        const apiUrl = `/sources/ophim/movies`;
+        const movies = await getMoviesApi(apiUrl, { page, limit });
         return movies.data as MoviesResponse<MoviesOPhimType> | null;
       }
 
@@ -100,10 +94,8 @@ export const moviesPhimMoiChillState = selectorFamily<
     ({ page, limit }) =>
     async () => {
       if (isDev && isWebPlatform) {
-        const movies = await getMoviesApi("/sources/phimmoichill/movies", {
-          page,
-          limit,
-        });
+        const apiUrl = `/sources/phimmoichill/movies`;
+        const movies = await getMoviesApi(apiUrl, { page, limit });
         return movies.data as MoviesResponse<MoviesPhimMoiChillType> | null;
       }
 
@@ -121,10 +113,8 @@ export const moviesPhimNguonCState = selectorFamily<
     ({ page, limit }) =>
     async () => {
       if (isWebPlatform) {
-        const movies = await getMoviesApi("/sources/phimnguonc/movies", {
-          page,
-          limit,
-        });
+        const apiUrl = `/sources/phimnguonc/movies`;
+        const movies = await getMoviesApi(apiUrl, { page, limit });
         return movies.data as MoviesResponse<MoviesPhimNguonCType> | null;
       }
 

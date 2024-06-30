@@ -1,3 +1,4 @@
+import { apiCaller } from "@/src/core/api";
 import { getSlug } from "@/src/core/api/commonFuncs";
 import { ApiResponse } from "@/src/core/api/dto/api-result.dto";
 
@@ -7,7 +8,8 @@ export async function getMoviePhimNguonCSlug(params: { slug: string }) {
   const { slug } = params;
 
   try {
-    const movie = await fetch(`${apiUrl}/${slug}`).then((res) => res.json());
+    const apiReq = `${apiUrl}/${slug}`;
+    const movie = await apiCaller(apiReq).then((res) => res.json());
 
     const data = {
       id: movie.movie.id,

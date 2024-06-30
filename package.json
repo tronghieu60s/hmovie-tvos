@@ -10,6 +10,8 @@
     "web:build": "expo export -p web",
     "web:release:vercel:preview": "vercel deploy",
     "web:release:vercel:production": "vercel deploy --prod",
+    "web:release:netlify:preview": "netlify build && netlify deploy",
+    "web:release:netlify:production": "netlify build && netlify deploy --prod",
     "start": "expo start",
     "update:production": "eas update --branch production",
     "test": "jest --watchAll",
