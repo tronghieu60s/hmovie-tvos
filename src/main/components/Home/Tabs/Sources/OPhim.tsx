@@ -4,7 +4,6 @@ import { router, useLocalSearchParams } from "expo-router";
 import React, { useCallback, useMemo, useState } from "react";
 import { LayoutChangeEvent, ScrollView, View } from "react-native";
 import { useRecoilValueLoadable } from "recoil";
-import { useSafeAreaInsetsStyle } from "../../../../hooks/useSafeAreaInsetsStyle";
 import { moviesOPhimState } from "../../../../recoil/home/selectors";
 import MoviesError from "../../../Movies/Error";
 import MoviesListPortrait from "../../../Movies/List/Portrait";
@@ -27,8 +26,6 @@ const HomeTabOPhim = () => {
     setWrapperLayout({ width, height });
   }, []);
 
-  const insets = useSafeAreaInsetsStyle(["bottom"]);
-
   const listItemStyle = useMemo(
     () => calculateListItemStyle(wrapperLayout.width),
     [wrapperLayout.width],
@@ -40,7 +37,7 @@ const HomeTabOPhim = () => {
         <ScrollView
           overScrollMode="never"
           style={tw`h-[${wrapperLayout.height}px]`}
-          contentContainerStyle={[tw`grow`, insets]}
+          contentContainerStyle={tw`grow`}
           showsVerticalScrollIndicator={false}>
           {state === "hasValue" && (
             <MoviesListPortrait

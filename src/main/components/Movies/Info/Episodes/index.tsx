@@ -1,10 +1,10 @@
 import { isWebPlatform } from "@/src/core/config";
 import tw from "@/src/core/tailwind";
+import IconSax from "@/src/main/base/IconSax";
 import { Text } from "@/src/main/base/Native/Text";
 import { MovieEpisode, MovieEpisodeItem } from "@/src/main/recoil/movie/types";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { router } from "expo-router";
-import { Play } from "iconsax-react-native";
 import React, { useCallback } from "react";
 import { Linking, Pressable, View } from "react-native";
 
@@ -78,11 +78,11 @@ const MoviesInfoEpisodes = (props: Props) => {
         {episodes.map((item) => (
           <Pressable
             key={item.name}
-            style={tw`shadow-md bg-white rounded px-3 py-2`}
+            style={tw`shadow-md sm:shadow bg-white rounded px-3 py-2`}
             onPress={() => onPressEpisode(item.episodes)}>
             <View style={tw`flex-row items-center`}>
               <View style={tw`px-3`}>
-                <Play size={20} color="#000000" />
+                <IconSax name="Play" size={18} color="#000000" />
               </View>
               <View style={tw`flex-1 px-3 py-2`}>
                 <Text size={14} style={tw`font-bold capitalize`}>

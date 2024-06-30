@@ -52,7 +52,9 @@ const HomeTabsSwitch = (props: Props) => {
         </Portal>
       )}
       {!isTVPlatform && (
-        <Modal isVisible={visibleSwitchTabs}>
+        <Modal
+          isVisible={visibleSwitchTabs}
+          onBackdropPress={() => onChangeVisibleSwitchTabs(false)}>
           <View>
             <ScrollView
               contentContainerStyle={tw`grow justify-center items-center gap-3`}>

@@ -49,7 +49,7 @@ const HomeScreen = () => {
             style={[tw`bg-sky-500`, insets.paddingTop > 0 ? insets : tw`pt-3`]}>
             <View
               style={tw`flex-row justify-between items-center px-3 pt-0 pb-3`}>
-              <Text size={17} style={tw`font-bold p-0`}>
+              <Text size={17} style={tw`text-white font-bold`}>
                 {currentTab.title}
               </Text>
               <HomeTabsSwitch

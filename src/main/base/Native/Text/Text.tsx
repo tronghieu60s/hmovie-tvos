@@ -1,5 +1,3 @@
-import { layout } from "@/src/core/layout";
-import { BREAKPOINT_RESPONSIVE_XL } from "@/src/core/responsive/breakpoints";
 import tw from "@/src/core/tailwind";
 import React from "react";
 import {
@@ -25,7 +23,7 @@ export const Text = (props: TextProps) => {
 
   return (
     <DefaultText
-      style={[tw`text-[${s(size)}px]`, tw`sm:text-[${s(size - 5)}px]`, style]}
+      style={[tw`text-[${s(size)}px] sm:text-[${s(size - 5)}px]`, style]}
       {...restProps}>
       {contentText}
     </DefaultText>
