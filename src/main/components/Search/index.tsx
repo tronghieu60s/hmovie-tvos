@@ -1,4 +1,5 @@
 import { DEBOUNCE_SEARCH_TIMER } from "@/src/core/config/debounce";
+import { layout } from "@/src/core/layout";
 import tw from "@/src/core/tailwind";
 import { router, useLocalSearchParams } from "expo-router";
 import React, { useCallback, useRef, useState } from "react";
@@ -42,7 +43,11 @@ const SearchScreen = () => {
     <View style={tw`grow bg-white`}>
       <View style={tw`grow`}>
         <View
-          style={[tw`bg-sky-500`, insets.paddingTop > 0 ? insets : tw`pt-3`]}>
+          style={[
+            tw`bg-sky-500`,
+            tw`pl-[${layout.widthLeftTabBar}px]`,
+            insets.paddingTop > 0 ? insets : tw`pt-3`,
+          ]}>
           <View style={tw`flex-row items-center gap-4 px-3 pt-0 pb-3`}>
             <IconSax name="SearchNormal" size={18} color={tw.color("white")} />
             <Touchable style={tw`flex-1`} onFocus={onFocus} hasTVPreferredFocus>
@@ -57,25 +62,27 @@ const SearchScreen = () => {
             </Touchable>
           </View>
         </View>
-        <View style={tw`flex-1 px-3`}>
-          <View style={tw`grow`} onLayout={onWrapperLayout}>
-            <ScrollView
-              overScrollMode="never"
-              style={tw`h-[${wrapperLayout.height}px]`}
-              contentContainerStyle={tw`py-3`}
-              showsVerticalScrollIndicator={false}>
-              {keyword.length < 3 && (
-                <Text size={14} style={tw`font-semibold text-center`}>
-                  {`Vui lòng nhập 3 ký tự trở lên để tìm kiếm phim.`}
-                </Text>
-              )}
-              {keyword.length >= 3 && (
-                <View>
-                  <SearchSourcesKKPhim width={wrapperLayout.width} />
-                  <SearchSourcesPhimNguonC width={wrapperLayout.width} />
-                </View>
-              )}
-            </ScrollView>
+        <View style={tw`flex-1 pl-[${layout.widthLeftTabBar}px]`}>
+          <View style={tw`flex-1 px-3`}>
+            <View style={tw`grow`} onLayout={onWrapperLayout}>
+              <ScrollView
+                overScrollMode="never"
+                style={tw`h-[${wrapperLayout.height}px]`}
+                contentContainerStyle={tw`py-3`}
+                showsVerticalScrollIndicator={false}>
+                {keyword.length < 3 && (
+                  <Text size={14} style={tw`font-semibold text-center`}>
+                    {`Vui lòng nhập 3 ký tự trở lên để tìm kiếm phim.`}
+                  </Text>
+                )}
+                {keyword.length >= 3 && (
+                  <View>
+                    <SearchSourcesKKPhim width={wrapperLayout.width} />
+                    <SearchSourcesPhimNguonC width={wrapperLayout.width} />
+                  </View>
+                )}
+              </ScrollView>
+            </View>
           </View>
         </View>
       </View>

@@ -4,5 +4,4 @@ export const isDev = __DEV__;
 export const isTVPlatform = Platform.isTV;
 export const isWebPlatform = Platform.OS === "web";
 export const isMobilePlatform =
-  Platform.OS === "ios" || Platform.OS === "android" || Platform.OS === "web";
-export const notMobilePlatform = Platform.OS === "web" || Platform.isTV;
+  Platform.OS === "ios" || Platform.OS === "android";

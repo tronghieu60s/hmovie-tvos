@@ -1,10 +1,9 @@
-import tw from "@/src/core/tailwind";
+import { isTVPlatform } from "@/src/core/config";
+import IconSax from "@/src/main/base/IconSax";
 import { visibleSwitchTabsState } from "@/src/main/recoil/home/atoms";
 import { Tabs, useSegments } from "expo-router";
-import { Home, SearchNormal } from "iconsax-react-native";
 import React, { useCallback, useEffect, useState } from "react";
 import { BackHandler } from "react-native";
-import { s } from "react-native-size-matters";
 import { useToast } from "react-native-toast-notifications";
 import { useRecoilState } from "recoil";
 
@@ -52,16 +51,16 @@ const TabLayout = () => {
     <Tabs
       screenOptions={{
         headerShown: false,
+        tabBarStyle: {
+          display: isTVPlatform ? "none" : "flex",
+        },
         tabBarShowLabel: false,
       }}>
       <Tabs.Screen
         name="index"
         options={{
           tabBarIcon: ({ color }) => (
-            <Home
-              color={color}
-              style={tw`text-[${s(20)}px] sm:text-[${s(15)}px]`}
-            />
+            <IconSax name="Home" color={color} size={25} />
           ),
         }}
       />
@@ -69,10 +68,7 @@ const TabLayout = () => {
         name="search"
         options={{
           tabBarIcon: ({ color }) => (
-            <SearchNormal
-              color={color}
-              style={tw`text-[${s(20)}px] sm:text-[${s(15)}px]`}
-            />
+            <IconSax name="SearchNormal" color={color} size={25} />
           ),
         }}
       />

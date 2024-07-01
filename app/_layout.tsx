@@ -1,4 +1,5 @@
 import { delay } from "@/src/core/commonFuncs";
+import { isMobilePlatform } from "@/src/core/config";
 import "@/src/core/logs/console";
 import tw from "@/src/core/tailwind";
 import SplashScreen from "@/src/main/components/Splash";
@@ -6,9 +7,10 @@ import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import { PortalProvider } from "@gorhom/portal";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
+import * as ScreenOrientation from "expo-screen-orientation";
 import * as ExpoSplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Platform, View, useColorScheme } from "react-native";
 import { ToastProvider } from "react-native-toast-notifications";
 import { RecoilRoot } from "recoil";
@@ -25,19 +27,30 @@ const RootLayout = () => {
   useDeviceContext(tw);
   const colorScheme = useColorScheme();
 
-  useEffect(() => {
-    (async () => {
-      if (loadedFonts) {
-        console.log(`Theme: ${colorScheme}`);
-        ExpoSplashScreen.hideAsync();
+  const onInitial = useCallback(async () => {
+    if (!loadedFonts) {
+      return;
+    }
 
-        if (Platform.OS === "web") {
-          await delay(2000);
-        }
-        setLoaded(true);
-      }
-    })();
+    if (Platform.OS === "web") {
+      await delay(2000);
+    }
+
+    console.log(`Theme: ${colorScheme}`);
+    ExpoSplashScreen.hideAsync();
+
+    if (isMobilePlatform && !Platform.isTV) {
+      await ScreenOrientation.lockAsync(
+        ScreenOrientation.OrientationLock.PORTRAIT_UP,
+      );
+    }
+
+    setLoaded(true);
   }, [colorScheme, loadedFonts]);
+
+  useEffect(() => {
+    onInitial();
+  }, [onInitial]);
 
   if (!loaded || !loadedFonts) {
     return <SplashScreen />;

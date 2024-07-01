@@ -11,6 +11,7 @@ import HomeTabKKPhim from "./Tabs/Sources/KKPhim";
 import HomeTabOPhim from "./Tabs/Sources/OPhim";
 import HomeTabPhimNguonC from "./Tabs/Sources/PhimNguonC";
 import HomeTabsSwitch from "./Tabs/TabSwitch";
+import { layout } from "@/src/core/layout";
 
 const tabs = [
   {
@@ -46,7 +47,11 @@ const HomeScreen = () => {
       {currentTab && (
         <View style={tw`grow`}>
           <View
-            style={[tw`bg-sky-500`, insets.paddingTop > 0 ? insets : tw`pt-3`]}>
+            style={[
+              tw`bg-sky-500`,
+              tw`pl-[${layout.widthLeftTabBar}px]`,
+              insets.paddingTop > 0 ? insets : tw`pt-3`,
+            ]}>
             <View
               style={tw`flex-row justify-between items-center px-3 pt-0 pb-3`}>
               <Text size={17} style={tw`text-white font-bold`}>
@@ -61,8 +66,10 @@ const HomeScreen = () => {
               />
             </View>
           </View>
-          {isTVPlatform && !visibleSwitchTabs && currentTab.children}
-          {!isTVPlatform && currentTab.children}
+          <View style={tw`flex-1 pl-[${layout.widthLeftTabBar}px]`}>
+            {isTVPlatform && !visibleSwitchTabs && currentTab.children}
+            {!isTVPlatform && currentTab.children}
+          </View>
         </View>
       )}
     </View>
