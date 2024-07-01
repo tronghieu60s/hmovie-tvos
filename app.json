@@ -12,12 +12,7 @@
     },
     "platforms": ["web", "ios", "android"],
     "plugins": [
-      [
-        "expo-router",
-        {
-          "origin": "https://hmovie-tvos.vercel.app/"
-        }
-      ],
+      ["expo-router"],
       [
         "expo-screen-orientation",
         {
@@ -49,7 +44,7 @@
     "ios": {},
     "web": {
       "name": "HMovie TV",
-      "output": "server",
+      "output": "static",
       "bundler": "metro",
       "favicon": "./assets/images/favicon.png"
     },

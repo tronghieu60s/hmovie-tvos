@@ -1,7 +1,4 @@
-import { apiCaller } from "@/src/core/api";
-import { isWebPlatform } from "@/src/core/config";
-import { getMoviesKKPhimSearch } from "@/src/sources/kkphim/movies/search";
-import { getMoviesPhimNguonCSearch } from "@/src/sources/phimnguonc/movies/search";
+import { axiosRequest } from "@/src/core/api";
 import { selectorFamily } from "recoil";
 import { MoviesType as MoviesKKPhimType } from "../movie/kkphim/types";
 import { MoviesType as MoviesPhimNguonCType } from "../movie/phimnguonc/types";
@@ -24,7 +21,7 @@ const getMoviesSearchApi = (
 
   const queryString = queryParams.toString();
 
-  return apiCaller(`${url}?${queryString}`, "POST").then((res) => res.json());
+  return axiosRequest.get(`${url}?${queryString}`);
 };
 
 export const moviesKKPhimSearchState = selectorFamily<
@@ -35,20 +32,9 @@ export const moviesKKPhimSearchState = selectorFamily<
   get:
     ({ page, limit, keyword }) =>
     async () => {
-      if (isWebPlatform) {
-        const movies = await getMoviesSearchApi(
-          "/sources/kkphim/movies/search",
-          {
-            page,
-            limit,
-            keyword,
-          },
-        );
-        return movies.data as MoviesResponse<MoviesKKPhimType> | null;
-      }
-
-      const movies = await getMoviesKKPhimSearch({ page, limit, keyword });
-      return movies.data as MoviesResponse<MoviesKKPhimType> | null;
+      const apiUrl = `/sources/kkphim/movies/search`;
+      const movies = await getMoviesSearchApi(apiUrl, { page, limit, keyword });
+      return movies.data.data;
     },
 });
 
@@ -60,15 +46,8 @@ export const moviesPhimNguonCSearchState = selectorFamily<
   get:
     ({ page, limit, keyword }) =>
     async () => {
-      if (isWebPlatform) {
-        const movies = await getMoviesSearchApi(
-          "/sources/phimnguonc/movies/search",
-          { page, limit, keyword },
-        );
-        return movies.data as MoviesResponse<MoviesPhimNguonCType> | null;
-      }
-
-      const movies = await getMoviesPhimNguonCSearch({ page, limit, keyword });
-      return movies.data as MoviesResponse<MoviesPhimNguonCType> | null;
+      const apiUrl = `/sources/phimnguonc/movies/search`;
+      const movies = await getMoviesSearchApi(apiUrl, { page, limit, keyword });
+      return movies.data.data;
     },
 });
