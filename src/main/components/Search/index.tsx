@@ -4,6 +4,7 @@ import tw from "@/src/core/tailwind";
 import { router, useLocalSearchParams } from "expo-router";
 import React, { useCallback, useRef, useState } from "react";
 import { LayoutChangeEvent, ScrollView, View } from "react-native";
+import { vs } from "react-native-size-matters";
 import { useDebouncedCallback } from "use-debounce";
 import IconSax from "../../base/IconSax";
 import { Text } from "../../base/Native/Text";
@@ -49,11 +50,11 @@ const SearchScreen = () => {
             insets.paddingTop > 0 ? insets : tw`pt-3`,
           ]}>
           <View style={tw`flex-row items-center gap-4 px-3 pt-0 pb-3`}>
-            <IconSax name="SearchNormal" size={18} color={tw.color("white")} />
+            <IconSax name="SearchNormal" size={20} color={tw.color("white")} />
             <Touchable style={tw`flex-1`} onFocus={onFocus} hasTVPreferredFocus>
               <TextInput
                 ref={textInputRef}
-                style={tw`grow bg-white text-black rounded px-3 py-2 sm:py-1`}
+                style={tw`grow bg-white text-black rounded px-3 py-[${vs(8)}px] sm:py-1`}
                 placeholder="Tìm kiếm"
                 placeholderTextColor={tw.color("gray-400")}
                 onChangeText={onChangeText}

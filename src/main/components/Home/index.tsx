@@ -53,7 +53,7 @@ const HomeScreen = () => {
               insets.paddingTop > 0 ? insets : tw`pt-3`,
             ]}>
             <View
-              style={tw`flex-row justify-between items-center px-3 pt-0 pb-3`}>
+              style={tw`flex-row justify-between items-center p-3 pt-0 android:pt-3`}>
               <Text size={17} style={tw`text-white font-bold`}>
                 {currentTab.title}
               </Text>

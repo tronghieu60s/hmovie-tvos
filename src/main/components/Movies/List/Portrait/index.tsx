@@ -4,24 +4,18 @@ import { MoviesResponse } from "@/src/main/recoil/movie/types";
 import { Link } from "expo-router";
 import React from "react";
 import { View } from "react-native";
-import { scale } from "react-native-size-matters";
 import MoviesError from "../../Error";
 import MoviesItemPortrait from "./Item";
 
 type Props = {
   movies: MoviesResponse | null;
-  gapSize?: number;
-  perItemSize?: number;
+  gapSize: number;
+  perItemSize: number;
   onPageChange?: (page: number) => void;
 };
 
 const MoviesListPortrait = (props: Props) => {
-  const {
-    movies,
-    gapSize = 15,
-    perItemSize = scale(100),
-    onPageChange,
-  } = props;
+  const { movies, gapSize, perItemSize, onPageChange } = props;
 
   if (!movies || !movies?.items.length) {
     return <MoviesError />;

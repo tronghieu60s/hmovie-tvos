@@ -1,6 +1,7 @@
 import tw from "@/src/core/tailwind";
 import { useSafeAreaInsetsStyle } from "@/src/main/hooks/useSafeAreaInsetsStyle";
 import { useLocalSearchParams } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { ActivityIndicator, View } from "react-native";
 import { WebView } from "react-native-webview";
@@ -24,6 +25,7 @@ const MovieOPhimWatchEmbed = () => {
         )}
         startInLoadingState
       />
+      <StatusBar hidden />
     </View>
   );
 };

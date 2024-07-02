@@ -6,7 +6,7 @@ import SplashScreen from "@/src/main/components/Splash";
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import { PortalProvider } from "@gorhom/portal";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
+import { Stack, useSegments } from "expo-router";
 import * as ScreenOrientation from "expo-screen-orientation";
 import * as ExpoSplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
@@ -19,6 +19,8 @@ import { useDeviceContext } from "twrnc";
 ExpoSplashScreen.preventAutoHideAsync();
 
 const RootLayout = () => {
+  const segments = useSegments();
+
   const [loaded, setLoaded] = useState(false);
   const [loadedFonts] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
@@ -39,18 +41,31 @@ const RootLayout = () => {
     console.log(`Theme: ${colorScheme}`);
     ExpoSplashScreen.hideAsync();
 
-    if (isMobilePlatform && !Platform.isTV) {
-      await ScreenOrientation.lockAsync(
-        ScreenOrientation.OrientationLock.PORTRAIT_UP,
-      );
-    }
-
     setLoaded(true);
   }, [colorScheme, loadedFonts]);
 
   useEffect(() => {
     onInitial();
   }, [onInitial]);
+
+  const onScreenRedirect = useCallback(async () => {
+    if (segments.includes("watch") && segments.includes("embed")) {
+      await ScreenOrientation.lockAsync(
+        ScreenOrientation.OrientationLock.LANDSCAPE,
+      );
+      return;
+    }
+
+    if (isMobilePlatform && !Platform.isTV) {
+      await ScreenOrientation.lockAsync(
+        ScreenOrientation.OrientationLock.PORTRAIT_UP,
+      );
+    }
+  }, [segments]);
+
+  useEffect(() => {
+    onScreenRedirect();
+  }, [onScreenRedirect]);
 
   if (!loaded || !loadedFonts) {
     return <SplashScreen />;
