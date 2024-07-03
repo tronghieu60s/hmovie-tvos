@@ -34,7 +34,7 @@
       [
         "@react-native-tvos/config-tv",
         {
-          "androidTVBanner": "./assets/tv_icons/icon-400x240.png"
+          "androidTVBanner": "./assets/images/logo/logo_tv_banner_light.png"
         }
       ]
     ],
