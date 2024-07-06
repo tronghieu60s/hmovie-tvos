@@ -1,14 +1,14 @@
 import tw from "@/src/core/tailwind";
-import MoviesInfoKKPhim from "@/src/main/components/Movies/Sources/KKPhim";
+import MoviesInfo from "@/src/main/components/Movies/Info";
 import React from "react";
 import { View } from "react-native";
 
-const MovieKKPhim = () => {
+const MovieSourceMovie = () => {
   return (
     <View style={[tw`grow bg-white`]}>
-      <MoviesInfoKKPhim />
+      <MoviesInfo />
     </View>
   );
 };
 
-export default MovieKKPhim;
+export default MovieSourceMovie;

@@ -1,5 +1,6 @@
 import { isTVPlatform } from "@/src/core/config";
 import tw from "@/src/core/tailwind";
+import { MovieSource } from "@/src/main/recoil/movie/types";
 import { Portal } from "@gorhom/portal";
 import { router } from "expo-router";
 import React, { useCallback } from "react";
@@ -11,29 +12,29 @@ import TabsSwitchItem from "./SwitchItem";
 type Props = {
   tabs: {
     title: string;
-    children: JSX.Element;
+    source: MovieSource;
   }[];
-  visibleSwitchTabs: boolean;
-  onChangeVisibleSwitchTabs: (visible: boolean) => void;
+  visible: boolean;
+  onChangeVisible: (visible: boolean) => void;
 };
 
 const HomeTabsSwitch = (props: Props) => {
-  const { tabs, visibleSwitchTabs, onChangeVisibleSwitchTabs } = props;
+  const { tabs, visible, onChangeVisible } = props;
 
   const onChangeTab = useCallback(
-    (index: number) => {
-      router.setParams({ tab: `${index}`, page: `1` });
-      onChangeVisibleSwitchTabs(false);
+    (source: MovieSource) => {
+      router.setParams({ page: `1`, source });
+      onChangeVisible(false);
     },
-    [onChangeVisibleSwitchTabs],
+    [onChangeVisible],
   );
 
   return (
     <View style={tw`relative`}>
-      <TabsSwitchButton onPress={() => onChangeVisibleSwitchTabs(true)} />
+      <TabsSwitchButton onPress={() => onChangeVisible(true)} />
       {isTVPlatform && (
         <Portal>
-          {visibleSwitchTabs && (
+          {visible && (
             <View style={tw`absolute top-0 bottom-0 left-0 right-0 z-10`}>
               <View style={tw`absolute w-full h-full bg-black opacity-85`} />
               <ScrollView
@@ -41,7 +42,7 @@ const HomeTabsSwitch = (props: Props) => {
                 {tabs.map((item, index) => (
                   <TabsSwitchItem
                     key={index}
-                    onPress={() => onChangeTab(index)}
+                    onPress={() => onChangeTab(item.source)}
                     hasTVPreferredFocus={index === 0}>
                     {item.title}
                   </TabsSwitchItem>
@@ -53,15 +54,15 @@ const HomeTabsSwitch = (props: Props) => {
       )}
       {!isTVPlatform && (
         <Modal
-          isVisible={visibleSwitchTabs}
-          onBackdropPress={() => onChangeVisibleSwitchTabs(false)}>
+          isVisible={visible}
+          onBackdropPress={() => onChangeVisible(false)}>
           <View>
             <ScrollView
               contentContainerStyle={tw`grow justify-center items-center gap-3`}>
               {tabs.map((item, index) => (
                 <TabsSwitchItem
                   key={index}
-                  onPress={() => onChangeTab(index)}
+                  onPress={() => onChangeTab(item.source)}
                   hasTVPreferredFocus={index === 0}>
                   {item.title}
                 </TabsSwitchItem>

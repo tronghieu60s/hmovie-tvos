@@ -4,7 +4,7 @@ import { useLocalSearchParams } from "expo-router";
 import React, { useState } from "react";
 import { ActivityIndicator, View } from "react-native";
 
-const MovieOPhimWatchEmbed = () => {
+const MovieWatchEmbed = () => {
   const { link } = useLocalSearchParams();
 
   const [loading, setLoading] = useState(true);
@@ -29,4 +29,4 @@ const MovieOPhimWatchEmbed = () => {
   );
 };
 
-export default MovieOPhimWatchEmbed;
+export default MovieWatchEmbed;

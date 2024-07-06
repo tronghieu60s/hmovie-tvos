@@ -1,4 +1,5 @@
 import { isTVPlatform } from "@/src/core/config";
+import { layout } from "@/src/core/layout";
 import tw from "@/src/core/tailwind";
 import { useLocalSearchParams } from "expo-router";
 import React, { useMemo } from "react";
@@ -7,29 +8,22 @@ import { useRecoilState } from "recoil";
 import { Text } from "../../base/Native/Text";
 import { useSafeAreaInsetsStyle } from "../../hooks/useSafeAreaInsetsStyle";
 import { visibleSwitchTabsState } from "../../recoil/home/atoms";
-import HomeTabKKPhim from "./Tabs/Sources/KKPhim";
-import HomeTabOPhim from "./Tabs/Sources/OPhim";
-import HomeTabPhimNguonC from "./Tabs/Sources/PhimNguonC";
+import { MovieSource } from "../../recoil/movie/types";
+import HomeTabItem from "./Tabs/TabItem";
 import HomeTabsSwitch from "./Tabs/TabSwitch";
-import { layout } from "@/src/core/layout";
 
-const tabs = [
-  {
-    title: "Ổ Phim",
-    children: <HomeTabOPhim />,
-  },
-  {
-    title: "KK Phim",
-    children: <HomeTabKKPhim />,
-  },
-  {
-    title: "Phim Nguồn C",
-    children: <HomeTabPhimNguonC />,
-  },
+const tabs: {
+  title: string;
+  source: MovieSource;
+}[] = [
+  { title: "Anime Hay", source: "animehay" },
+  { title: "Ổ Phim", source: "ophim" },
+  { title: "KK Phim", source: "kkphim" },
+  { title: "Phim Nguồn C", source: "phimnguonc" },
 ];
 
 const HomeScreen = () => {
-  const { tab = 0 } = useLocalSearchParams();
+  const { source = "ophim" } = useLocalSearchParams();
 
   const [visibleSwitchTabs, setVisibleSwitchTabs] = useRecoilState(
     visibleSwitchTabsState,
@@ -38,8 +32,8 @@ const HomeScreen = () => {
   const insets = useSafeAreaInsetsStyle(["top"]);
 
   const currentTab = useMemo(
-    () => tabs.find((_, index) => index === Number(tab)),
-    [tab],
+    () => tabs.find((item) => item.source === source),
+    [source],
   );
 
   return (
@@ -58,16 +52,14 @@ const HomeScreen = () => {
               </Text>
               <HomeTabsSwitch
                 tabs={tabs}
-                visibleSwitchTabs={visibleSwitchTabs}
-                onChangeVisibleSwitchTabs={(visible) =>
-                  setVisibleSwitchTabs(visible)
-                }
+                visible={visibleSwitchTabs}
+                onChangeVisible={(visible) => setVisibleSwitchTabs(visible)}
               />
             </View>
           </View>
           <View style={tw`flex-1 pl-[${layout.widthLeftTabBar}px]`}>
-            {isTVPlatform && !visibleSwitchTabs && currentTab.children}
-            {!isTVPlatform && currentTab.children}
+            {isTVPlatform && !visibleSwitchTabs && <HomeTabItem />}
+            {!isTVPlatform && <HomeTabItem />}
           </View>
         </View>
       )}

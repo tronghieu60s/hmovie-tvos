@@ -4,16 +4,18 @@ import { router, useLocalSearchParams } from "expo-router";
 import React, { useCallback, useMemo, useState } from "react";
 import { LayoutChangeEvent, ScrollView, View } from "react-native";
 import { useRecoilValueLoadable } from "recoil";
-import { moviesOPhimState } from "../../../../recoil/home/selectors";
+import { moviesListState } from "../../../../recoil/home/selectors";
 import MoviesError from "../../../Movies/Error";
 import MoviesListPortrait from "../../../Movies/List/Portrait";
 import MoviesListPortraitSkeleton from "../../../Movies/List/Portrait/Skeleton";
+import { MovieSource } from "@/src/main/recoil/movie/types";
 
-const HomeTabOPhim = () => {
-  const { page = 1 } = useLocalSearchParams();
+const HomeTabItem = () => {
+  const { page = 1, source: _source = "ophim" } = useLocalSearchParams();
+  const source = _source as MovieSource;
 
   const { state, contents: movies } = useRecoilValueLoadable(
-    moviesOPhimState({ page: Number(page), limit: 24 }),
+    moviesListState({ page: Number(page), limit: 24, source }),
   );
   const [wrapperLayout, setWrapperLayout] = useState({ width: 0, height: 0 });
 
@@ -61,4 +63,4 @@ const HomeTabOPhim = () => {
   );
 };
 
-export default HomeTabOPhim;
+export default HomeTabItem;

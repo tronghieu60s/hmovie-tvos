@@ -6,7 +6,7 @@ import React from "react";
 import { ActivityIndicator, View } from "react-native";
 import { WebView } from "react-native-webview";
 
-const MovieOPhimWatchEmbed = () => {
+const MovieWatchEmbed = () => {
   const { link } = useLocalSearchParams();
 
   const insets = useSafeAreaInsetsStyle(["top"]);
@@ -30,4 +30,4 @@ const MovieOPhimWatchEmbed = () => {
   );
 };
 
-export default MovieOPhimWatchEmbed;
+export default MovieWatchEmbed;

@@ -8,7 +8,7 @@ const SplashScreen = () => {
     <View style={tw`flex-1 bg-white`}>
       <Image
         style={tw`w-full h-full`}
-        source={require("@/assets/images/logo/logo_full_light.svg")}
+        source={require("@/assets/images/logo/logo_full_light.png")}
         contentFit="contain"
       />
     </View>

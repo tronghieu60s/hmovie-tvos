@@ -1,17 +1,17 @@
 import tw from "@/src/core/tailwind";
 import { Badge } from "@/src/main/base/Flowbite/Badge";
 import { Text } from "@/src/main/base/Native/Text";
-import { MovieType } from "@/src/main/recoil/movie/ophim/types";
+import { MoviesItem } from "@/src/main/recoil/movie/types";
 import { Image } from "expo-image";
 import React from "react";
 import { ScrollView, View } from "react-native";
 import { scale } from "react-native-size-matters";
 
 type Props = {
-  movie: MovieType;
+  movie: MoviesItem;
 };
 
-const MoviesOPhimTopInfo = (props: Props) => {
+const MoviesInfoTopInfo = (props: Props) => {
   const { movie } = props;
 
   return (
@@ -115,4 +115,4 @@ const MoviesOPhimTopInfo = (props: Props) => {
   );
 };
 
-export default MoviesOPhimTopInfo;
+export default MoviesInfoTopInfo;

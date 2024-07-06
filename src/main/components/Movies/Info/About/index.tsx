@@ -1,15 +1,15 @@
 import tw from "@/src/core/tailwind";
 import { Badge } from "@/src/main/base/Flowbite/Badge";
 import { Text } from "@/src/main/base/Native/Text";
-import { MovieType } from "@/src/main/recoil/movie/kkphim/types";
+import { MoviesItem } from "@/src/main/recoil/movie/types";
 import React from "react";
 import { View } from "react-native";
 
 type Props = {
-  movie: MovieType;
+  movie: MoviesItem;
 };
 
-const MoviesKKPhimAbout = (props: Props) => {
+const MovieInfoAbout = (props: Props) => {
   const { movie } = props;
 
   return (
@@ -69,4 +69,4 @@ const MoviesKKPhimAbout = (props: Props) => {
   );
 };
 
-export default MoviesKKPhimAbout;
+export default MovieInfoAbout;

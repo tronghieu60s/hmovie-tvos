@@ -63,7 +63,11 @@ const MoviesInfoEpisodes = (props: Props) => {
   );
 
   const onPressEpisode = useCallback(
-    (episodes: MovieEpisodeItem[]) => {
+    (episodes?: MovieEpisodeItem[]) => {
+      if (!episodes) {
+        return;
+      }
+
       const sheetServers = episodes.map((item) => `Server: ${item.server}`);
       const sheetOptions = [...sheetServers, "Huỷ"];
 

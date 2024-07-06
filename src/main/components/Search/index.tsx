@@ -11,8 +11,7 @@ import { Text } from "../../base/Native/Text";
 import { TextInput } from "../../base/Native/TextInput";
 import { Touchable } from "../../base/Touchable";
 import { useSafeAreaInsetsStyle } from "../../hooks/useSafeAreaInsetsStyle";
-import SearchSourcesKKPhim from "./Sources/KKPhim";
-import SearchSourcesPhimNguonC from "./Sources/PhimNguonC";
+import SearchItem from "./Item";
 
 const SearchScreen = () => {
   const { keyword = "" } = useLocalSearchParams();
@@ -77,9 +76,37 @@ const SearchScreen = () => {
                   </Text>
                 )}
                 {keyword.length >= 3 && (
-                  <View>
-                    <SearchSourcesKKPhim width={wrapperLayout.width} />
-                    <SearchSourcesPhimNguonC width={wrapperLayout.width} />
+                  <View style={tw`gap-5`}>
+                    <View>
+                      <Text size={16} style={tw`text-black font-bold`}>
+                        AnimeHay
+                      </Text>
+                      <SearchItem
+                        width={wrapperLayout.width}
+                        source="animehay"
+                      />
+                    </View>
+                    <View>
+                      <Text size={16} style={tw`text-black font-bold`}>
+                        Ổ Phim
+                      </Text>
+                      <SearchItem width={wrapperLayout.width} source="ophim" />
+                    </View>
+                    <View>
+                      <Text size={16} style={tw`text-black font-bold`}>
+                        KK Phim
+                      </Text>
+                      <SearchItem width={wrapperLayout.width} source="kkphim" />
+                    </View>
+                    <View>
+                      <Text size={16} style={tw`text-black font-bold`}>
+                        Phim Nguồn C
+                      </Text>
+                      <SearchItem
+                        width={wrapperLayout.width}
+                        source="phimnguonc"
+                      />
+                    </View>
                   </View>
                 )}
               </ScrollView>

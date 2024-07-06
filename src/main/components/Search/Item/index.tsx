@@ -1,7 +1,6 @@
 import { calculateListItemStyle } from "@/src/core/commonFuncs";
-import tw from "@/src/core/tailwind";
-import { Text } from "@/src/main/base/Native/Text";
-import { moviesPhimNguonCSearchState } from "@/src/main/recoil/search/selectors";
+import { MovieSource } from "@/src/main/recoil/movie/types";
+import { moviesListSearchState } from "@/src/main/recoil/search/selectors";
 import { useLocalSearchParams } from "expo-router";
 import { useMemo } from "react";
 import { View } from "react-native";
@@ -9,13 +8,20 @@ import { useRecoilValueLoadable } from "recoil";
 import MoviesListPortrait from "../../Movies/List/Portrait";
 import MoviesListPortraitSkeleton from "../../Movies/List/Portrait/Skeleton";
 
-const SearchSourcesPhimNguonC = ({ width }: { width: number }) => {
+type Props = {
+  width: number;
+  source: MovieSource;
+};
+
+const SearchItem = (props: Props) => {
+  const { width, source } = props;
   const { keyword = "" } = useLocalSearchParams();
 
   const { state, contents: movies } = useRecoilValueLoadable(
-    moviesPhimNguonCSearchState({
+    moviesListSearchState({
       page: 1,
       limit: 10,
+      source,
       keyword: String(keyword),
     }),
   );
@@ -28,9 +34,6 @@ const SearchSourcesPhimNguonC = ({ width }: { width: number }) => {
 
   return (
     <View>
-      <Text size={16} style={tw`text-black font-bold`}>
-        Phim Nguồn C
-      </Text>
       {state === "hasValue" && (
         <MoviesListPortrait
           movies={movies}
@@ -49,4 +52,4 @@ const SearchSourcesPhimNguonC = ({ width }: { width: number }) => {
   );
 };
 
-export default SearchSourcesPhimNguonC;
+export default SearchItem;
