@@ -5,14 +5,19 @@ import React from "react";
 import { ActivityIndicator, View } from "react-native";
 import { WebView } from "react-native-webview";
 
-const MovieWatchEmbedProxy = () => {
+const MovieWatchEmbed = () => {
   const { link } = useLocalSearchParams();
 
   return (
     <View style={tw`flex-1`}>
       <WebView
         style={tw`flex-1 bg-black`}
-        source={{ uri: `${link}` }}
+        source={{
+          html: `<style>* { margin: 0; padding: 0; background-color: #000; }</style>
+              <iframe width="100%" height="100%" src="${link}" 
+                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+              </iframe>`,
+        }}
         renderLoading={() => (
           <ActivityIndicator
             size="large"
@@ -27,4 +32,4 @@ const MovieWatchEmbedProxy = () => {
   );
 };
 
-export default MovieWatchEmbedProxy;
+export default MovieWatchEmbed;

@@ -14,8 +14,8 @@ const MovieWatchEmbed = () => {
   return (
     <View style={[tw`flex-1`, insets]}>
       <iframe
-        style={tw`flex-1 border-0`}
         src={`${link}`}
+        style={tw`flex-1 border-0`}
         onLoad={() => setLoading(false)}
       />
       {loading && (

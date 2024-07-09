@@ -45,6 +45,7 @@ export type MovieEpisode = {
 
 export type MovieEpisodeItem = {
   server: string;
+  isProxy?: boolean;
   linkM3u8?: string;
   linkEmbed?: string;
 };

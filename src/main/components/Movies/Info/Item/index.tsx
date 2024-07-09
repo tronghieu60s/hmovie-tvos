@@ -48,7 +48,10 @@ const MoviesInfoItem = (props: Props) => {
               <Text size={15} style={tw`font-bold`}>
                 Xem Phim
               </Text>
-              <MoviesInfoEpisodes episodes={movie.episodes} />
+              <MoviesInfoEpisodes
+                source={movie.source}
+                episodes={movie.episodes}
+              />
             </View>
           </View>
           <View style={tw`flex-1 bg-white sm:hidden`}>
@@ -60,7 +63,12 @@ const MoviesInfoItem = (props: Props) => {
                 },
                 {
                   title: "Xem phim",
-                  children: <MoviesInfoEpisodes episodes={movie.episodes} />,
+                  children: (
+                    <MoviesInfoEpisodes
+                      source={movie.source}
+                      episodes={movie.episodes}
+                    />
+                  ),
                 },
               ]}
               itemStyles={{ size: 13.5 }}

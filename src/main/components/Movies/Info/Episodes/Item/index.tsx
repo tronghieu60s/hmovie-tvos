@@ -6,12 +6,13 @@ import { View } from "react-native";
 
 type Props = {
   name: string;
+  loading?: boolean;
   filename?: string;
   perItemSize: number;
 };
 
 const DefaultMoviesInfoEpisodesItem = (props: Props) => {
-  const { name, filename, perItemSize } = props;
+  const { name, loading, filename, perItemSize } = props;
 
   const { hasFocus } = useTouchable();
 
