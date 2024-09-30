@@ -1,3 +1,13 @@
+```js
+Cảnh báo bản quyền:
+ - Đây là ứng dụng xem phim, mục đích để học tập, chúng tôi không cung cấp ra ngoài và cũng không hỗ trợ bất kì điều gì.
+ - Bản thân ứng dụng này là không hợp pháp nếu dùng vào mục đích kiếm tiền nào, và tôi public ra đây mục tiêu là để học tập, vui lòng không sử dụng vào mục đích kiếm tiền.
+
+Copyright Warning:
+ - This is a development plugin for the Cloudstream application, intended for learning purposes and internal movie viewing. We do not distribute this Extension externally, nor do we provide any support.
+ - The application itself is illegal if used for any commercial purposes. My aim in making this public is for learning purposes only, so please do not use it for making money.
+```
+
 # Expo Router TV demo 👋
 
 ![Apple TV screen shot](https://github.com/douglowder/examples/assets/6577821/a881466f-a7a0-4c66-b1fc-33235c466997)
